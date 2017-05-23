@@ -10,9 +10,9 @@ public class Bullet
   
   public Bullet(Player character, int d, boolean p)
   {
-	  xpos = character.getxpos();
-	  ypos = character.getypos();
-	  direction =  d;//key input
+      xpos = character.getxpos();
+      ypos = character.getypos();
+      direction =  d;//key input
       hitbox = new Rectangle(xpos, ypos, 2, 2); //numbers will change
       isPierce = p;
   }
