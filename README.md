@@ -1,2 +1,0 @@
-# Carpi
-Java Final Project
