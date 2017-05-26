@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.image.BufferStrategy;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Board extends JPanel implements ActionListener
 {
@@ -18,7 +20,7 @@ public class Board extends JPanel implements ActionListener
 	public ArrayList<Bullet> currentBullets = new ArrayList<Bullet>();
 	public Board()
 	{
-		 
+		 time = new Timer()
 	}
 
 }
