@@ -1,6 +1,6 @@
 import java.awt.Rectangle;
 
-public abstract class Character
+public abstract class Entity
 {
 	public int health, speed, xPos, yPos, direction;
 	public Rectangle hitbox;
