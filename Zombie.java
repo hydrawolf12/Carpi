@@ -1,5 +1,5 @@
 
-public class Zombie extends Character
+public class Zombie extends Entity
 {
 
 	public Zombie(int speed, int xPos, int yPos)// creates zombie speed and position
