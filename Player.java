@@ -1,3 +1,8 @@
+import java.awt.Rectangle;
+import javax.swing.Timer;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 public class Player extends Entity
 {
 	private Gun currentWep;
@@ -7,6 +12,9 @@ public class Player extends Entity
 
 	public Player() //constructs player hitbox + spawns in center of map
 	{
+		xPos = 174;
+		yPos = 174;
+		Rectangle playerBox = new Rectangle(20, 20, 154, 154);
 	}
 	public void move(boolean[] inputs) //moves player
 	{
@@ -59,10 +67,19 @@ public class Player extends Entity
 			xPos++;
 			direction = 3;
 		}
+		
 	}
 	
 	public void shoot(boolean[] inputs) //spawns bullet
 	{
+		ActionListener action = new ActionListener()
+		{   
+		    @Override
+		    public void actionPerformed(ActionEvent event)
+		    {
+		    	canShoot = true;
+		    }
+		};
 		boolean up, left, down, right;
 		up = inputs[4];
 		left = inputs[5];
@@ -71,43 +88,40 @@ public class Player extends Entity
 		if (up && left)
 		{
 			direction = 8;
-			currentWep.shoot(direction);
 		}
 		else if(left && down)
 		{
 			direction = 6;
-			currentWep.shoot(direction);
 		}
 		else if(down && right)
 		{
 			direction = 4;
-			currentWep.shoot(direction);
 		}
 		else if(up && right)
 		{
 			direction = 2;
-			currentWep.shoot(direction);
 		}
 		else if(up)
 		{
 			direction = 1;
-			currentWep.shoot(direction);
 		}
 		else if(left)
 		{
 			direction = 7;
-			currentWep.shoot(direction);
 		}
 		else if(down)
 		{
 			direction = 5;
-			currentWep.shoot(direction);
 		}
 		else if(right)
 		{
 			direction = 3;
-			currentWep.shoot(direction);
 		}
+		currentWep.shoot(direction);
+		canShoot = false;
+		Timer shootTimer = new Timer(3000, action);
+		shootTimer.setRepeats(false);
+		shootTimer.start();
 	}
 	
 	public boolean checkHP() //checks hp ends game if < 0
@@ -118,21 +132,24 @@ public class Player extends Entity
 	
 	public void setWeapon(boolean[] inputs) //what variable type is the keyboard input?
 	{	
-		boolean one, two , three;
-		one = inputs[8];
-		two = inputs[9];
-		three = inputs[10];
-		if (one)
+		if (canShoot)
 		{
-			currentWep = new Pistol(int damage, int fireRate);
-		}
-		else if(two)
-		{
-			currentWep = new Shotgun(int damage, int fireRate);
-		}
-		else if(three)
-		{
-			currentWep = new Sniper(int damage, int fireRate);
+			boolean one, two , three;
+			one = inputs[8];
+			two = inputs[9];
+			three = inputs[10];
+			if (one)
+			{
+				currentWep = new Pistol(int damage, int fireRate);
+			}
+			else if(two)
+			{
+				currentWep = new Shotgun(int damage, int fireRate);
+			}
+			else if(three)
+			{
+				currentWep = new Sniper(int damage, int fireRate);
+			}	
 		}
 	}
 	
