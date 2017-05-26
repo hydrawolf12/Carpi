@@ -24,7 +24,7 @@ public class Board extends JPanel implements ActionListener
 	public boolean[] currentInputs = new boolean[11]; 
 	public Board()
 	{
-		 time = new Timer(50, )
+		 
 	}
 }
 private class AAdapter extends KeyAdapter
