@@ -56,7 +56,7 @@ public class Bullet
 		  if(currentZombs.get(i).getRectangle.intersects(this.hitbox))
 		  {
 			 if(currentZombs.get(i).takeDamage(player.damage))
-			    currentZombs.remove(i);
+			    currentZombs.get(i).remove;
 			 if(isPierce == false)
 			 {
 			    currentBullets.remove(); // must find index somehow
