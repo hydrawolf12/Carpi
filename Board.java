@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.image.BufferStrategy;
 
-public class Board extends JPanel
+public class Board extends JPanel implements ActionListener
 {
 	private static Timer timer;
 	private static int score;
