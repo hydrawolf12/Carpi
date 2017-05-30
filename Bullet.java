@@ -1,4 +1,4 @@
-import java.awt.Rectangle;
+imimport java.awt.Rectangle;
 
 public class Bullet 
 {
@@ -7,15 +7,17 @@ public class Bullet
   private int xpos;
   private int ypos;
   boolean isPierce;
+  boolean isBuckshot;
   
-  public Bullet(Player character, int d, boolean p)
+  public Bullet(Player character, int d, boolean p, boolean b)
   {
-      xpos = character.getxpos();
-      ypos = character.getypos();
-      direction =  d;//key input
+	  xpos = character.getxpos();
+	  ypos = character.getypos();
+	  direction =  d;//key input
       hitbox = new Rectangle(xpos, ypos, 2, 2); //numbers will change
+      isBuckshot = b;
       isPierce = p;
-  }
+   }
   
   public void move()
   {
@@ -55,15 +57,29 @@ public class Bullet
 	  {
 		  if(currentZombs.get(i).getRectangle.intersects(this.hitbox))
 		  {
-			  //currentZombs.remove(i);
-			 if(currentZombs.get(i).takeDamage(player.damage))
-			    currentZombs.get(i).remove;
+			 currentZombs.remove();
 			 if(isPierce == false)
 			 {
-			    currentBullets.remove(); // must find index somehow
+			    this.remove();
 			    break;
+			 }
+			 if(xpos >= boardEnd || ypos >= boardEnd || xpos <= 0 || ypos <= 0)
+			 {
+				 this.remove();
 			 }
 		  }
 	  }
-  }
+   }
+  
+   public void remove()
+   {
+	  for (int i = 0; i < currentBullets.size(); i++)
+	  {
+		  if (this.equals(currentBullets.get(i)))
+		  {
+			  currentBullets.remove(i);
+			  break;
+		  }
+	  }
+   }
 }
