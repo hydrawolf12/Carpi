@@ -8,21 +8,24 @@ public class Player extends Entity
 	private Gun currentWep;
 	public boolean canShoot;
 	public boolean isInvin;
-	private int damage, fireRate;
+	public int damage, fireRate;
 
-	public Player() //constructs player hitbox + spawns in center of map
+	public Player(int health, int speed, int x, int y, int w, int h, int topL, int topR) //constructs player hitbox + spawns in center of map
 	{
-		xPos = 174;
-		yPos = 174;
-		Rectangle playerBox = new Rectangle(20, 20, 154, 154);
+		super(health, speed, x , y , w, h, topL, topR); //x and y should be 174 topL and topR should be 154
+		damage = 1;
+		fireRate = 1;
+		isInvin = false;
+		canShoot = true;
+		currentWep = new Pistol(damage, fireRate);
 	}
-	public void move(boolean[] inputs) //moves player
+	public void move() //moves player
 	{
 		boolean w,a,s,d;
-		w = inputs[0];
-		a = inputs[1];
-		s = inputs[2];
-		d = inputs[3];
+		w = currentInputs[0];
+		a = currentInputs[1];
+		s = currentInputs[2];
+		d = currentInputs[3];
 		if (w && a)
 		{
 			yPos--;
@@ -67,10 +70,13 @@ public class Player extends Entity
 			xPos++;
 			direction = 3;
 		}
-		
+		for (Zombie z: currentZombs)
+		{
+			z.calcAng();
+		}
 	}
 	
-	public void shoot(boolean[] inputs) //spawns bullet
+	public void shoot() //spawns bullet
 	{
 		ActionListener action = new ActionListener()
 		{   
@@ -81,10 +87,11 @@ public class Player extends Entity
 		    }
 		};
 		boolean up, left, down, right;
-		up = inputs[4];
-		left = inputs[5];
-		down = inputs[6];
-		right = inputs[7];
+		
+		up = currentInputs[4];
+		left = currentInputs[5];
+		down = currentInputs[6];
+		right = currentInputs[7];
 		if (up && left)
 		{
 			direction = 8;
@@ -130,25 +137,25 @@ public class Player extends Entity
 			endGame();
 	}
 	
-	public void setWeapon(boolean[] inputs) //what variable type is the keyboard input?
+	public void setWeapon() //what variable type is the keyboard input?
 	{	
 		if (canShoot)
 		{
 			boolean one, two , three;
-			one = inputs[8];
-			two = inputs[9];
-			three = inputs[10];
+			one = currentInputs[8];
+			two = currentInputs[9];
+			three = currentInputs[10];
 			if (one)
 			{
-				currentWep = new Pistol(int damage, int fireRate);
+				currentWep = new Pistol(damage, fireRate);
 			}
 			else if(two)
 			{
-				currentWep = new Shotgun(int damage, int fireRate);
+				currentWep = new Shotgun(damage, fireRate);
 			}
 			else if(three)
 			{
-				currentWep = new Sniper(int damage, int fireRate);
+				currentWep = new Sniper(damage, fireRate);
 			}	
 		}
 	}
@@ -166,7 +173,18 @@ public class Player extends Entity
 	
 	public void toggleInvin()
 	{
-		isInvin = !isInvin;
+		ActionListener action = new ActionListener()
+		{   
+		    @Override
+		    public void actionPerformed(ActionEvent event)
+		    {
+		    	isInvin = false;
+		    }
+		};
+		isInvin = true;
+		Timer invTimer = new Timer(2000, action);
+		invTimer.setRepeats(false);
+		invTimer.start();
 	}
 	
 
