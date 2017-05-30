@@ -1,18 +1,25 @@
+import java.awt.Rectangle;
 
 public class Boss extends Zombie
 {
-	public int health;
-	public Boss(int speed, int xPos, int yPos, int hp) //initiates boss based on speed position and health
+	public Boss(int health, int speed, int x, int y, int w, int h, int topL, int topR, Player mccree) //initiates boss based on speed position and health
 	{
-		super(speed, xPos, yPos);
-		health = hp;
-		//reduce zomb spawn rate
+		super(health, speed, x, y, w, h, topL, topR, mccree);
 	}
-	public void setHealth(int a) //decrement hp by player's bossDamage
+	
+	public void remove(int pos, Player mccree) // removes boss from field, upgrades player, returns spawn rate to normal
 	{
-	}
-	public void remove() // removes boss from field, upgrades player, returns spawn rate to normal
-	{
+		currentZombs.remove(pos);
+		Spawner.currentHealth++;
+		Spawner.currentSpeed++;
+		bossKillCount++;
+		if (bossKillCount % 2 == 0)
+			mccree.health ++;
+		else if (bossKillCount % 2 == 1)
+		{
+			mccree.damage++;
+			mccree.fireRate++;
+		}
 	}
 	
 }
