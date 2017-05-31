@@ -3,12 +3,14 @@ import java.util.ArrayList;
 public class Zombie extends Entity
 {
 
-	public Player player;
+	private Player player;
+	private ArrayList<Zombie> currentZombs;
 	
-	public Zombie(int health, int speed, int x, int y, int w, int h, int topL, int topR, Player mccree) //public Zombie(int hp, int sp, int x, int y, Player mccree)// creates zombie speed and position
+	public Zombie(int health, int speed, int x, int y, int w, int h, int topL, int topR, Player mccree, ArrayList<Zombie> zombieList) //public Zombie(int hp, int sp, int x, int y, Player mccree)// creates zombie speed and position
 	{
 		super(health, speed, x, y, w, h, topL, topR);
 		player = mccree;
+		currentZombs = zombieList;
 	}
 	
 	public void move()// moves every tick
@@ -103,13 +105,14 @@ public class Zombie extends Entity
 		player.health--;
 		player.checkHP();
 	}
-	public boolean takeDamage(int a)
+	public void takeDamage(int a, int pos)
 	{
 		health -= a;
 		if (health <= 0)
-			return true;
-		else
-			return false;
+		{
+			currentZombs.remove(pos);
+			killCount++;
+		}
 	}
 	//public boolean checkHP()
 	//{
@@ -118,10 +121,10 @@ public class Zombie extends Entity
 	//	else
 	//		return false;
 	//}
-	public void remove(int pos)// removes zombie from ArrayList when collides w/ bullet
-	{
-		currentZombs.remove(pos);
-		killCount++;
-	}
+	//public void remove(int pos)// removes zombie from ArrayList when collides w/ bullet
+	//{
+	//	currentZombs.remove(pos);
+	//	killCount++;
+	//}
 	
 }

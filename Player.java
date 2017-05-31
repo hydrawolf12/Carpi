@@ -186,6 +186,9 @@ public class Player extends Entity
 		invTimer.setRepeats(false);
 		invTimer.start();
 	}
-	
+	public void returnType()
+	{
+		currentWep.returnType();
+	}
 
 }

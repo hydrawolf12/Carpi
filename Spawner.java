@@ -1,8 +1,8 @@
 public class Spawner
 {
-	public static int currentSpeed;
-	public static int currentHealth;
-	public static int rate;
+	private static int currentSpeed;
+	private static int currentHealth;
+	private static int rate;
 	
 	public void incrementSpeed(int a)
 	{
@@ -70,7 +70,7 @@ public class Spawner
 			x = 0;
 			y = 43;
 		}
-		Zombie zimbabwe = new Zombie(currentHealth, currentSpeed, x, y, mccree);
+		Zombie zimbabwe = new Zombie(currentHealth, currentSpeed, x, y, 20, 20, 154, 154 mccree);
 		zimbabwe.calcAng();
 		currentZombs.add(zimbabwe);
 		
