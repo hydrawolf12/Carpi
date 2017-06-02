@@ -18,6 +18,8 @@ public class Board extends JPanel implements ActionListener
 	private static int score;
 	private static int killCount;
 	private static int bossKillCount;
+	private static int xEnd;
+	private static int yEnd;
 	private Player player;
 	public ArrayList<Zombie> currentZombs = new ArrayList<Zombie>();
 	public ArrayList<Bullet> currentBullets = new ArrayList<Bullet>();
@@ -128,5 +130,15 @@ private class AAdapter extends KeyAdapter
 	public void getBullets()
 	{
 	   return currentBullets;
+	}
+	
+	public static int getxEnd()
+	{
+	   return xEnd;
+	}
+	
+	public static int getyEnd()
+	{
+	   return yEnd;
 	}
 }
