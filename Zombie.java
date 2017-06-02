@@ -15,6 +15,7 @@ public class Zombie extends Entity
 	
 	public void move()// moves every tick
 	{
+		
 		if (direction == 1)
 			  yPos--;
 		else if (direction == 2)
@@ -43,6 +44,7 @@ public class Zombie extends Entity
 			  yPos--;
 			  xPos--;
 		}
+		this.calcAng();
 	}
 	public void calcAng()// called when player moves
 	{
@@ -92,7 +94,7 @@ public class Zombie extends Entity
 		{
 			if(z.hitbox.intersects(player.hitbox))
 			{
-				if(!player.getInvin())
+				if(!player.isInvin)
 				{
 					player.toggleInvin();
 					z.attack();
