@@ -6,9 +6,9 @@ import java.awt.event.ActionListener;
 public class Player extends Entity
 {
 	private Gun currentWep;
-	public boolean canShoot;
-	public boolean isInvin;
-	public int damage, fireRate;
+	private boolean canShoot;
+	private boolean isInvin;
+	private int damage, fireRate;
 
 	public Player(int health, int speed, int x, int y, int w, int h, int topL, int topR) //constructs player hitbox + spawns in center of map
 	{
@@ -19,6 +19,22 @@ public class Player extends Entity
 		canShoot = true;
 		currentWep = new Pistol(damage, fireRate);
 	}
+	public boolean getShoot()
+	{
+		return canShoot;
+	}
+	public boolean getInvin()
+	{
+		return isInvin;
+	}
+	public int getDamage()
+	{
+		return damage;
+	}
+	public int getFireRate()
+	{
+		return fireRate;
+	}
 	public void move() //moves player
 	{
 		boolean w,a,s,d;
@@ -26,49 +42,53 @@ public class Player extends Entity
 		a = currentInputs[1];
 		s = currentInputs[2];
 		d = currentInputs[3];
-		if (w && a)
+		canUP = yPos > 1;
+		canDOWN = yPos < CarpiGame.getY - 1;
+		canLEFT = xPos > 1;
+		canRIGHT =  xPos < CarpiGame.getX - 1;
+		if (w && a && canUP && canLEFT)
 		{
 			yPos--;
 			xPos--;
-			direction = 8;
+			// direction = 8;
 		}
-		else if(a && s)
+		else if(a && s && canLEFT && canDOWN)
 		{
 			yPos++;
 			xPos--;
-			direction = 6;
+			// direction = 6;
 		}
-		else if(s && d)
+		else if(s && d && canDOWN && canRIGHT)
 		{
 			yPos++;
 			xPos++;
-			direction = 4;
+			// direction = 4;
 		}
-		else if(w && d)
+		else if(w && d && canUP && canRIGHT)
 		{
 			yPos--;
 			xPos++;
-			direction = 2;
+			// direction = 2;
 		}
-		else if(w)
+		else if(w && canUP)
 		{
 			yPos--;
-			direction = 1;
+			// direction = 1;
 		}
-		else if(a)
+		else if(a && canLEFT)
 		{
 			xPos--;
-			direction = 7;
+			// direction = 7;
 		}
-		else if(s)
+		else if(s && canDOWN)
 		{
 			yPos++;
-			direction = 5;
+			//  direction = 5;
 		}
-		else if(d)
+		else if(d && canRIGHT)
 		{
 			xPos++;
-			direction = 3;
+			// direction = 3;
 		}
 		for (Zombie z: currentZombs)
 		{
@@ -165,10 +185,13 @@ public class Player extends Entity
 		health += a;
 	}
 	
-	public void updateDamageFireRate(int a) // updates damage and firerate by a
+	public void updateDamage(int a) // updates damage and firerate by a
 	{
 		damage+= a;
-		fireRate+= a;
+	}
+	public void updateFireRate(int a)
+	{
+		fireRate += a;
 	}
 	
 	public void toggleInvin()
@@ -186,9 +209,9 @@ public class Player extends Entity
 		invTimer.setRepeats(false);
 		invTimer.start();
 	}
-	public void returnType()
+	public Gun returnType()
 	{
-		currentWep.returnType();
+		return currentWep.returnType();
 	}
 
 }
