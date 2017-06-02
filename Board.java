@@ -125,4 +125,8 @@ private class AAdapter extends KeyAdapter
 			currentInputs[10] = false;
 		}
 	}
+	public void getBullets()
+	{
+	   return currentBullets;
+	}
 }
