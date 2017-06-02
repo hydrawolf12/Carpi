@@ -3,6 +3,6 @@ public class Pistol extends Gun
 {
   public void shoot(int direction) 
   {
-	  currentBullets.add(new Bullet(player, direction, false, false));
+	  getBullets().add(new Bullet(player, direction, false, false, player.getDamage()));
   }
 }
