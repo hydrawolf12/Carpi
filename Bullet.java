@@ -10,10 +10,10 @@ public class Bullet extends Entity
   boolean isBuckshot;
 
   
-  public Bullet(Player character, int d, boolean p, boolean b, int dam)
+  public Bullet(int x,int y, int d, boolean p, boolean b, int dam)
   {
-      xpos = character.getxpos();
-      ypos = character.getypos();
+      xPos = x;
+      yPos = y;
       direction =  d;//key input
       hitbox = new Rectangle(xpos, ypos, 2, 2); //numbers will change
       isBuckshot = b;
