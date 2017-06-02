@@ -3,39 +3,42 @@ import javax.swing.Timer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Bullet 
-{
-  private int direction; 
-  private Rectangle hitbox; 
+public class Bullet extends Entity
+{ 
   private int damage;
-  private int xpos;
-  private int ypos;
   boolean isPierce;
   boolean isBuckshot;
 
   
   public Bullet(Player character, int d, boolean p, boolean b, int dam)
   {
-	  ActionListener action = new ActionListener()
-		{   
-		    @Override
-		    public void actionPerformed(ActionEvent event)
-		    {
-		    	
-		    }
-		};
-	  xpos = character.getxpos();
-	  ypos = character.getypos();
-	  direction =  d;//key input
+      xpos = character.getxpos();
+      ypos = character.getypos();
+      direction =  d;//key input
       hitbox = new Rectangle(xpos, ypos, 2, 2); //numbers will change
       isBuckshot = b;
       isPierce = p;
       damage = dam;
       if(isBuckshot == true)
       {
-    	  Timer t = new Timer(3000, action);
+    	  startTimer();
       }
    }
+   
+  public void startTimer()
+  {
+      ActionListener action = new ActionListener()
+		{   
+		    @Override
+		    public void actionPerformed(ActionEvent event)
+		    {
+		    	this.remove();
+		    }
+		};
+      Timer t = new Timer(3000, action);
+      t.setRepeats(false);
+      t.start();
+  }
    
   public void move()
   {
