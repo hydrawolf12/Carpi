@@ -78,13 +78,13 @@ public class Bullet extends Entity
 	  {
 		  if(currentZombs.get(i).getRectangle.intersects(this.hitbox))
 		  {
-			 currentZombs.takeDamage(this.damage);
+			 currentZombs.takeDamage(this.damage, i);
 			 if(isPierce == false)
 			 {
 			    this.remove();
 			    break;
 			 }
-			 if(xpos >= 350 || ypos >= 350 || xpos <= 0 || ypos <= 0)
+			 if(xpos >= getxEnd() || ypos >= getyEnd() || xpos <= 0 || ypos <= 0)
 			 {
 				 this.remove();
 			 }
