@@ -92,7 +92,7 @@ public class Zombie extends Entity
 		{
 			if(z.hitbox.intersects(player.hitbox))
 			{
-				if(!player.isInvin)
+				if(!player.getInvin())
 				{
 					player.toggleInvin();
 					z.attack();
