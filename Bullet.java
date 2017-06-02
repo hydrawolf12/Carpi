@@ -84,7 +84,7 @@ public class Bullet extends Entity
 			    this.remove();
 			    break;
 			 }
-			 if(xpos >= boardEnd || ypos >= boardEnd || xpos <= 0 || ypos <= 0)
+			 if(xpos >= 350 || ypos >= 350 || xpos <= 0 || ypos <= 0)
 			 {
 				 this.remove();
 			 }
