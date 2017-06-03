@@ -25,6 +25,7 @@ public class Board extends JPanel implements ActionListener
 	private static int xEnd;
 	private static int yEnd;
 	private Player player;
+	private boolean
 	private ArrayList<Zombie> currentZombs = new ArrayList<Zombie>();
 	private ArrayList<Bullet> currentBullets = new ArrayList<Bullet>();
 	private boolean[] currentInputs = new boolean[11]; 
@@ -140,16 +141,20 @@ public class Board extends JPanel implements ActionListener
 	}
 	public void actionPerformed(ActionEvent e)
 	{
-		player.move();
-		for(int i = 0; i < currentZombs.size(); i++)
+		if(inGame)
 		{
-			currentZombs.get(i).move();
+			player.move();
+			for(int i = 0; i < currentZombs.size(); i++)
+			{
+				currentZombs.get(i).move();
+			}
+			for(int i = 0; i < currentBullets.size(); i++)
+			{
+				currentBullets.get(i).move();
+			}
 		}
-		for(int i = 0; i < currentBullets.size(); i++)
-		{
-			currentBullets.get(i).move();
-		}
-		repaint();		
+		repaint();	
+		
 	}
 }
 
