@@ -2,7 +2,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 public class CarpiGame extends JFrame 
 {	
-	/*public CarpiGame () Dis some Trash b0y
+	/*public CarpiGame () Dis some Trash b0i
 	{
 		initGame();
 	}
