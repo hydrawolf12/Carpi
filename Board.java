@@ -25,9 +25,9 @@ public class Board extends JPanel implements ActionListener
 	private static int xEnd;
 	private static int yEnd;
 	private Player player;
-	public ArrayList<Zombie> currentZombs = new ArrayList<Zombie>();
-	public ArrayList<Bullet> currentBullets = new ArrayList<Bullet>();
-	public boolean[] currentInputs = new boolean[11]; 
+	private ArrayList<Zombie> currentZombs = new ArrayList<Zombie>();
+	private ArrayList<Bullet> currentBullets = new ArrayList<Bullet>();
+	private boolean[] currentInputs = new boolean[11]; 
 	public BufferedImage c1pistol, c1shotgun, c1sniper, c2pistol, c2shotgun, c2sniper, 
 	c3pistol, c3shotgun, c3sniper, c4pistol, c4shotgun, c4sniper, c5pistol, c5shotgun, 
 	c5sniper, c6pistol, c6shotgun, c6sniper, c7pistol, c7shotgun, c7sniper, c8pistol, 
@@ -36,6 +36,16 @@ public class Board extends JPanel implements ActionListener
 	
 	public Board()
 	{
+		ActionListener updateScore = new ActionListener()
+		{   
+		    @Override
+		    public void actionPerformed(ActionEvent event)
+		    {
+		    	score++;
+		    }
+		};
+		timer score = new Timer(1000, updateScore)
+		timer.start();
 		try 
 		{
 		    c1pistol = ImageIO.read(new File("c1pistol.jpg"));
