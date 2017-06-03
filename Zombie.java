@@ -6,40 +6,44 @@ public class Zombie extends Entity
 	private Player player;
 	private ArrayList<Zombie> currentZombs;
 	
-	public Zombie(int health, int speed, int x, int y, int w, int h, int topL, int topR, Player mccree, ArrayList<Zombie> zombieList) //public Zombie(int hp, int sp, int x, int y, Player mccree)// creates zombie speed and position
+	public Zombie(int health, int speed, int x, int y, int w, int h, int topX, int topY, int width, int height Player mccree, ArrayList<Zombie> zombieList) //public Zombie(int hp, int sp, int x, int y, Player mccree)// creates zombie speed and position
 	{
-		super(health, speed, x, y, w, h, topL, topR);
+		super(health, speed, x, y, w, h, topX, topY, width, height);
 		player = mccree;
 		currentZombs = zombieList;
 	}
 	
 	public void move()// moves every tick
 	{
+		canUP = yPos > 1;
+		canDOWN = yPos < frameHeight - 1;
+		canLEFT = xPos > 1;
+		canRIGHT =  xPos < frameWidth - 1;
 		
-		if (direction == 1)
+		if (direction == 1 && canUP)
 			  yPos--;
-		else if (direction == 2)
+		else if (direction == 2 && canUP && canRIGHT)
 		{
 			  yPos--;
 			  xPos++;
 		}
-		else if (direction == 3)
+		else if (direction == 3 && canRIGHT)
 			  xPos++;
-		else if (direction == 4)
+		else if (direction == 4 && canDOWN && canRIGHT)
 		{
 			  yPos++;
 			  xPos++;
 		}
-		else if (direction == 5)
+		else if (direction == 5 && canDOWN)
 			  yPos--;
-		else if (direction == 6)
+		else if (direction == 6 && canDOWN && canLEFT)
 		{
 			  yPos++;
 			  xPos--;
 		}
-		else if (direction == 7)
+		else if (direction == 7 && canLEFT)
 			  xPos--;
-		else if (direction == 8)
+		else if (direction == 8 && canUP && canLEFT)
 		{
 			  yPos--;
 			  xPos--;
