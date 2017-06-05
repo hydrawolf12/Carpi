@@ -18,12 +18,12 @@ import java.io.IOException;
 
 public class Board extends JPanel implements ActionListener
 {
-	private static Timer timer;
+	private static Timer timer = new Timer(5, this);
 	private static int score;
 	private static int killCount;
 	private static int bossKillCount;
-	private static int xEnd;
-	private static int yEnd;
+	private static int xEnd = 1000;
+	private static int yEnd = 1000;
 	private Player player;
 	private boolean
 	private ArrayList<Zombie> currentZombs = new ArrayList<Zombie>();
@@ -37,15 +37,6 @@ public class Board extends JPanel implements ActionListener
 	
 	public Board()
 	{
-		ActionListener updateScore = new ActionListener()
-		{   
-		    @Override
-		    public void actionPerformed(ActionEvent event)
-		    {
-		    	score++;
-		    }
-		};
-		timer score = new Timer(1000, updateScore)
 		timer.start();
 		try 
 		{
@@ -141,6 +132,7 @@ public class Board extends JPanel implements ActionListener
 	}
 	public void actionPerformed(ActionEvent e)
 	{
+		score++;
 		if(inGame)
 		{
 			player.move();
