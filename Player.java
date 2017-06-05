@@ -12,7 +12,9 @@ public class Player extends Entity
 
 	public Player()//public Player(int health, int speed, int x, int y, int w, int h, int topL, int topR, int width, int height) //constructs player hitbox + spawns in center of map
 	{
-		super(3, 2, getxEnd / 2 , getyEnd / 2, 50, 50, getxEnd / 2 - 25, getyEnd / 2 - 25);
+		x = getxEnd() / 2;
+		y = getyEnd() / 2;
+		super(3, 2, x , y, 50, 50, x - 25, y - 25);
 		damage = 1;
 		fireRate = 1;
 		isInvin = false;
@@ -43,9 +45,9 @@ public class Player extends Entity
 		s = currentInputs[2];
 		d = currentInputs[3];
 		canUP = yPos > 1;
-		canDOWN = yPos < getyEnd - 1;
+		canDOWN = yPos < getyEnd() - 1;
 		canLEFT = xPos > 1;
-		canRIGHT =  xPos < getxEnd - 1;
+		canRIGHT =  xPos < getxEnd() - 1;
 		if (w && a && canUP && canLEFT)
 		{
 			yPos--;
