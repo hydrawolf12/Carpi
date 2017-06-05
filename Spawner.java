@@ -12,24 +12,24 @@ public class Spawner
 		rate = 1;
 		mccree = player;
 	}
-	public void incrementSpeed(int a)
+	public static void incrementSpeed(int a)
 	{
 		currentSpeed += a;
 	}
 	
-	public void incrementHealth(int a)
+	public static void incrementHealth(int a)
 	{
 		currentHealth += a;
 	}
 	
-	public void setRate(int a)
+	public static void incrementRate(int a)
 	{
-		rate = a;
+		rate += a;
 	}
 	
 	public void spawnBoss(Player mccree)
 	{
-		Boss baby = new Boss(currentHealth * 5, currentSpeed * 3, getxEnd / 2 + 25, 25, 50, 50, getxEnd / 2, 0, mccree);
+		Boss baby = new Boss(currentHealth * 5, currentSpeed * 3, getxEnd() / 2 + 25, 25, 50, 50, getxEnd / 2, 0, mccree);
 		baby.calcAng();
 		currentZombs.add(baby);
 		
@@ -78,7 +78,7 @@ public class Spawner
 			x = 1;
 			y = frameHeight / 8;
 		}
-		Zombie zimbabwe = new Zombie(currentHealth, currentSpeed, x, y, 50, 50, x - 25, y - 25, frameWidth, frameHeight, mccree);
+		Zombie zimbabwe = new Zombie(currentHealth, currentSpeed, x, y, 50, 50, x - 25, y - 25, mccree);
 		zimbabwe.calcAng();
 		currentZombs.add(zimbabwe);
 		
