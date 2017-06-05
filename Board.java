@@ -37,7 +37,7 @@ public class Board extends JPanel implements ActionListener
 	
 	public Board()
 	{
-		timer.start();
+		timer.start(); //needs to do this for updateing test
 		try 
 		{
 		    c1pistol = ImageIO.read(new File("c1pistol.jpg"));
