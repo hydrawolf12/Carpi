@@ -156,7 +156,7 @@ public class Board extends JPanel implements ActionListener
 		repaint();	
 		
 	}
-	private class AAdapter extends KeyAdapter
+	private class AAdapter extends KeyAdapter //deals with keyboard inputs
 	{
 		public void keyPressed(KeyEvent e)
 		{
