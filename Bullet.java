@@ -10,12 +10,9 @@ public class Bullet extends Entity
   boolean isBuckshot;
 
   
-  public Bullet(int x,int y, int d, boolean p, boolean b, int dam)
+  public Bullet(int x, int y, int d, boolean p, boolean b, int dam)
   {
-      xPos = x;
-      yPos = y;
-      direction =  d;//key input
-      hitbox = new Rectangle(xpos - 1, ypos - 1, 2, 2); //numbers will change
+      Entity(0, 0, x, y, 2, 2, x - 1, y - 1, int width, int height)
       isBuckshot = b;
       isPierce = p;
       damage = dam;
