@@ -15,7 +15,7 @@ public class Bullet extends Entity
       xPos = x;
       yPos = y;
       direction =  d;//key input
-      hitbox = new Rectangle(xpos, ypos, 2, 2); //numbers will change
+      hitbox = new Rectangle(xpos - 1, ypos - 1, 2, 2); //numbers will change
       isBuckshot = b;
       isPierce = p;
       damage = dam;
@@ -43,33 +43,35 @@ public class Bullet extends Entity
   public void move()
   {
 	  if (direction == 1)
-		  ypos--;
+		  yPos--;
 	  else if (direction == 2)
 	  {
-		  ypos--;
-		  xpos++;
+		  yPos--;
+		  xPos++;
 	  }
 	  else if (direction == 3)
-		  xpos++;
+		  xPos++;
 	  else if (direction == 4)
 	  {
-		  ypos++;
-		  xpos++;
+		  yPos++;
+		  xPos++;
 	  }
 	  else if (direction == 5)
-		  ypos--;
+		  yPos--;
 	  else if (direction == 6)
 	  {
-		  ypos++;
+		  yPos++;
 		  xpos--;
 	  }
 	  else if (direction == 7)
-		  xpos--;
+		  xPos--;
 	  else if (direction == 8)
 	  {
-		  ypos--;
-		  xpos--;
+		  yPos--;
+		  xPos--;
 	  }
+	  
+	  hitbox = new Rectangle(xpos - 1, ypos - 1, 2, 2);
   }
   
   public void collisionDetect()
