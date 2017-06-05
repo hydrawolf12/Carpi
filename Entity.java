@@ -2,18 +2,17 @@ import java.awt.Rectangle;
 
 public abstract class Entity
 {
-	private int health, speed, xPos, yPos, direction, frameWidth, frameHeight;
+	private int health, speed, xPos, yPos, direction;
 	private Rectangle hitbox;
 	
-	public Entity(int hp, int sp, int x, int y, int hbW, int hbH, int topX, int topY, int width, int height)
+	public Entity(int hp, int sp, int x, int y, int hbW, int hbH, int topX, int topY)
 	{
 		health = hp;
 		speed = sp;
 		xPos = x;
 		yPos = y;
 		direction = 1;
-		frameWidth = width;
-		frameHeight = height;
+		
 		hitbox = new Rectangle(topX, topY, hbW, hbH);
 	}
 	
