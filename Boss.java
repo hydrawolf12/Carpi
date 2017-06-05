@@ -12,6 +12,7 @@ public class Boss extends Zombie
 		currentZombs.remove(pos);
 		Spawner.incrementHealth(2);
 		Spawner.incrementSpeed(1);
+		Spawner.incrementRate(1);
 		bossKillCount++;
 		if (bossKillCount % 3 == 0)
 			mccree.updateHP(1); // int a subject to change
