@@ -7,7 +7,7 @@ public class Zombie extends Entity
 	private ArrayList<Zombie> currentZombs;
 	private static int killCount;
 	
-	public Zombie(int health, int speed, int x, int y, int width, int height, Player mccree, ArrayList<Zombie> zombieList) //public Zombie(int hp, int sp, int x, int y, Player mccree)// creates zombie speed and position
+	public Zombie(int health, int speed, int x, int y, Player mccree, ArrayList<Zombie> zombieList) //public Zombie(int hp, int sp, int x, int y, Player mccree)// creates zombie speed and position
 	{
 		super(health, speed, x, y, x - 25, y - 25, 50, 50, width, height);
 		player = mccree;
@@ -17,9 +17,9 @@ public class Zombie extends Entity
 	public void move()// moves every tick
 	{
 		canUP = yPos > 1;
-		canDOWN = yPos < frameHeight - 1;
+		canDOWN = yPos < getyEnd() - 1;
 		canLEFT = xPos > 1;
-		canRIGHT =  xPos < frameWidth - 1;
+		canRIGHT =  xPos < getxEnd() - 1;
 		
 		if (direction == 1 && canUP)
 			  yPos--;
@@ -128,10 +128,10 @@ public class Zombie extends Entity
 	//	else
 	//		return false;
 	//}
-	//public void remove(int pos)// removes zombie from ArrayList when collides w/ bullet
-	//{
-	//	currentZombs.remove(pos);
-	//	killCount++;
-	//}
+	public void remove(int pos)// removes zombie from ArrayList when collides w/ bullet
+	{
+		currentZombs.remove(pos);
+		killCount++;
+	}
 	
 }
