@@ -101,12 +101,14 @@ public class Board extends JPanel implements ActionListener
 		this.setBackground(Color.BLACK);
 		
 		g.setColor(new Color(216, 174, 119));
-		g.fillRect(0, 0, 1000, 850);
+		g.fillRect(0, 0, 1000, 900);
 		
 		g.setColor(Color.RED);
-		g.fillRect(475, 400, 50, 50);
+		g.fillRect(475, 425, 50, 50);
 		
 		g.setColor(Color.WHITE);
+		
+		g.setFont(new Font("Times New Roman", Font.PLAIN, 34));
 		g.drawString("Health: 420", 200, 950);
 		g.drawString("Score: 420", 700, 950);
 	}*/
