@@ -156,6 +156,20 @@ public class Board extends JPanel implements ActionListener
 		repaint();	
 		
 	}
+	public void getBullets()
+	{
+	   return currentBullets;
+	}
+	
+	public static int getxEnd()
+	{
+	   return xEnd;
+	}
+	
+	public static int getyEnd()
+	{
+	   return yEnd;
+	}
 	private class AAdapter extends KeyAdapter //deals with keyboard inputs
 	{
 		public void keyPressed(KeyEvent e)
@@ -254,22 +268,5 @@ public class Board extends JPanel implements ActionListener
 				currentInputs[10] = false;
 			}
 		}
-		public void getBullets()
-		{
-		   return currentBullets;
-		}
-		
-		public static int getxEnd()
-		{
-		   return xEnd;
-		}
-		
-		public static int getyEnd()
-		{
-		   return yEnd;
-		}
 	}
 }
-
-
-
