@@ -100,7 +100,7 @@ public class Board extends JPanel implements ActionListener
 		super.paintComponent(g);
 		this.setBackground(Color.BLACK);
 		
-		g.setColor(new Color(219, 143, 43));
+		g.setColor(new Color(216, 174, 119));
 		g.fillRect(0, 0, 1000, 850);
 		
 		g.setColor(Color.RED);
