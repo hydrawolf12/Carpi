@@ -4,17 +4,13 @@ public class Spawner
 	private static int currentHealth;
 	private static int rate;
 	private static Player mccree;
-	private static int frameWidth;
-	private static int frameHeight;
 	
-	public Spawner(Player player, int width, int height)
+	public Spawner(Player player)
 	{
 		currentSpeed = 1;
 		currentHealth = 1;
 		rate = 1;
 		mccree = player;
-		frameWidth = width;
-		frameHeight = height;
 	}
 	public void incrementSpeed(int a)
 	{
@@ -33,7 +29,7 @@ public class Spawner
 	
 	public void spawnBoss(Player mccree)
 	{
-		Boss baby = new Boss(currentHealth * 5, currentSpeed * 3, frameWidth / 2, frameHeight / 2, 50, 50, frameHeight / 8, frameWidth / 2, frameWidth, frameHeight, mccree);
+		Boss baby = new Boss(currentHealth * 5, currentSpeed * 3, getxEnd / 2 + 25, 25, 50, 50, getxEnd / 2, 0, mccree);
 		baby.calcAng();
 		currentZombs.add(baby);
 		
