@@ -14,7 +14,7 @@ public class Player extends Entity
 	{
 		x = getxEnd() / 2;
 		y = getyEnd() / 2;
-		super(3, 2, x , y, 50, 50, x - 25, y - 25);
+		super(3, 2, x , y, x - 25, y - 25, 50, 50);
 		damage = 1;
 		fireRate = 1;
 		isInvin = false;
@@ -92,6 +92,7 @@ public class Player extends Entity
 			xPos++;
 			// direction = 3;
 		}
+		hitbox = new Rectangle(x - 25, y - 25, 50 , 50);
 		for (Zombie z: currentZombs)
 		{
 			z.calcAng();
