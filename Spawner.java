@@ -27,6 +27,10 @@ public class Spawner
 		rate += a;
 	}
 	
+	public static void returnRate()
+	{
+		return rate;
+	}
 	public void spawnBoss(Player mccree)
 	{
 		Boss baby = new Boss(currentHealth * 5, currentSpeed * 3, getxEnd() / 2 + 25, 25, 50, 50, getxEnd / 2, 0, mccree);
@@ -78,7 +82,7 @@ public class Spawner
 			x = 1;
 			y = frameHeight / 8;
 		}
-		Zombie zimbabwe = new Zombie(currentHealth, currentSpeed, x, y, 50, 50, x - 25, y - 25, mccree);
+		Zombie zimbabwe = new Zombie(currentHealth, currentSpeed, x, y, x - 25,y - 25, 50, 50, mccree);
 		zimbabwe.calcAng();
 		currentZombs.add(zimbabwe);
 		
