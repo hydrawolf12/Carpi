@@ -40,10 +40,10 @@ public class Board extends JPanel implements ActionListener
 		timer.start(); 
 		try 
 		{
-		    c1pistol = ImageIO.read(new File("c1pistol.jpg"));
-		    c1shotgun = ImageIO.read(new File("c1shotgun.jpg"));
-		    c1sniper = ImageIO.read(new File("c1sniper.jpg"));
-		    c2pistol = ImageIO.read(new File("c2pistol.jpg"));
+		    cpistol = ImageIO.read(new File("c1pistol.jpg"));
+		    cshotgun = ImageIO.read(new File("c1shotgun.jpg"));
+		    csniper = ImageIO.read(new File("c1sniper.jpg"));
+		    /*c2pistol = ImageIO.read(new File("c2pistol.jpg"));
 		    c2shotgun = ImageIO.read(new File("c2shotgun.jpg"));
 		    c2sniper = ImageIO.read(new File("c2sniper.jpg"));
 		    c3pistol = ImageIO.read(new File("c3pistol.jpg"));
@@ -63,23 +63,23 @@ public class Board extends JPanel implements ActionListener
 		    c7sniper = ImageIO.read(new File("c7sniper.jpg"));
 		    c8pistol = ImageIO.read(new File("c8pistol.jpg"));
 		    c8shotgun = ImageIO.read(new File("c8shotgun.jpg"));
-		    c8sniper = ImageIO.read(new File("c8sniper.jpg"));
-		    z1 = ImageIO.read(new File("z1.jpg"));
-		    z2 = ImageIO.read(new File("z2.jpg"));
+		    c8sniper = ImageIO.read(new File("c8sniper.jpg")); */
+		    z = ImageIO.read(new File("z1.jpg"));
+		    /*z2 = ImageIO.read(new File("z2.jpg"));
 		    z3 = ImageIO.read(new File("z3.jpg"));
 		    z4 = ImageIO.read(new File("z4.jpg"));
 		    z5 = ImageIO.read(new File("z5.jpg"));
 		    z6 = ImageIO.read(new File("z6.jpg"));
 		    z7 = ImageIO.read(new File("z7.jpg"));
-		    z8 = ImageIO.read(new File("z8.jpg"));
-		    bz1 = ImageIO.read(new File("bz1.jpg"));
-		    bz2 = ImageIO.read(new File("bz2.jpg"));
+		    z8 = ImageIO.read(new File("z8.jpg"));*/
+		    bz = ImageIO.read(new File("bz1.jpg"));
+		    /*bz2 = ImageIO.read(new File("bz2.jpg"));
 		    bz3 = ImageIO.read(new File("bz3.jpg"));
 		    bz4 = ImageIO.read(new File("bz4.jpg"));
 		    bz5 = ImageIO.read(new File("bz5.jpg"));
 		    bz6 = ImageIO.read(new File("bz6.jpg"));
 		    bz7 = ImageIO.read(new File("bz7.jpg"));
-		    bz8 = ImageIO.read(new File("bz8.jpg"));
+		    bz8 = ImageIO.read(new File("bz8.jpg"));*/
 		    b = ImageIO.read(new File("b.jpg"));
 		    background = ImageIO.read(new File("background.jpg"));
 		} catch (IOException e) 
@@ -110,7 +110,8 @@ public class Board extends JPanel implements ActionListener
 		g.drawImage(currentCarpi, player.getXPos(), player.getYPos(), null);
 		for(int i = 0; i < currentZombs.size(); i++)
 		{
-			if(Zombie.getDirection() == 1)
+			g.drawImage(z, currentZombs.get(i).getXPos() - 25, currentZombs.get(i).getYPos() -25, null);
+			/*if(Zombie.getDirection() == 1)
 				g.drawImage(z1, currentZombs.get(i).getXPos() - 25, currentZombs.get(i).getYPos() -25, null);
 			else if(Zombie.getDirection == 2)
 				g.drawImage(z2, currentZombs.get(i).getXPos() -25, currentZombs.get(i).getYPos() -25, null);
@@ -125,7 +126,7 @@ public class Board extends JPanel implements ActionListener
 			else if(Zombie.getDirection() == 7)
 				g.drawImage(z7, currentZombs.get(i).getXPos() -25, currentZombs.get(i).getYPos() -25, null);
 			else if(Zombie.getDirection() == 8)
-				g.drawImage(z8, currentZombs.get(i).getXPos() -25, currentZombs.get(i).getYPos() -25, null);
+				g.drawImage(z8, currentZombs.get(i).getXPos() -25, currentZombs.get(i).getYPos() -25, null); */
 		}
 		for(int i = 0; i < currentBullets.size(); i++)
 		{
