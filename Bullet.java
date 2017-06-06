@@ -12,10 +12,11 @@ public class Bullet extends Entity
   
   public Bullet(int x, int y, int d, boolean p, boolean b, int dam)
   {
-      Entity(0, 0, x, y, 2, 2, x - 1, y - 1, int width, int height)
+      Entity(0, 0, x, y, 2, 2, x - 1, y - 1)
       isBuckshot = b;
       isPierce = p;
       damage = dam;
+      direction = d;
       if(isBuckshot == true)
       {
     	  startTimer();
