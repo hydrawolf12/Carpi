@@ -12,27 +12,27 @@ public class Bullet extends Entity
   
   public Bullet(int x, int y, int d, boolean p, boolean b, int dam)
   {
-          if (direction == 1)
+          if (d == 1)
 		  Entity(0, 0, x, y - 2, 2, 2, x - 1, y - 1);
-	  else if (direction == 2)
+	  else if (d == 2)
 	  {
 		  Entity(0, 0, x + 2, y - 2, 2, 2, x - 1, y - 1);
 	  }
-	  else if (direction == 3)
+	  else if (d == 3)
 		  Entity(0, 0, x + 2, y, 2, 2, x - 1, y - 1);
-	  else if (direction == 4)
+	  else if (d == 4)
 	  {
 		  Entity(0, 0, x + 2, y + 2, 2, 2, x - 1, y - 1);
 	  }
-	  else if (direction == 5)
+	  else if (d == 5)
 		  Entity(0, 0, x, y + 2, 2, 2, x - 1, y - 1);
-	  else if (direction == 6)
+	  else if (d == 6)
 	  {
 		  Entity(0, 0, x - 2, y + 2, 2, 2, x - 1, y - 1);
 	  }
-	  else if (direction == 7)
+	  else if (d == 7)
 		   Entity(0, 0, x - 2, y, 2, 2, x - 1, y - 1);
-	  else if (direction == 8)
+	  else if (d == 8)
 	  {
 		  Entity(0, 0, x - 2, y - 2, 2, 2, x - 1, y - 1);
 	  }
