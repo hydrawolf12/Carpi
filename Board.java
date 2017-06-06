@@ -20,11 +20,12 @@ public class Board extends JPanel implements ActionListener
 {
 	private static Timer timer = new Timer(5, this);
 	private static int score;
-	private static int killCount;
+	private static int killCount;//test
 	private static int bossKillCount;
 	private static int xEnd = 1000;
 	private static int yEnd = 1000;
 	private Player player;
+	private int count = 0;
 	private boolean
 	private ArrayList<Zombie> currentZombs = new ArrayList<Zombie>();
 	private ArrayList<Bullet> currentBullets = new ArrayList<Bullet>();
@@ -37,13 +38,12 @@ public class Board extends JPanel implements ActionListener
 	
 	public Board()
 	{
-		timer.start(); 
 		try 
 		{
-		    cpistol = ImageIO.read(new File("c1pistol.jpg"));
-		    cshotgun = ImageIO.read(new File("c1shotgun.jpg"));
-		    csniper = ImageIO.read(new File("c1sniper.jpg"));
-		    /*c2pistol = ImageIO.read(new File("c2pistol.jpg"));
+		    c1pistol = ImageIO.read(new File("c1pistol.jpg"));
+		    c1shotgun = ImageIO.read(new File("c1shotgun.jpg"));
+		    c1sniper = ImageIO.read(new File("c1sniper.jpg"));
+		    c2pistol = ImageIO.read(new File("c2pistol.jpg"));
 		    c2shotgun = ImageIO.read(new File("c2shotgun.jpg"));
 		    c2sniper = ImageIO.read(new File("c2sniper.jpg"));
 		    c3pistol = ImageIO.read(new File("c3pistol.jpg"));
@@ -63,28 +63,29 @@ public class Board extends JPanel implements ActionListener
 		    c7sniper = ImageIO.read(new File("c7sniper.jpg"));
 		    c8pistol = ImageIO.read(new File("c8pistol.jpg"));
 		    c8shotgun = ImageIO.read(new File("c8shotgun.jpg"));
-		    c8sniper = ImageIO.read(new File("c8sniper.jpg")); */
-		    z = ImageIO.read(new File("z1.jpg"));
-		    /*z2 = ImageIO.read(new File("z2.jpg"));
+		    c8sniper = ImageIO.read(new File("c8sniper.jpg"));
+		    z1 = ImageIO.read(new File("z1.jpg"));
+		    z2 = ImageIO.read(new File("z2.jpg"));
 		    z3 = ImageIO.read(new File("z3.jpg"));
 		    z4 = ImageIO.read(new File("z4.jpg"));
 		    z5 = ImageIO.read(new File("z5.jpg"));
 		    z6 = ImageIO.read(new File("z6.jpg"));
 		    z7 = ImageIO.read(new File("z7.jpg"));
-		    z8 = ImageIO.read(new File("z8.jpg"));*/
-		    bz = ImageIO.read(new File("bz1.jpg"));
-		    /*bz2 = ImageIO.read(new File("bz2.jpg"));
+		    z8 = ImageIO.read(new File("z8.jpg"));
+		    bz1 = ImageIO.read(new File("bz1.jpg"));
+		    bz2 = ImageIO.read(new File("bz2.jpg"));
 		    bz3 = ImageIO.read(new File("bz3.jpg"));
 		    bz4 = ImageIO.read(new File("bz4.jpg"));
 		    bz5 = ImageIO.read(new File("bz5.jpg"));
 		    bz6 = ImageIO.read(new File("bz6.jpg"));
 		    bz7 = ImageIO.read(new File("bz7.jpg"));
-		    bz8 = ImageIO.read(new File("bz8.jpg"));*/
+		    bz8 = ImageIO.read(new File("bz8.jpg"));
 		    b = ImageIO.read(new File("b.jpg"));
 		    background = ImageIO.read(new File("background.jpg"));
 		} catch (IOException e) 
 		{
 		} 
+		timer.start(); 
 	}
 	/*public void  paintComponent(Graphics g)
 	{
@@ -108,44 +109,71 @@ public class Board extends JPanel implements ActionListener
 		super.paintComponent(g);
 		g.drawImage(background, 0, 0, null);
 		g.drawImage(currentCarpi, player.getXPos(), player.getYPos(), null);
-		for(int i = 0; i < currentZombs.size(); i++)
+		/*for(int i = 0; i < currentZombs.size(); i++)
 		{
-			g.drawImage(z, currentZombs.get(i).getXPos() - 25, currentZombs.get(i).getYPos() -25, null);
-			/*if(Zombie.getDirection() == 1)
-				g.drawImage(z1, currentZombs.get(i).getXPos() - 25, currentZombs.get(i).getYPos() -25, null);
+			if(Zombie.getDirection() == 1)
+				g.drawImage(z1, currentZombs.get(i).getXPos(), currentZombs.get(i).getYPos(), null);
 			else if(Zombie.getDirection == 2)
-				g.drawImage(z2, currentZombs.get(i).getXPos() -25, currentZombs.get(i).getYPos() -25, null);
+				g.drawImage(z2, currentZombs.get(i).getXPos(), currentZombs.get(i).getYPos(), null);
 			else if(Zombie.getDirection() == 3)
-				g.drawImage(z3, currentZombs.get(i).getXPos() -25, currentZombs.get(i).getYPos() -25, null);
+				g.drawImage(z3, currentZombs.get(i).getXPos(), currentZombs.get(i).getYPos(), null);
 			else if(Zombie.getDirection() == 4)
-				g.drawImage(z4, currentZombs.get(i).getXPos() -25, currentZombs.get(i).getYPos() -25, null);
+				g.drawImage(z4, currentZombs.get(i).getXPos(), currentZombs.get(i).getYPos(), null);
 			else if(Zombie.getDirection() == 5)
-				g.drawImage(z5, currentZombs.get(i).getXPos() -25, currentZombs.get(i).getYPos() -25, null);
+				g.drawImage(z5, currentZombs.get(i).getXPos(), currentZombs.get(i).getYPos(), null);
 			else if(Zombie.getDirection() == 6)
-				g.drawImage(z6, currentZombs.get(i).getXPos() -25, currentZombs.get(i).getYPos() -25, null);
+				g.drawImage(z6, currentZombs.get(i).getXPos(), currentZombs.get(i).getYPos(), null);
 			else if(Zombie.getDirection() == 7)
-				g.drawImage(z7, currentZombs.get(i).getXPos() -25, currentZombs.get(i).getYPos() -25, null);
+				g.drawImage(z7, currentZombs.get(i).getXPos(), currentZombs.get(i).getYPos(), null);
 			else if(Zombie.getDirection() == 8)
-				g.drawImage(z8, currentZombs.get(i).getXPos() -25, currentZombs.get(i).getYPos() -25, null); */
-		}
-		for(int i = 0; i < currentBullets.size(); i++)
+				g.drawImage(z8, currentZombs.get(i).getXPos(), currentZombs.get(i).getYPos(), null);
+		}*/
+		for(Zombie zomb : currentZombs)
 		{
-			g.drawImage(b, currentBullets.get(i).getXPos() - 5, currentBullets.get(i).getYPos() - 5, null);
+			if(Zombie.getDirection() == 1)
+				g.drawImage(z1, zomb.getXPos(), zomb.getYPos(), null);
+			else if(Zombie.getDirection == 2)
+				g.drawImage(z2, zomb.getXPos(), zomb.getYPos(), null);
+			else if(Zombie.getDirection() == 3)
+				g.drawImage(z3, zomb.getXPos(), zomb.getYPos(), null);
+			else if(Zombie.getDirection() == 4)
+				g.drawImage(z4, zomb.getXPos(), zomb.getYPos(), null);
+			else if(Zombie.getDirection() == 5)
+				g.drawImage(z5, zomb.getXPos(), zomb.getYPos(), null);
+			else if(Zombie.getDirection() == 6)
+				g.drawImage(z6, zomb.getXPos(), zomb.getYPos(), null);
+			else if(Zombie.getDirection() == 7)
+				g.drawImage(z7, zomb.getXPos(), zomb.getYPos(), null);
+			else if(Zombie.getDirection() == 8)
+				g.drawImage(z8, zomb.getXPos(), zomb.getYPos(), null);
+		}
+		 
+		/*for(int i = 0; i < currentBullets.size(); i++)
+		{
+			g.drawImage(b, currentBullets.get(i).getXPos(), currentBullets.get(i).getYPos(), null);
+		}*/
+		for(Bullet bullet : currentBullets)
+		{
+			g.drawImage(b, bullet.getXPos(), bullet.getYPos(), null);
 		}
 	}
 	public void actionPerformed(ActionEvent e)
 	{
-		score++;
+		count++;
+		if(count == 200)
+		{
+			score++;
+		}
 		if(inGame)
 		{
 			player.move();
-			for(int i = 0; i < currentZombs.size(); i++)
+			for(Zombie z : currentZombs)
 			{
-				currentZombs.get(i).move();
+				z.move();
 			}
-			for(int i = 0; i < currentBullets.size(); i++)
+			for(Bullet bullet : currentBullets)
 			{
-				currentBullets.get(i).move();
+				bullet.move();
 			}
 		}
 		repaint();	
