@@ -12,7 +12,30 @@ public class Bullet extends Entity
   
   public Bullet(int x, int y, int d, boolean p, boolean b, int dam)
   {
-      Entity(0, 0, x, y, 2, 2, x - 1, y - 1)
+          if (direction == 1)
+		  Entity(0, 0, x, y - 2, 2, 2, x - 1, y - 1);
+	  else if (direction == 2)
+	  {
+		  Entity(0, 0, x + 2, y - 2, 2, 2, x - 1, y - 1);
+	  }
+	  else if (direction == 3)
+		  Entity(0, 0, x + 2, y, 2, 2, x - 1, y - 1);
+	  else if (direction == 4)
+	  {
+		  Entity(0, 0, x + 2, y + 2, 2, 2, x - 1, y - 1);
+	  }
+	  else if (direction == 5)
+		  Entity(0, 0, x, y + 2, 2, 2, x - 1, y - 1);
+	  else if (direction == 6)
+	  {
+		  Entity(0, 0, x - 2, y + 2, 2, 2, x - 1, y - 1);
+	  }
+	  else if (direction == 7)
+		   Entity(0, 0, x - 2, y, 2, 2, x - 1, y - 1);
+	  else if (direction == 8)
+	  {
+		  Entity(0, 0, x - 2, y - 2, 2, 2, x - 1, y - 1);
+	  }
       isBuckshot = b;
       isPierce = p;
       damage = dam;
@@ -55,11 +78,11 @@ public class Bullet extends Entity
 		  xPos++;
 	  }
 	  else if (direction == 5)
-		  yPos--;
+		  yPos++;
 	  else if (direction == 6)
 	  {
 		  yPos++;
-		  xpos--;
+		  xPos--;
 	  }
 	  else if (direction == 7)
 		  xPos--;
