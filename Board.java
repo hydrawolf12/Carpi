@@ -111,25 +111,25 @@ public class Board extends JPanel implements ActionListener
 		for(int i = 0; i < currentZombs.size(); i++)
 		{
 			if(Zombie.getDirection() == 1)
-				g.drawImage(z1, currentZombs.get(i).getXPos(), currentZombs.get(i).getYPos(), null);
+				g.drawImage(z1, currentZombs.get(i).getXPos() - 25, currentZombs.get(i).getYPos() -25, null);
 			else if(Zombie.getDirection == 2)
-				g.drawImage(z2, currentZombs.get(i).getXPos(), currentZombs.get(i).getYPos(), null);
+				g.drawImage(z2, currentZombs.get(i).getXPos() -25, currentZombs.get(i).getYPos() -25, null);
 			else if(Zombie.getDirection() == 3)
-				g.drawImage(z3, currentZombs.get(i).getXPos(), currentZombs.get(i).getYPos(), null);
+				g.drawImage(z3, currentZombs.get(i).getXPos() -25, currentZombs.get(i).getYPos() -25, null);
 			else if(Zombie.getDirection() == 4)
-				g.drawImage(z4, currentZombs.get(i).getXPos(), currentZombs.get(i).getYPos(), null);
+				g.drawImage(z4, currentZombs.get(i).getXPos() -25, currentZombs.get(i).getYPos() -25, null);
 			else if(Zombie.getDirection() == 5)
-				g.drawImage(z5, currentZombs.get(i).getXPos(), currentZombs.get(i).getYPos(), null);
+				g.drawImage(z5, currentZombs.get(i).getXPos() -25, currentZombs.get(i).getYPos() -25, null);
 			else if(Zombie.getDirection() == 6)
-				g.drawImage(z6, currentZombs.get(i).getXPos(), currentZombs.get(i).getYPos(), null);
+				g.drawImage(z6, currentZombs.get(i).getXPos() -25, currentZombs.get(i).getYPos() -25, null);
 			else if(Zombie.getDirection() == 7)
-				g.drawImage(z7, currentZombs.get(i).getXPos(), currentZombs.get(i).getYPos(), null);
+				g.drawImage(z7, currentZombs.get(i).getXPos() -25, currentZombs.get(i).getYPos() -25, null);
 			else if(Zombie.getDirection() == 8)
-				g.drawImage(z8, currentZombs.get(i).getXPos(), currentZombs.get(i).getYPos(), null);
+				g.drawImage(z8, currentZombs.get(i).getXPos() -25, currentZombs.get(i).getYPos() -25, null);
 		}
 		for(int i = 0; i < currentBullets.size(); i++)
 		{
-			g.drawImage(b, currentBullets.get(i).getXPos(), currentBullets.get(i).getYPos(), null);
+			g.drawImage(b, currentBullets.get(i).getXPos() - 5, currentBullets.get(i).getYPos() - 5, null);
 		}
 	}
 	public void actionPerformed(ActionEvent e)
