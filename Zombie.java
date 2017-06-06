@@ -9,7 +9,7 @@ public class Zombie extends Entity
 	
 	public Zombie(int health, int speed, int x, int y, Player mccree, ArrayList<Zombie> zombieList) //public Zombie(int hp, int sp, int x, int y, Player mccree)// creates zombie speed and position
 	{
-		super(health, speed, x, y, x - 25, y - 25, 50, 50, width, height);
+		super(health, speed, x, y, x - 25, y - 25, 50, 50);
 		player = mccree;
 		currentZombs = zombieList;
 	}
