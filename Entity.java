@@ -5,7 +5,7 @@ public abstract class Entity
 	private int health, speed, xPos, yPos, direction;
 	private Rectangle hitbox;
 	
-	public Entity(int hp, int sp, int x, int y, int hbW, int hbH, int topX, int topY)
+	public Entity(int hp, int sp, int x, int y, int topX, int topY, int hbW, int hbH)
 	{
 		health = hp;
 		speed = sp;
