@@ -2,7 +2,7 @@ import java.awt.Rectangle;
 
 public class Boss extends Zombie
 {
-
+	private int bossKillCount = 0;
 	// private boolean isBossDefeated;
 	private Timer spawn = Board.returnZombieSpawner();
 	public Boss(int health, int speed, int x, int y, Player mccree) //initiates boss based on speed position and health
