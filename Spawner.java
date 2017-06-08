@@ -27,7 +27,7 @@ public class Spawner
 		rate += a;
 	}
 	
-	public static void returnRate()
+	public static void returnRate() //IN MILLISECONDS, NOT SECONDS.  SO MULTIPLE WHATEVER IT CURRENT IT IS BY 1000.
 	{
 		return rate;
 	}

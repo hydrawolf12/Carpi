@@ -19,6 +19,8 @@ import java.io.IOException;
 public class Board extends JPanel implements ActionListener
 {
 	private static Timer timer = new Timer(5, this);
+	private static Timer scoreT;
+	private static Timer spawnZ;
 	private static int score;
 	private static int killCount;//test
 	private static int bossKillCount;
@@ -26,6 +28,7 @@ public class Board extends JPanel implements ActionListener
 	private static int yEnd = 1000;
 	private Player player;
 	private int count = 0;
+	private Spawner spawner;
 	private boolean
 	private ArrayList<Zombie> currentZombs = new ArrayList<Zombie>();
 	private ArrayList<Bullet> currentBullets = new ArrayList<Bullet>();
@@ -38,6 +41,26 @@ public class Board extends JPanel implements ActionListener
 	
 	public Board()
 	{
+		player = new Player();
+		spawner = new Spawner(player);
+		ActionListener updateScore = new ActionListener()
+		{   
+		    @Override
+		    public void actionPerformed(ActionEvent event)
+		    {
+		    	score++;
+		    }
+		};
+		ActionListener spawnZomb = new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent event)
+			{
+				spawner.spawnZombie();
+			}
+		};
+		scoreT = new Timer(1000, updateScore);
+		spawnZ = new Timer(Spawner.returnRate(), spawnZomb);
 		try 
 		{
 		    c1pistol = ImageIO.read(new File("c1pistol.jpg"));
@@ -86,6 +109,8 @@ public class Board extends JPanel implements ActionListener
 		{
 		} 
 		timer.start(); 
+		score.start();
+		spawnZ.start();
 	}
 	/*public void  paintComponent(Graphics g)
 	{
@@ -159,11 +184,6 @@ public class Board extends JPanel implements ActionListener
 	}
 	public void actionPerformed(ActionEvent e)
 	{
-		count++;
-		if(count == 200)
-		{
-			score++;
-		}
 		if(inGame)
 		{
 			player.move();
@@ -176,8 +196,11 @@ public class Board extends JPanel implements ActionListener
 				bullet.move();
 			}
 		}
+		/*if(Boss.returnIsBossDefeated)  Either do this or somehow do this in the Boss remove method;
+		{
+			updateSpawner();
+		}*/
 		repaint();	
-		
 	}
 	public void getBullets()
 	{
@@ -192,6 +215,13 @@ public class Board extends JPanel implements ActionListener
 	public static int getyEnd()
 	{
 	   return yEnd;
+	}
+	
+	public static void updateSpawner()
+	{
+		spawnZ.stop();
+		spawnZ = new Timer(Spawner.returnRate(), spawnZomb);
+		spawnZ.start();
 	}
 	private class AAdapter extends KeyAdapter //deals with keyboard inputs
 	{
