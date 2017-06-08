@@ -3,38 +3,45 @@ import javax.swing.Timer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Bullet extends Entity
+public class Bullet 
 { 
   private int damage;
-  boolean isPierce;
-  boolean isBuckshot;
+  private boolean isPierce;
+  private boolean isBuckshot;
+  private int xPos;
+  private int yPos;
+  private int direction;
+  private Rectangle hitbox;
 
-  
   public Bullet(int x, int y, int d, boolean p, boolean b, int dam)
   {
-          if (d == 1)
-		  Entity(0, 0, x, y - 2, 2, 2, x - 1, y - 1);
+      if (d == 1)
+		  yPos = yPos - 2;
 	  else if (d == 2)
 	  {
-		  Entity(0, 0, x + 2, y - 2, 2, 2, x - 1, y - 1);
+		  xPos = xPos + 2;
+		  yPos = yPos - 2;
 	  }
 	  else if (d == 3)
-		  Entity(0, 0, x + 2, y, 2, 2, x - 1, y - 1);
+		  xPos = xPos + 2;
 	  else if (d == 4)
 	  {
-		  Entity(0, 0, x + 2, y + 2, 2, 2, x - 1, y - 1);
+		  yPos = yPos + 2;
+		  xPos = xPos + 2;
 	  }
 	  else if (d == 5)
-		  Entity(0, 0, x, y + 2, 2, 2, x - 1, y - 1);
+		  yPos = yPos + 2;
 	  else if (d == 6)
 	  {
-		  Entity(0, 0, x - 2, y + 2, 2, 2, x - 1, y - 1);
+		  xPos = xPos - 2;
+		  yPos = yPos + 2;
 	  }
 	  else if (d == 7)
-		   Entity(0, 0, x - 2, y, 2, 2, x - 1, y - 1);
+		  xPos = xPos - 2;
 	  else if (d == 8)
 	  {
-		  Entity(0, 0, x - 2, y - 2, 2, 2, x - 1, y - 1);
+		  yPos = yPos - 2;
+		  xPos = xPos - 2;
 	  }
       isBuckshot = b;
       isPierce = p;
@@ -53,7 +60,7 @@ public class Bullet extends Entity
 		    @Override
 		    public void actionPerformed(ActionEvent event)
 		    {
-		    	this.remove();
+		    	remove();
 		    }
 		};
       Timer t = new Timer(3000, action);
@@ -92,7 +99,7 @@ public class Bullet extends Entity
 		  xPos--;
 	  }
 	  
-	  hitbox = new Rectangle(xpos - 1, ypos - 1, 2, 2);
+	  hitbox = new Rectangle(xPos - 1, yPos - 1, 2, 2);
   }
   
   public void collisionDetect()
@@ -127,4 +134,3 @@ public class Bullet extends Entity
 	  }
    }
 }
-
