@@ -47,6 +47,7 @@ public class Bullet
       isPierce = p;
       damage = dam;
       direction = d;
+      hitbox = new Rectangle(xPos - 1, yPos - 1, 2, 2);
       if(isBuckshot == true)
       {
     	  startTimer();
