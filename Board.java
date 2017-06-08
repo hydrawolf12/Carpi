@@ -198,7 +198,7 @@ public class Board extends JPanel implements ActionListener
 		}
 		/*if(Boss.returnIsBossDefeated)  Either do this or somehow do this in the Boss remove method;
 		{
-			updateSpawner();
+			spawnZ.setDelay(Spawner.returnRate()); //ASK IF I MAKE A SPAWNER VARIABLE IN BOSS AND SET IT EQUAL TO THIS WILL IT WORK IT UPDATE IF I CHANGE IT IN THE BOSS METHOD.
 		}*/
 		repaint();	
 	}
@@ -217,12 +217,7 @@ public class Board extends JPanel implements ActionListener
 	   return yEnd;
 	}
 	
-	public static void updateSpawner()
-	{
-		spawnZ.stop();
-		spawnZ = new Timer(Spawner.returnRate(), spawnZomb);
-		spawnZ.start();
-	}
+
 	private class AAdapter extends KeyAdapter //deals with keyboard inputs
 	{
 		public void keyPressed(KeyEvent e)
