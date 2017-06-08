@@ -5,7 +5,7 @@ public class Zombie extends Entity
 
 	private Player player;
 	private ArrayList<Zombie> currentZombs;
-	private static int killCount;
+	private static int killCount = Board.returnKillCount();
 	
 	public Zombie(int health, int speed, int x, int y, Player mccree, ArrayList<Zombie> zombieList) //public Zombie(int hp, int sp, int x, int y, Player mccree)// creates zombie speed and position
 	{
@@ -50,6 +50,7 @@ public class Zombie extends Entity
 			  xPos--;
 		}
 		this.calcAng();
+		hitbox = new Rectangle(x - 25, y - 25, 50, 50);
 	}
 	public void calcAng()// called when player moves
 	{
@@ -118,7 +119,6 @@ public class Zombie extends Entity
 		if (health <= 0)
 		{
 			currentZombs.remove(pos);
-			killCount++;
 		}
 	}
 	//public boolean checkHP()
@@ -131,7 +131,7 @@ public class Zombie extends Entity
 	public void remove(int pos)// removes zombie from ArrayList when collides w/ bullet
 	{
 		currentZombs.remove(pos);
-		killCount++;
+		Board.setKillCount(1);
 	}
 	
 }
