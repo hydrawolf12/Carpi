@@ -19,17 +19,42 @@ import java.io.IOException;
 public class Board extends JPanel implements ActionListener
 {
 	private static Timer timer = new Timer(5, this);
-	private static Timer scoreT;
-	private static Timer spawnZ;
-	private static int score;
-	private static int killCount;//test
-	private static int bossKillCount;
+	private static int score = 0;
+	private static int killCount;
 	private static int xEnd = 1000;
-	private static int yEnd = 1000;
-	private Player player;
+	private static int yEnd = 900;
+	private Player player = new Player();
 	private int count = 0;
-	private Spawner spawner;
-	private boolean
+	private Spawner spawner = new Spawner(player);
+	private ActionListener updateScore = new ActionListener()
+	{   
+	    @Override
+	    public void actionPerformed(ActionEvent event)
+	    {
+	    	Graphics g = new Graphics();
+	    	g.setFont(new Font("Times New Roman", Font.PLAIN, 34));
+	    	g.drawString("Score: " + String.valueOf(score), 700, 950);
+	    	score++;
+	    }
+	};
+	private ActionListener spawnZomb = new ActionListener()
+	{
+		@Override
+		public void actionPerformed(ActionEvent event)
+		{
+			if(killCount >= 100)
+			{
+				spawner.spawnBoss();
+				killCount = 0;
+			}
+			else
+			{
+				spawner.spawnZombie();
+			}
+		}
+	};
+	private Timer scoreT = new Timer(1000, updateScore);
+	private Timer spawnZ = new Timer(Spawner.returnRate(), spawnZomb);
 	private ArrayList<Zombie> currentZombs = new ArrayList<Zombie>();
 	private ArrayList<Bullet> currentBullets = new ArrayList<Bullet>();
 	private boolean[] currentInputs = new boolean[11]; 
@@ -41,26 +66,6 @@ public class Board extends JPanel implements ActionListener
 	
 	public Board()
 	{
-		player = new Player();
-		spawner = new Spawner(player);
-		ActionListener updateScore = new ActionListener()
-		{   
-		    @Override
-		    public void actionPerformed(ActionEvent event)
-		    {
-		    	score++;
-		    }
-		};
-		ActionListener spawnZomb = new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent event)
-			{
-				spawner.spawnZombie();
-			}
-		};
-		scoreT = new Timer(1000, updateScore);
-		spawnZ = new Timer(Spawner.returnRate(), spawnZomb);
 		try 
 		{
 		    cpistol = ImageIO.read(new File("c5pistol.jpg"));
@@ -108,9 +113,9 @@ public class Board extends JPanel implements ActionListener
 		} catch (IOException e) 
 		{
 		} 
-		timer.start(); 
 		score.start();
 		spawnZ.start();
+		timer.start(); 
 	}
 	/*public void  paintComponent(Graphics g)
 	{
@@ -127,7 +132,6 @@ public class Board extends JPanel implements ActionListener
 		
 		g.setFont(new Font("Times New Roman", Font.PLAIN, 34));
 		g.drawString("Health: 420", 200, 950);
-		g.drawString("Score: 420", 700, 950);
 	}*/
 	public void paintComponent(Graphics g)
 	{
@@ -199,7 +203,18 @@ public class Board extends JPanel implements ActionListener
 	   return yEnd;
 	}
 	
-
+	public static Timer returnZombieSpawner()
+	{
+		return spawnZ;
+	}
+	public static int returnKillCount()
+	{
+		return killCount;
+	}
+	public static int setKillCount(int k)
+	{
+		killCount += k;
+	}
 	private class AAdapter extends KeyAdapter //deals with keyboard inputs
 	{
 		public void keyPressed(KeyEvent e)
