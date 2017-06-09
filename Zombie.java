@@ -4,14 +4,14 @@ public class Zombie extends Entity
 {
 
 	private Player player;
-	private ArrayList<Zombie> currentZombs;
+	// private static ArrayList<Zombie> currentZombs = Board.returnCurrentZombs();
 	private static int killCount = Board.returnKillCount();
 	
-	public Zombie(int health, int speed, int x, int y, Player mccree, ArrayList<Zombie> zombieList) //public Zombie(int hp, int sp, int x, int y, Player mccree)// creates zombie speed and position
+	public Zombie(int health, int speed, int x, int y, Player mccree) //public Zombie(int hp, int sp, int x, int y, Player mccree)// creates zombie speed and position
 	{
 		super(health, speed, x, y, x - 25, y - 25, 50, 50);
 		player = mccree;
-		currentZombs = zombieList;
+		// currentZombs = zombieList;
 	}
 	
 	public void move()// moves every tick
@@ -110,16 +110,17 @@ public class Zombie extends Entity
 	}
 	public void attack()//attacks if hitboxes overlap w/ player
 	{
-		player.health--;
+		player.updateHP(-1);
 		player.checkHP();
 	}
-	public void takeDamage(int a, int pos)
+	public boolean takeDamage(int a, int pos)
 	{
 		health -= a;
 		if (health <= 0)
 		{
-			currentZombs.remove(pos);
-		}
+			return true;
+		} 
+		return false;
 	}
 	//public boolean checkHP()
 	//{
@@ -128,10 +129,10 @@ public class Zombie extends Entity
 	//	else
 	//		return false;
 	//}
-	public void remove(int pos)// removes zombie from ArrayList when collides w/ bullet
+	/*public void remove(int pos)// removes zombie from ArrayList when collides w/ bullet
 	{
 		currentZombs.remove(pos);
 		Board.setKillCount(1);
-	}
+	} */
 	
 }
