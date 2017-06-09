@@ -2,6 +2,7 @@ import java.awt.Rectangle;
 import javax.swing.Timer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.*;
 
 public class Bullet 
 { 
@@ -12,33 +13,34 @@ public class Bullet
   private int yPos;
   private int direction;
   private Rectangle hitbox;
+  public static Test b = new Board();
 
   public Bullet(int x, int y, int d, boolean p, boolean b, int dam)
   {
-      if (d == 1)
+      if (d == 90)
 		  yPos = yPos - 2;
-	  else if (d == 2)
+	  else if (d == 45)
 	  {
 		  xPos = xPos + 2;
 		  yPos = yPos - 2;
 	  }
-	  else if (d == 3)
+	  else if (d == 0)
 		  xPos = xPos + 2;
-	  else if (d == 4)
+	  else if (d == 315)
 	  {
 		  yPos = yPos + 2;
 		  xPos = xPos + 2;
 	  }
-	  else if (d == 5)
+	  else if (d == 270)
 		  yPos = yPos + 2;
-	  else if (d == 6)
+	  else if (d == 225)
 	  {
 		  xPos = xPos - 2;
 		  yPos = yPos + 2;
 	  }
-	  else if (d == 7)
+	  else if (d == 180)
 		  xPos = xPos - 2;
-	  else if (d == 8)
+	  else if (d == 135)
 	  {
 		  yPos = yPos - 2;
 		  xPos = xPos - 2;
@@ -47,7 +49,6 @@ public class Bullet
       isPierce = p;
       damage = dam;
       direction = d;
-      hitbox = new Rectangle(xPos - 1, yPos - 1, 2, 2);
       if(isBuckshot == true)
       {
     	  startTimer();
@@ -71,65 +72,69 @@ public class Bullet
    
   public void move()
   {
-	  if (direction == 1)
+	  if (direction == 90)
 		  yPos--;
-	  else if (direction == 2)
+	  else if (direction == 45)
 	  {
 		  yPos--;
 		  xPos++;
 	  }
-	  else if (direction == 3)
+	  else if (direction == 0)
 		  xPos++;
-	  else if (direction == 4)
+	  else if (direction == 315)
 	  {
 		  yPos++;
 		  xPos++;
 	  }
-	  else if (direction == 5)
+	  else if (direction == 270)
 		  yPos++;
-	  else if (direction == 6)
+	  else if (direction == 225)
 	  {
 		  yPos++;
 		  xPos--;
 	  }
-	  else if (direction == 7)
+	  else if (direction == 180)
 		  xPos--;
-	  else if (direction == 8)
+	  else if (direction == 135)
 	  {
 		  yPos--;
 		  xPos--;
 	  }
-	  
 	  hitbox = new Rectangle(xPos - 1, yPos - 1, 2, 2);
   }
   
   public void collisionDetect()
-  {
+  {   
+      ArrayList<Zombie> currentZombs = b.returnList();
 	  for (int i = 0; i < currentZombs.size(); i++)
 	  {
-		  if(currentZombs.get(i).getRectangle.intersects(this.hitbox))
+		  if(currentZombs.get(i).getRectangle().intersects(this.hitbox))
 		  {
-			 currentZombs.takeDamage(this.damage, i);
+			 //if(currentZombs.takeDamage(this.damage, i) == true)
+			 
 			 if(isPierce == false)
 			 {
 			    this.remove();
+			    i--;
 			    break;
 			 }
-			 if(xpos >= getxEnd() || ypos >= getyEnd() || xpos <= 0 || ypos <= 0)
-			 {
-				 this.remove();
-			 }
+			 //if(xpos >= getxEnd() || ypos >= getyEnd() || xpos <= 0 || ypos <= 0)
+			 //{
+				 //this.remove();
+			 //}
 		  }
 	  }
    }
   
    public void remove()
    {
+      ArrayList<Bullet> currentBullets = b.returnList2(); 
 	  for (int i = 0; i < currentBullets.size(); i++)
 	  {
 		  if (this.equals(currentBullets.get(i)))
 		  {
 			  currentBullets.remove(i);
+			  i--;
 			  break;
 		  }
 	  }
