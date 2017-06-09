@@ -4,14 +4,14 @@ public class Spawner
 	private static int currentHealth;
 	private static int rate;
 	private Board board;
-	private static Player mccree;
+	// private static Player mccree;
 	
 	public Spawner(Board a)
 	{
 		currentSpeed = 1;
 		currentHealth = 1;
 		rate = 1;
-		mccree = player;
+		// mccree = player;
 		board = a;
 	}
 	public static void incrementSpeed(int a)
@@ -33,16 +33,19 @@ public class Spawner
 	{
 		return rate;
 	}
-	public void spawnBoss()
+	public Boss spawnBoss()
 	{
-		Boss baby = new Boss(currentHealth * 5, currentSpeed * 3, getxEnd() / 2 + 25, 25, 50, 50, getxEnd / 2, 0, mccree);
+		Boss baby = new Boss(currentHealth * 5, currentSpeed * 3, board.getxEnd() / 2 + 25, 25, 50, 50, board.getxEnd() / 2, 0, board);
 		baby.calcAng();
-		Board.addZomb(baby);
+		//board.addZomb(baby);
+		return baby;
 		
 	}
-	public void spawnZombie()
+	public Zombie spawnZombie()
 	{
 		int x,y;
+		int frameWidth = board.getxEnd();
+		int frameHeight = board.getyEnd();
 		int a = (int)(Math.random() * 8) + 1;
 		if (a == 1)
 		{
@@ -86,7 +89,7 @@ public class Spawner
 		}
 		Zombie zimbabwe = new Zombie(currentHealth, currentSpeed, x, y, x - 25,y - 25, 50, 50, mccree);
 		zimbabwe.calcAng();
-		Board.addZomb(zimbabwe);
+		return zimbabwe;
 		
 	}
 
