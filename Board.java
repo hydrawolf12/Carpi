@@ -18,46 +18,21 @@ import java.io.IOException;
 
 public class Board extends JPanel implements ActionListener
 {
-	private   Timer timer = new Timer(5, this);
-	private   int score = 0;
-	private   int killCount;
-	private   int xEnd = 1000;
-	private   int yEnd = 900;
-	private Player player = new Player();
-	private int count = 0;
-	private Spawner spawner = new Spawner(player);
-	private ActionListener updateScore = new ActionListener()
-	{   
-	    @Override
-	    public void actionPerformed(ActionEvent event)
-	    {
-	    	Graphics g = new Graphics();
-	    	g.setFont(new Font("Times New Roman", Font.PLAIN, 34));
-	    	g.drawString("Score: " + String.valueOf(score), 700, 950);
-	    	score++;
-	    }
-	};
-	private ActionListener spawnZomb = new ActionListener()
-	{
-		@Override
-		public void actionPerformed(ActionEvent event)
-		{
-			if(killCount >= 100)
-			{
-				spawner.spawnBoss();
-				killCount = 0;
-			}
-			else
-			{
-				spawner.spawnZombie(); 
-			}
-		}
-	};
-	private Timer scoreT = new Timer(1000, updateScore);
-	private Timer spawnZ = new Timer(Spawner.returnRate(), spawnZomb);
-	private ArrayList<Zombie> currentZombs = new ArrayList<Zombie>();
-	private ArrayList<Bullet> currentBullets = new ArrayList<Bullet>();
-	private boolean[] currentInputs = new boolean[11]; 
+	private Timer timer = new Timer(5, this);
+	private int score;
+	private int killCount;
+	private int xEnd;
+	private int yEnd;
+	private Player player;
+	private int count;
+	private Spawner spawner;
+	private ActionListener updateScore;
+	private ActionListener spawnZomb;
+	private Timer scoreT;
+	private Timer spawnZ;
+	private ArrayList<Zombie> currentZombs;
+	private ArrayList<Bullet> currentBullets;
+	private boolean[] currentInputs; 
 	public BufferedImage c1pistol, c1shotgun, c1sniper, c2pistol, c2shotgun, c2sniper, 
 	c3pistol, c3shotgun, c3sniper, c4pistol, c4shotgun, c4sniper, c5pistol, c5shotgun, 
 	c5sniper, c6pistol, c6shotgun, c6sniper, c7pistol, c7shotgun, c7sniper, c8pistol, 
@@ -66,7 +41,45 @@ public class Board extends JPanel implements ActionListener
 	
 	public Board()
 	{
-		
+		score = 0;
+		killCount = 0;
+		xEnd = 1000;
+		yEnd = 900;
+		count = 0;
+		player = new Player(this);
+		spawner = new Spawner(this);
+		updateScore = new ActionListener()
+		{   
+		    @Override
+		    public void actionPerformed(ActionEvent event)
+		    {
+		    	Graphics g = new Graphics();
+		    	g.setFont(new Font("Times New Roman", Font.PLAIN, 34));
+		    	g.drawString("Score: " + String.valueOf(score), 700, 950);
+		    	score++;
+		    }
+		};
+		spawnZomb = new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent event)
+			{
+				if(killCount >= 100)
+				{
+					currentZomb.add(spawner.spawnBoss());
+					killCount = 0;
+				}
+				else
+				{
+					currentZomb.add(spawner.spawnZombie()); 
+				}
+			}
+		};
+		scoreT = new Timer(1000, updateScore);
+		spawnZ = new Timer(spawner.returnRate(), spawnZomb);
+		currentZombs = new ArrayList<Zombie>();
+		currentBullets = new ArrayList<Bullet>();
+		currentInputs = new boolean[11]
 		try 
 		{
 		    cpistol = ImageIO.read(new File("c5pistol.jpg"));
@@ -188,6 +201,10 @@ public class Board extends JPanel implements ActionListener
 			spawnZ.setDelay(Spawner.returnRate()); //ASK IF I MAKE A SPAWNER VARIABLE IN BOSS AND SET IT EQUAL TO THIS WILL IT WORK IT UPDATE IF I CHANGE IT IN THE BOSS METHOD.
 		}*/
 		repaint();	
+	}
+	public Player getPlayer()
+	{
+		return player;
 	}
 	public void getBullets()
 	{
