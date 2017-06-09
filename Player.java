@@ -129,11 +129,11 @@ public class Player extends Entity
 		}
 		else if(up && right)
 		{
-			direction = 2;
+			direction = 45;
 		}
 		else if(up)
 		{
-			direction = 1;
+			direction = 90;
 		}
 		else if(left)
 		{
@@ -145,7 +145,7 @@ public class Player extends Entity
 		}
 		else if(right)
 		{
-			direction = 3;
+			direction = 0;
 		}
 		currentWep.shoot(direction, this);
 		canShoot = false;
