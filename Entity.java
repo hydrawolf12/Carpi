@@ -16,6 +16,10 @@ public abstract class Entity
 		hitbox = new Rectangle(topX, topY, hbW, hbH);
 	}
 	
+	public Rectangle getHitbox()
+	{
+		return hitbox;
+	}
 	public int getHealth()
 	{
 		return health;
