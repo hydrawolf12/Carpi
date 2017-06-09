@@ -9,11 +9,13 @@ public class Player extends Entity
 	private boolean canShoot;
 	private boolean isInvin;
 	private int damage, fireRate;
+	private Board board;
 
-	public Player()//public Player(int health, int speed, int x, int y, int w, int h, int topL, int topR, int width, int height) //constructs player hitbox + spawns in center of map
+	public Player(Board playBoard)//public Player(int health, int speed, int x, int y, int w, int h, int topL, int topR, int width, int height) //constructs player hitbox + spawns in center of map
 	{
-		x = getxEnd() / 2;
-		y = getyEnd() / 2;
+		board = playBoard;
+		x = board.getxEnd() / 2;
+		y = board.getyEnd() / 2;
 		super(3, 2, x , y, x - 25, y - 25, 50, 50);
 		damage = 1;
 		fireRate = 1;
@@ -45,26 +47,26 @@ public class Player extends Entity
 		s = currentInputs[2];
 		d = currentInputs[3];
 		canUP = yPos > 1;
-		canDOWN = yPos < getyEnd() - 1;
+		canDOWN = yPos < board.getyEnd() - 1;
 		canLEFT = xPos > 1;
-		canRIGHT =  xPos < getxEnd() - 1;
+		canRIGHT =  xPos < board.getxEnd() - 1;
 		if (w && a && canUP && canLEFT)
 		{
 			yPos--;
 			xPos--;
-			// direction = 8;
+			// direction = 135;
 		}
 		else if(a && s && canLEFT && canDOWN)
 		{
 			yPos++;
 			xPos--;
-			// direction = 6;
+			// direction = 225;
 		}
 		else if(s && d && canDOWN && canRIGHT)
 		{
 			yPos++;
 			xPos++;
-			// direction = 4;
+			// direction = 315;
 		}
 		else if(w && d && canUP && canRIGHT)
 		{
@@ -80,12 +82,12 @@ public class Player extends Entity
 		else if(a && canLEFT)
 		{
 			xPos--;
-			// direction = 7;
+			// direction = 180;
 		}
 		else if(s && canDOWN)
 		{
 			yPos++;
-			//  direction = 5;
+			//  direction = 270;
 		}
 		else if(d && canRIGHT)
 		{
@@ -117,15 +119,15 @@ public class Player extends Entity
 		right = currentInputs[7];
 		if (up && left)
 		{
-			direction = 8;
+			direction = 135;
 		}
 		else if(left && down)
 		{
-			direction = 6;
+			direction = 225;
 		}
 		else if(down && right)
 		{
-			direction = 4;
+			direction = 315;
 		}
 		else if(up && right)
 		{
@@ -137,11 +139,11 @@ public class Player extends Entity
 		}
 		else if(left)
 		{
-			direction = 7;
+			direction = 180;
 		}
 		else if(down)
 		{
-			direction = 5;
+			direction = 270;
 		}
 		else if(right)
 		{
@@ -157,7 +159,7 @@ public class Player extends Entity
 	public boolean checkHP() //checks hp ends game if < 0
 	{	
 		if (health == 0)
-			endGame();
+			board.endGame();
 	}
 	
 	public void setWeapon() //what variable type is the keyboard input?
