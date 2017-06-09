@@ -11,7 +11,7 @@ public abstract class Entity
 		speed = sp;
 		xPos = x;
 		yPos = y;
-		direction = 1;
+		direction = 0;
 		
 		hitbox = new Rectangle(topX, topY, hbW, hbH);
 	}
