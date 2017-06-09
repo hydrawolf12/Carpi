@@ -18,11 +18,11 @@ import java.io.IOException;
 
 public class Board extends JPanel implements ActionListener
 {
-	private static Timer timer = new Timer(5, this);
-	private static int score = 0;
-	private static int killCount;
-	private static int xEnd = 1000;
-	private static int yEnd = 900;
+	private   Timer timer = new Timer(5, this);
+	private   int score = 0;
+	private   int killCount;
+	private   int xEnd = 1000;
+	private   int yEnd = 900;
 	private Player player = new Player();
 	private int count = 0;
 	private Spawner spawner = new Spawner(player);
@@ -49,7 +49,7 @@ public class Board extends JPanel implements ActionListener
 			}
 			else
 			{
-				spawner.spawnZombie();
+				spawner.spawnZombie(); 
 			}
 		}
 	};
@@ -66,6 +66,7 @@ public class Board extends JPanel implements ActionListener
 	
 	public Board()
 	{
+		
 		try 
 		{
 		    cpistol = ImageIO.read(new File("c5pistol.jpg"));
@@ -193,27 +194,35 @@ public class Board extends JPanel implements ActionListener
 	   return currentBullets;
 	}
 	
-	public static int getxEnd()
+	public   int getxEnd()
 	{
 	   return xEnd;
 	}
 	
-	public static int getyEnd()
+	public   int getyEnd()
 	{
 	   return yEnd;
 	}
 	
-	public static Timer returnZombieSpawner()
+	public   Timer returnZombieSpawner()
 	{
 		return spawnZ;
 	}
-	public static int returnKillCount()
+	public   int returnKillCount()
 	{
 		return killCount;
 	}
-	public static int setKillCount(int k)
+	public   int setKillCount(int k)
 	{
 		killCount += k;
+	}
+	public   void addZomb(Zombie z)
+	{
+		currentZombs.add(z);
+	}
+	public   void removeZomb(Zombie z)
+	{
+		currentZombs.remove(z);
 	}
 	private class AAdapter extends KeyAdapter //deals with keyboard inputs
 	{
