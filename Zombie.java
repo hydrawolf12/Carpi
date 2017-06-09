@@ -3,57 +3,60 @@ import java.util.ArrayList;
 public class Zombie extends Entity
 {
 
-	private Player player;
+	// private Player player;
+	private Board board;
 	// private static ArrayList<Zombie> currentZombs = Board.returnCurrentZombs();
 	private static int killCount = Board.returnKillCount();
 	
-	public Zombie(int health, int speed, int x, int y, Player mccree) //public Zombie(int hp, int sp, int x, int y, Player mccree)// creates zombie speed and position
+	public Zombie(int health, int speed, int x, int y, Board playBoard) //public Zombie(int hp, int sp, int x, int y, Player mccree)// creates zombie speed and position
 	{
 		super(health, speed, x, y, x - 25, y - 25, 50, 50);
-		player = mccree;
+		board = playBoard;
 		// currentZombs = zombieList;
 	}
+	
 	
 	public void move()// moves every tick
 	{
 		canUP = yPos > 1;
-		canDOWN = yPos < getyEnd() - 1;
+		canDOWN = yPos < board.getyEnd() - 1;
 		canLEFT = xPos > 1;
-		canRIGHT =  xPos < getxEnd() - 1;
+		canRIGHT =  xPos < board.getxEnd() - 1;
 		
-		if (direction == 1 && canUP)
+		if (direction == 90 && canUP)
 			  yPos--;
-		else if (direction == 2 && canUP && canRIGHT)
+		else if (direction == 45 && canUP && canRIGHT)
 		{
 			  yPos--;
 			  xPos++;
 		}
-		else if (direction == 3 && canRIGHT)
+		else if (direction == 0 && canRIGHT)
 			  xPos++;
-		else if (direction == 4 && canDOWN && canRIGHT)
+		else if (direction == 315 && canDOWN && canRIGHT)
 		{
 			  yPos++;
 			  xPos++;
 		}
-		else if (direction == 5 && canDOWN)
+		else if (direction == 270 && canDOWN)
 			  yPos--;
-		else if (direction == 6 && canDOWN && canLEFT)
+		else if (direction == 225 && canDOWN && canLEFT)
 		{
 			  yPos++;
 			  xPos--;
 		}
-		else if (direction == 7 && canLEFT)
+		else if (direction == 180 && canLEFT)
 			  xPos--;
-		else if (direction == 8 && canUP && canLEFT)
+		else if (direction == 135 && canUP && canLEFT)
 		{
 			  yPos--;
 			  xPos--;
 		}
-		this.calcAng();
-		hitbox = new Rectangle(x - 25, y - 25, 50, 50);
+			hitbox = new Rectangle(x - 25, y - 25, 50, 50);
+			this.calcAng();
 	}
 	public void calcAng()// called when player moves
 	{
+		Player player = board.getPlayer();
 		double angle = (double)Math.toDegrees(Math.atan2(player.getYpos - yPos, player.getXpos - xPos));
 
 	    if(angle < 0)
@@ -63,44 +66,44 @@ public class Zombie extends Entity
 	    
 	    if (angle < 45)
 	    {
-	    	direction = 1;
+	    	direction = 0;
 	    }
 	    else if(angle < 90)
 	    {
-	    	direction = 2;
+	    	direction = 45;
 	    }
 	    else if(angle < 135)
 	    {
-	    	direction = 3;
+	    	direction = 90;
 	    }
 	    else if(angle < 180)
 	    {
-	    	direction = 4;
+	    	direction = 135;
 	    }
 	    else if(angle < 225)
 	    {
-	    	direction = 5;
+	    	direction = 180;
 	    }
 	    else if(angle < 270)
 	    {
-	    	direction = 6;
+	    	direction = 225;
 	    }
 	    else if(angle < 315)
 	    {
-	    	direction = 7;
+	    	direction = 270;
 	    }
 	    else if(angle < 360)
 	    {
-	    	direction = 8;
+	    	direction = 315;
 	    }
 	}
 	public void collisionDetect()
 	{
 		for (Zombie z: currentZombs)
 		{
-			if(z.hitbox.intersects(player.hitbox))
+			if(z.hitbox.intersects(player.getHitbox()))
 			{
-				if(!player.isInvin)
+				if(!player.getInvin())
 				{
 					player.toggleInvin();
 					z.attack();
