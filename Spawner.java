@@ -87,7 +87,7 @@ public class Spawner
 			x = 1;
 			y = frameHeight / 8;
 		}
-		Zombie zimbabwe = new Zombie(currentHealth, currentSpeed, x, y, 50, 50, board);
+		Zombie zimbabwe = new Zombie(currentHealth, currentSpeed, x, y, board);
 		zimbabwe.calcAng();
 		return zimbabwe;
 		
