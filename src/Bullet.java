@@ -3,7 +3,7 @@ import javax.swing.Timer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
-
+//Make a bullet accessor methods
 public class Bullet 
 { 
   private int damage;
@@ -13,7 +13,6 @@ public class Bullet
   private int yPos;
   private int direction;
   private Rectangle hitbox;
-  public static Test b = new Board();
 
   public Bullet(int x, int y, int d, boolean p, boolean b, int dam)
   {
@@ -108,7 +107,7 @@ public class Bullet
       ArrayList<Zombie> currentZombs = b.returnList();
 	  for (int i = 0; i < currentZombs.size(); i++)
 	  {
-		  if(currentZombs.get(i).getRectangle().intersects(this.hitbox))
+		  if(currentZombs.get(i).getHitbox().intersects(this.hitbox))
 		  {
 			 //if(currentZombs.takeDamage(this.damage, i) == true)
 			 
@@ -140,56 +139,3 @@ public class Bullet
 	  }
    }
 }
-
-import java.util.*;
-/**
- * Write a description of class Main here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
-public class Test
-{
-    private ArrayList<Zombie> currentZombs;
-    private ArrayList<Bullet> currentBullets;
-    
-    public Test()
-    {
-       currentZombs = new ArrayList<Zombie>();
-       currentBullets = new ArrayList<Bullet>();
-       currentBullets.add(new Bullet(10, 10, 3, false, false, 0));
-       currentZombs.add(new Zombie());
-       currentBullets.get(0).collisionDetect();
-    }
-    
-    public ArrayList<Zombie> returnList()
-    {
-       return currentZombs;
-    }
-    
-    public ArrayList<Bullet> returnList2()
-    {
-        return currentBullets;
-    } 
-}
-
-import java.awt.Rectangle;
-/**
- * Write a description of class Zombie here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
-public class Zombie
-{
-    Rectangle r;
-    public Zombie()
-    {
-        r = new Rectangle(10, 10, 2, 2);
-    }
-    
-    public Rectangle getRectangle()
-    {
-        return r;
-    }
-}    

@@ -1,25 +1,23 @@
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
-import javax.swing.Timer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.awt.image.BufferStrategy;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
+import javax.swing.JPanel;
+import javax.swing.Timer;
 
 public class Board extends JPanel implements ActionListener
 {
 	private Timer timer = new Timer(5, this);
 	private int score;
+	private boolean inGame;
 	private static int killCount;
 	private int xEnd;
 	private int yEnd;
@@ -51,6 +49,7 @@ public class Board extends JPanel implements ActionListener
 		currentZombs = new ArrayList<Zombie>();
 		currentBullets = new ArrayList<Bullet>();
 		currentInputs = new boolean[11];
+		inGame = true;
 		updateScore = new ActionListener()
 		{   
 		    @Override
@@ -69,12 +68,13 @@ public class Board extends JPanel implements ActionListener
 			{
 				if(killCount >= 100)
 				{
-					currentZomb.add(spawner.spawnBoss());
+					
+					getZombies().add(spawner.spawnBoss());
 					killCount = 0;
 				}
 				else
 				{
-					currentZomb.add(spawner.spawnZombie()); 
+					getZombies().add(spawner.spawnZombie()); 
 				}
 			}
 		};
@@ -127,7 +127,8 @@ public class Board extends JPanel implements ActionListener
 		} catch (IOException e) 
 		{
 		} 
-		score.start();
+		addKeyListener(new AAdapter());
+		scoreT.start();
 		spawnZ.start();
 		timer.start(); 
 	}
@@ -268,6 +269,14 @@ public class Board extends JPanel implements ActionListener
 	{
 		currentZombs.remove(zomb);
 	}
+	public boolean getInputs(int x)
+	{
+		return currentInputs[x];
+	}
+	public void Endgame()
+	{
+		//idk what to Its gonna display graphics and stuff.  so tommy thats ur call;
+	}
 	private class AAdapter extends KeyAdapter //deals with keyboard inputs
 	{
 		public void keyPressed(KeyEvent e)
@@ -285,7 +294,7 @@ public class Board extends JPanel implements ActionListener
 			{
 				currentInputs[2] = true;
 			}
-			if(key = KeyEvent.VK_D)
+			if(key == KeyEvent.VK_D)
 			{
 				currentInputs[3] = true;
 			}
@@ -333,7 +342,7 @@ public class Board extends JPanel implements ActionListener
 			{
 				currentInputs[2] = false;
 			}
-			if(key = KeyEvent.VK_D)
+			if(key == KeyEvent.VK_D)
 			{
 				currentInputs[3] = false;
 			}

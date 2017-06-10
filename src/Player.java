@@ -13,15 +13,15 @@ public class Player extends Entity
 
 	public Player(Board playBoard)//public Player(int health, int speed, int x, int y, int w, int h, int topL, int topR, int width, int height) //constructs player hitbox + spawns in center of map
 	{
+		super(3, 2, playBoard.getxEnd() / 2, playBoard.getyEnd() / 2,  playBoard.getxEnd() / 2 - 25, playBoard.getyEnd() / 2 - 25, 50, 50);
 		board = playBoard;
-		x = board.getxEnd() / 2;
-		y = board.getyEnd() / 2;
-		super(3, 2, x , y, x - 25, y - 25, 50, 50); //Super has to be the first line
+		int x = playBoard.getxEnd() / 2;
+		int y = playBoard.getyEnd() / 2;
 		damage = 1;
 		fireRate = 1;
 		isInvin = false;
 		canShoot = true;
-		currentWep = new Pistol(damage, fireRate);
+		currentWep = new Pistol(damage, fireRate);//this isn't a thing
 	}
 	public boolean getShoot()
 	{
@@ -42,60 +42,60 @@ public class Player extends Entity
 	public void move() //moves player
 	{
 		boolean w,a,s,d;
-		w = currentInputs[0];
-		a = currentInputs[1];
-		s = currentInputs[2];
-		d = currentInputs[3];
-		canUP = this.getyPos() > 1;
-		canDOWN = this.getyPos() < board.getyEnd() - 1;
-		canLEFT = this.getxPos() > 1;
-		canRIGHT =  this.getxPos() < board.getxEnd() - 1;
+		w = board.getInputs(0);
+		a = board.getInputs(1);
+		s = board.getInputs(2);
+		d = board.getInputs(3);
+		boolean canUP = this.getYPos() > 1;
+		boolean canDOWN = this.getYPos() < board.getyEnd() - 1;
+		boolean canLEFT = this.getXPos() > 1;
+		boolean canRIGHT =  this.getXPos() < board.getxEnd() - 1;
 		if (w && a && canUP && canLEFT)
 		{
-			this.setyPos(-1);
-			this.setxPos(-1);
+			this.setYPos(-1);
+			this.setXPos(-1);
 			// direction = 135;
 		}
 		else if(a && s && canLEFT && canDOWN)
 		{
-			this.setyPos(1);
-			this.setxPos(-1);
+			this.setYPos(1);
+			this.setXPos(-1);
 			// direction = 225;
 		}
 		else if(s && d && canDOWN && canRIGHT)
 		{
-			this.setyPos(1);
-			this.setxPos(1);
+			this.setYPos(1);
+			this.setXPos(1);
 			// direction = 315;
 		}
 		else if(w && d && canUP && canRIGHT)
 		{
-			this.setyPos(-1);
-			this.setxPos(1);
+			this.setYPos(-1);
+			this.setXPos(1);
 			// direction = 2;
 		}
 		else if(w && canUP)
 		{
-			this.setyPos(-1);
+			this.setYPos(-1);
 			// direction = 1;
 		}
 		else if(a && canLEFT)
 		{
-			this.setxPos(-1);
+			this.setXPos(-1);
 			// direction = 180;
 		}
 		else if(s && canDOWN)
 		{
-			this.setyPos(-1);
+			this.setYPos(-1);
 			//  direction = 270;
 		}
 		else if(d && canRIGHT)
 		{
-			this.setxPos(1);
+			this.setXPos(1);
 			// direction = 3;
 		}
-		hitbox = new Rectangle(x - 25, y - 25, 50 , 50);
-		for (Zombie z: currentZombs)
+		this.setHitbox(new Rectangle(this.getXPos() - 25, this.getYPos() - 25, 50 , 50));
+		for (Zombie z: board.getZombies())
 		{
 			z.calcAng();
 		}
@@ -113,43 +113,43 @@ public class Player extends Entity
 		};
 		boolean up, left, down, right;
 		
-		up = currentInputs[4];
-		left = currentInputs[5];
-		down = currentInputs[6];
-		right = currentInputs[7];
+		up = board.getInputs(4);
+		left = board.getInputs(5);
+		down = board.getInputs(6);
+		right = board.getInputs(7);
 		if (up && left)
 		{
-			direction = 135;
+			this.setDirection(135);
 		}
 		else if(left && down)
 		{
-			direction = 225;
+			this.setDirection(225);
 		}
 		else if(down && right)
 		{
-			direction = 315;
+			this.setDirection(315);
 		}
 		else if(up && right)
 		{
-			direction = 45;
+			this.setDirection(45);
 		}
 		else if(up)
 		{
-			direction = 90;
+			this.setDirection(90);
 		}
 		else if(left)
 		{
-			direction = 180;
+			this.setDirection(180);
 		}
 		else if(down)
 		{
-			direction = 270;
+			this.setDirection(270);
 		}
 		else if(right)
 		{
-			direction = 0;
+			this.setDirection(0);
 		}
-		currentWep.shoot(direction, this);
+		currentWep.shoot(this.getDirection(), this);
 		canShoot = false;
 		Timer shootTimer = new Timer(3000, action);
 		shootTimer.setRepeats(false);
@@ -158,7 +158,7 @@ public class Player extends Entity
 	
 	public boolean checkHP() //checks hp ends game if < 0
 	{	
-		if (health == 0)
+		if (this.getHealth() == 0)
 			board.endGame();
 	}
 	
@@ -167,9 +167,9 @@ public class Player extends Entity
 		if (canShoot)
 		{
 			boolean one, two , three;
-			one = currentInputs[8];
-			two = currentInputs[9];
-			three = currentInputs[10];
+			one = board.getInputs(8);
+			two = board.getInputs(9);
+			three = board.getInputs(10);
 			if (one)
 			{
 				currentWep = new Pistol(damage, fireRate);

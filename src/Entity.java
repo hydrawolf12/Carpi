@@ -20,6 +20,10 @@ public abstract class Entity
 	{
 		return hitbox;
 	}
+	public void setHitbox(Rectangle ricky)
+	{
+		hitbox = ricky;
+	}
 	public int getHealth()
 	{
 		return health;
@@ -32,25 +36,29 @@ public abstract class Entity
 	{
 		return speed;
 	}
-	public int getxPos()
+	public int getXPos()
 	{
 		return xPos;
 	}
-	public int getyPos()
+	public int getYPos()
 	{
 		return yPos;
 	}
-	public void setxPos(int a)
+	public void setXPos(int a)
 	{
 		xPos += a;
 	}
-	public void setyPos(int a)
+	public void setYPos(int a)
 	{
 		yPos += a;
 	}
 	public int getDirection()
 	{
 		return direction;
+	}
+	public void setDirection(int x)
+	{
+		direction = x;
 	}
 	
 	public abstract void move();
