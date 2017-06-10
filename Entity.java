@@ -24,6 +24,10 @@ public abstract class Entity
 	{
 		return health;
 	}
+	public int setHealth(int a)
+	{
+		health += a;
+	}
 	public int getSpeed()
 	{
 		return speed;
