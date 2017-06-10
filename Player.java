@@ -185,11 +185,6 @@ public class Player extends Entity
 		}
 	}
 	
-	public void updateHP(int a) //updates hp by a
-	{
-		health += a;
-	}
-	
 	public void updateDamage(int a) // updates damage and firerate by a
 	{
 		damage+= a;
