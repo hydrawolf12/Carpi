@@ -16,7 +16,7 @@ public class Player extends Entity
 		board = playBoard;
 		x = board.getxEnd() / 2;
 		y = board.getyEnd() / 2;
-		super(3, 2, x , y, x - 25, y - 25, 50, 50);
+		super(3, 2, x , y, x - 25, y - 25, 50, 50); //Super has to be the first line
 		damage = 1;
 		fireRate = 1;
 		isInvin = false;
