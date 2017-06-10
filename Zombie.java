@@ -101,7 +101,7 @@ public class Zombie extends Entity
 	{
 		for (Zombie z: currentZombs)
 		{
-			if(z.hitbox.intersects(player.getHitbox()))
+			if(z.getHitbox().intersects(player.getHitbox()))
 			{
 				if(!player.getInvin())
 				{
@@ -113,7 +113,7 @@ public class Zombie extends Entity
 	}
 	public void attack()//attacks if hitboxes overlap w/ player
 	{
-		player.updateHP(-1);
+		player.setHealth(-1);
 		player.checkHP();
 	}
 	public boolean takeDamage(int a, int pos)
