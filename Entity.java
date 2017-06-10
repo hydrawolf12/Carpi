@@ -36,6 +36,14 @@ public abstract class Entity
 	{
 		return yPos;
 	}
+	public void setxPos(int a)
+	{
+		xPos += a;
+	}
+	public void setyPos(int a)
+	{
+		yPos += a;
+	}
 	public int getDirection()
 	{
 		return direction;
