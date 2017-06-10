@@ -24,32 +24,32 @@ public class Zombie extends Entity
 		boolean canRIGHT =  this.getxPos() < board.getxEnd() - 1;
 		
 		if (direction == 90 && canUP)
-			  yPos--;
+			  this.setyPos(-1);
 		else if (direction == 45 && canUP && canRIGHT)
 		{
-			  yPos--;
-			  xPos++;
+			  this.setyPos(-1);
+			  this.setxPos(1);
 		}
 		else if (direction == 0 && canRIGHT)
-			  xPos++;
+			  this.setxPos(1);
 		else if (direction == 315 && canDOWN && canRIGHT)
 		{
-			  yPos++;
-			  xPos++;
+			  this.setyPos(1);
+			  this.setxPos(1);
 		}
 		else if (direction == 270 && canDOWN)
-			  yPos--;
+			  this.setyPos(1);
 		else if (direction == 225 && canDOWN && canLEFT)
 		{
-			  yPos++;
-			  xPos--;
+			  this.setyPos(1);
+			  this.setxPos(-1);
 		}
 		else if (direction == 180 && canLEFT)
-			  xPos--;
+			  this.setxPos(-1);
 		else if (direction == 135 && canUP && canLEFT)
 		{
-			  yPos--;
-			  xPos--;
+			  this.setyPos(-1);
+			  this.setxPos(-1);
 		}
 			hitbox = new Rectangle(x - 25, y - 25, 50, 50);
 			this.calcAng();
