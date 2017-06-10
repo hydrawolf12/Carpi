@@ -43,7 +43,8 @@ public class Spawner
 	}
 	public Zombie spawnZombie()
 	{
-		int x,y;
+		int x = 0;
+		int y = 0;
 		int frameWidth = board.getxEnd();
 		int frameHeight = board.getyEnd();
 		int a = (int)(Math.random() * 8) + 1;
