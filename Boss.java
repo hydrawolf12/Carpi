@@ -41,7 +41,7 @@ public class Boss extends Zombie
 	public boolean takeDamage(int a, int pos)
 	{
 		boss.setHealth(a);
-		if (boss.getHP() <= 0)
+		if (boss.getHealth() <= 0)
 		{
 			Player mccree = board.getPlayer();
 			Spawner.incrementHealth(2);
