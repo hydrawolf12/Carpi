@@ -20,7 +20,7 @@ public class Board extends JPanel implements ActionListener
 {
 	private Timer timer = new Timer(5, this);
 	private int score;
-	private int killCount;
+	private static int killCount;
 	private int xEnd;
 	private int yEnd;
 	private Player player;
@@ -48,6 +48,9 @@ public class Board extends JPanel implements ActionListener
 		count = 0;
 		player = new Player(this);
 		spawner = new Spawner(this);
+		currentZombs = new ArrayList<Zombie>();
+		currentBullets = new ArrayList<Bullet>();
+		currentInputs = new boolean[11];
 		updateScore = new ActionListener()
 		{   
 		    @Override
@@ -77,9 +80,6 @@ public class Board extends JPanel implements ActionListener
 		};
 		scoreT = new Timer(1000, updateScore);
 		spawnZ = new Timer(spawner.returnRate(), spawnZomb);
-		currentZombs = new ArrayList<Zombie>();
-		currentBullets = new ArrayList<Bullet>();
-		currentInputs = new boolean[11]
 		try 
 		{
 		    cpistol = ImageIO.read(new File("pixelArt//cpistol.png"));
@@ -231,40 +231,42 @@ public class Board extends JPanel implements ActionListener
 	{
 		return player;
 	}
-	public void getBullets()
+	public ArrayList<Bullet> getBullets()
 	{
 	   return currentBullets;
 	}
-	
-	public   int getxEnd()
+	public ArrayList<Zombie> getZombies()
+	{
+		return currentZombs;
+	}
+	public int getxEnd()
 	{
 	   return xEnd;
 	}
 	
-	public   int getyEnd()
+	public int getyEnd()
 	{
 	   return yEnd;
 	}
-	
-	public   Timer returnZombieSpawner()
+	public Timer returnZombieSpawner()
 	{
 		return spawnZ;
 	}
-	public   int returnKillCount()
+	public static int returnKillCount()
 	{
 		return killCount;
 	}
-	public   int setKillCount(int k)
+	public static void setKillCount(int k)
 	{
 		killCount += k;
 	}
-	public   void addZomb(Zombie z)
+	public void addZomb(Zombie z)
 	{
 		currentZombs.add(z);
 	}
-	public   void removeZomb(Zombie z)
+	public void removeZomb(Zombie zomb)
 	{
-		currentZombs.remove(z);
+		currentZombs.remove(zomb);
 	}
 	private class AAdapter extends KeyAdapter //deals with keyboard inputs
 	{
