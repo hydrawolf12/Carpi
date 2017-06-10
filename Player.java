@@ -46,52 +46,52 @@ public class Player extends Entity
 		a = currentInputs[1];
 		s = currentInputs[2];
 		d = currentInputs[3];
-		canUP = yPos > 1;
-		canDOWN = yPos < board.getyEnd() - 1;
-		canLEFT = xPos > 1;
-		canRIGHT =  xPos < board.getxEnd() - 1;
+		canUP = this.getyPos() > 1;
+		canDOWN = this.getyPos() < board.getyEnd() - 1;
+		canLEFT = this.getxPos() > 1;
+		canRIGHT =  this.getxPos() < board.getxEnd() - 1;
 		if (w && a && canUP && canLEFT)
 		{
-			yPos--;
-			xPos--;
+			this.setyPos--;
+			this.setxPos--;
 			// direction = 135;
 		}
 		else if(a && s && canLEFT && canDOWN)
 		{
-			yPos++;
-			xPos--;
+			this.setyPos++;
+			this.setxPos--;
 			// direction = 225;
 		}
 		else if(s && d && canDOWN && canRIGHT)
 		{
-			yPos++;
-			xPos++;
+			this.setyPos++;
+			this.setxPos++;
 			// direction = 315;
 		}
 		else if(w && d && canUP && canRIGHT)
 		{
-			yPos--;
-			xPos++;
+			this.setyPos--;
+			this.setxPos++;
 			// direction = 2;
 		}
 		else if(w && canUP)
 		{
-			yPos--;
+			this.setyPos--;
 			// direction = 1;
 		}
 		else if(a && canLEFT)
 		{
-			xPos--;
+			this.setxPos--;
 			// direction = 180;
 		}
 		else if(s && canDOWN)
 		{
-			yPos++;
+			this.setyPos++;
 			//  direction = 270;
 		}
 		else if(d && canRIGHT)
 		{
-			xPos++;
+			this.setxPos++;
 			// direction = 3;
 		}
 		hitbox = new Rectangle(x - 25, y - 25, 50 , 50);
