@@ -24,7 +24,7 @@ public abstract class Entity
 	{
 		return health;
 	}
-	public int setHealth(int a)
+	public void setHealth(int a)
 	{
 		health += a;
 	}
