@@ -35,7 +35,7 @@ public class Spawner
 	}
 	public Boss spawnBoss()
 	{
-		Boss baby = new Boss(currentHealth * 5, currentSpeed * 3, 50, 50, board);
+		Boss baby = new Boss(currentHealth * 5, currentSpeed * 3, board.getxEnd() / 2, 30, board);
 		baby.calcAng();
 		//board.addZomb(baby);
 		return baby;
