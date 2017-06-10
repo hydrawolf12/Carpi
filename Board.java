@@ -82,9 +82,9 @@ public class Board extends JPanel implements ActionListener
 		currentInputs = new boolean[11]
 		try 
 		{
-		    cpistol = ImageIO.read(new File("c5pistol.jpg"));
-		    cshotgun = ImageIO.read(new File("c5shotgun.jpg"));
-		    csniper = ImageIO.read(new File("c5sniper.jpg"));
+		    cpistol = ImageIO.read(new File("pixelArt//cpistol.png"));
+		    cshotgun = ImageIO.read(new File("pixelArt//cshotgun.png"));
+		    csniper = ImageIO.read(new File("pixelArt//csniper.png"));
 		    /*c2pistol = ImageIO.read(new File("c2pistol.jpg"));
 		    c2shotgun = ImageIO.read(new File("c2shotgun.jpg"));
 		    c2sniper = ImageIO.read(new File("c2sniper.jpg"));
@@ -106,7 +106,7 @@ public class Board extends JPanel implements ActionListener
 		    c8pistol = ImageIO.read(new File("c8pistol.jpg"));
 		    c8shotgun = ImageIO.read(new File("c8shotgun.jpg"));
 		    c8sniper = ImageIO.read(new File("c8sniper.jpg"));*/
-		    z = ImageIO.read(new File("z5.jpg"));
+		    z = ImageIO.read(new File("pixelArt//z.png"));
 		    /*z2 = ImageIO.read(new File("z2.jpg"));
 		    z3 = ImageIO.read(new File("z3.jpg"));
 		    z4 = ImageIO.read(new File("z4.jpg"));
@@ -114,7 +114,7 @@ public class Board extends JPanel implements ActionListener
 		    z6 = ImageIO.read(new File("z6.jpg"));
 		    z7 = ImageIO.read(new File("z7.jpg"));
 		    z8 = ImageIO.read(new File("z8.jpg"));*/
-		    bz = ImageIO.read(new File("bz5.jpg"));
+		    bz = ImageIO.read(new File("pixelArt//bz.png"));
 		    /*bz2 = ImageIO.read(new File("bz2.jpg"));
 		    bz3 = ImageIO.read(new File("bz3.jpg"));
 		    bz4 = ImageIO.read(new File("bz4.jpg"));
@@ -122,8 +122,8 @@ public class Board extends JPanel implements ActionListener
 		    bz6 = ImageIO.read(new File("bz6.jpg"));
 		    bz7 = ImageIO.read(new File("bz7.jpg"));
 		    bz8 = ImageIO.read(new File("bz8.jpg"));*/
-		    b = ImageIO.read(new File("b.jpg"));
-		    background = ImageIO.read(new File("background.jpg"));
+		    b = ImageIO.read(new File("pixelArt//b.jpg"));
+		    background = ImageIO.read(new File("pixelArt//background.jpg"));
 		} catch (IOException e) 
 		{
 		} 
@@ -131,7 +131,8 @@ public class Board extends JPanel implements ActionListener
 		spawnZ.start();
 		timer.start(); 
 	}
-	/*public void  paintComponent(Graphics g)
+	/*int i = 0;
+	public void  paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
 		this.setBackground(Color.BLACK);
@@ -139,8 +140,32 @@ public class Board extends JPanel implements ActionListener
 		g.setColor(new Color(216, 174, 119));
 		g.fillRect(0, 0, 1000, 900);
 		
-		g.setColor(Color.RED);
-		g.fillRect(475, 425, 50, 50);
+		//BufferedImage currentCarpi = cpistol;
+		AffineTransform at1 = AffineTransform.getTranslateInstance(475, 425);
+		at1.rotate(Math.toRadians(i++/10), 25, 25);
+		at1.scale(2, 2);
+		Graphics2D g2d = (Graphics2D) g;
+		g2d.drawImage(cpistol, at1, null);
+		AffineTransform at2 = AffineTransform.getTranslateInstance(350, 425);
+		at2.rotate(Math.toRadians(i++/10), 25, 25);
+		at2.scale(2, 2);
+		g2d.drawImage(cshotgun, at2, null);
+		AffineTransform at3 = AffineTransform.getTranslateInstance(600, 425);
+		at3.rotate(Math.toRadians(i++/10), 25, 25);
+		at3.scale(2, 2);
+		g2d.drawImage(csniper, at3, null);
+		AffineTransform at4 = AffineTransform.getTranslateInstance(600, 550);
+		at4.rotate(Math.toRadians(i++/10), 25, 25);
+		at4.scale(2, 2);
+		g2d.drawImage(z, at4, null);
+		AffineTransform at5 = AffineTransform.getTranslateInstance(350, 550);
+		at5.rotate(Math.toRadians(i++/10), 25, 25);
+		at5.scale(2, 2);
+		g2d.drawImage(bz, at5, null);
+		repaint();
+		
+		//g.setColor(Color.RED);
+		//g.fillRect(475, 425, 50, 50);
 		
 		g.setColor(Color.WHITE);
 		
