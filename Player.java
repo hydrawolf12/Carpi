@@ -52,46 +52,46 @@ public class Player extends Entity
 		canRIGHT =  this.getxPos() < board.getxEnd() - 1;
 		if (w && a && canUP && canLEFT)
 		{
-			this.setyPos--;
-			this.setxPos--;
+			this.setyPos(-1);
+			this.setxPos(-1);
 			// direction = 135;
 		}
 		else if(a && s && canLEFT && canDOWN)
 		{
-			this.setyPos++;
-			this.setxPos--;
+			this.setyPos(1);
+			this.setxPos(-1);
 			// direction = 225;
 		}
 		else if(s && d && canDOWN && canRIGHT)
 		{
-			this.setyPos++;
-			this.setxPos++;
+			this.setyPos(1);
+			this.setxPos(1);
 			// direction = 315;
 		}
 		else if(w && d && canUP && canRIGHT)
 		{
-			this.setyPos--;
-			this.setxPos++;
+			this.setyPos(-1);
+			this.setxPos(1);
 			// direction = 2;
 		}
 		else if(w && canUP)
 		{
-			this.setyPos--;
+			this.setyPos(-1);
 			// direction = 1;
 		}
 		else if(a && canLEFT)
 		{
-			this.setxPos--;
+			this.setxPos(-1);
 			// direction = 180;
 		}
 		else if(s && canDOWN)
 		{
-			this.setyPos++;
+			this.setyPos(-1);
 			//  direction = 270;
 		}
 		else if(d && canRIGHT)
 		{
-			this.setxPos++;
+			this.setxPos(1);
 			// direction = 3;
 		}
 		hitbox = new Rectangle(x - 25, y - 25, 50 , 50);
