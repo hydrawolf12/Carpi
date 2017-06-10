@@ -18,10 +18,10 @@ public class Zombie extends Entity
 	
 	public void move()// moves every tick
 	{
-		boolean canUP = yPos > 1;
-		boolean canDOWN = yPos < board.getyEnd() - 1;
-		boolean canLEFT = xPos > 1;
-		boolean canRIGHT =  xPos < board.getxEnd() - 1;
+		boolean canUP = this.getyPos() > 1;
+		boolean canDOWN = this.getyPos() < board.getyEnd() - 1;
+		boolean canLEFT = this.xPos() > 1;
+		boolean canRIGHT =  this.getxPos() < board.getxEnd() - 1;
 		
 		if (direction == 90 && canUP)
 			  yPos--;
