@@ -113,13 +113,12 @@ public class Bullet
 		  {
 			 if(currentZombs.takeDamage(this.damage, i) == true)
 			 {
-			    currentZombs.get(i).remove();
+			    i--;
 			 }
 			 
 			 if(isPierce == false)
 			 {
 			     this.remove();
-			     i--;
 			     break;
 			 }
 			 
