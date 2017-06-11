@@ -3,6 +3,6 @@ public class Sniper extends Gun
 {
   public void shoot(int direction, Player player) 
   {
-	  getBullets().add(new Bullet(player.getxPos(), player.getyPos(), direction, false, true, player.getDamage() * 3));
+	  b.getBullets().add(new Bullet(b.getPlayer.getxPos(), b.getPlayer.getyPos(), direction, false, true, b.getPlayer.getDamage() * 3, b));
   }
 }
