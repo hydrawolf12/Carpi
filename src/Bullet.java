@@ -3,7 +3,7 @@ import javax.swing.Timer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
-//Make a bullet accessor methods
+
 public class Bullet 
 { 
   private int damage;
@@ -13,10 +13,12 @@ public class Bullet
   private int yPos;
   private int direction;
   private Rectangle hitbox;
+  private Board b;
 
-  public Bullet(int x, int y, int d, boolean p, boolean b, int dam)
+  public Bullet(int x, int y, int d, boolean p, boolean b, int dam, board bd)
   {
-      if (d == 90)
+	  b = bd;
+          if (d == 90)
 		  yPos = yPos - 2;
 	  else if (d == 45)
 	  {
@@ -109,18 +111,22 @@ public class Bullet
 	  {
 		  if(currentZombs.get(i).getHitbox().intersects(this.hitbox))
 		  {
-			 //if(currentZombs.takeDamage(this.damage, i) == true)
+			 if(currentZombs.takeDamage(this.damage, i) == true)
+			 {
+			    currentZombs.get(i).remove();
+			 }
 			 
 			 if(isPierce == false)
 			 {
-			    this.remove();
-			    i--;
-			    break;
+			     this.remove();
+			     i--;
+			     break;
 			 }
-			 //if(xpos >= getxEnd() || ypos >= getyEnd() || xpos <= 0 || ypos <= 0)
-			 //{
-				 //this.remove();
-			 //}
+			 
+			 if(xpos >= b.getxEnd() || ypos >= b.getyEnd() || xpos <= 0 || ypos <= 0)
+			 {
+				 this.remove();
+			 }
 		  }
 	  }
    }
@@ -137,5 +143,10 @@ public class Bullet
 			  break;
 		  }
 	  }
+   }
+	
+   public Bullet getBullet()
+   {
+       return this;
    }
 }
