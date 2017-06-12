@@ -145,4 +145,14 @@ public class Bullet
    {
        return this;
    }
+
+   public int getXPos()
+   {
+       return xPos;
+   }
+	
+   public int getYPos()
+   {
+        return yPos;
+   }
 }
