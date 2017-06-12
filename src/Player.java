@@ -157,7 +157,7 @@ public class Player extends Entity
 		shootTimer.start();
 	}
 	
-	public boolean checkHP() //checks hp ends game if < 0
+	public void checkHP() //checks hp ends game if < 0
 	{	
 		if (this.getHealth() == 0)
 			board.endGame();
