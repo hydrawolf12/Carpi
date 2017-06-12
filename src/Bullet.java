@@ -107,8 +107,10 @@ public class Bullet
           {
 		this.remove();
 	  }
-	  
-	  hitbox = new Rectangle(xPos - 1, yPos - 1, 2, 2);
+	  else
+	  {
+	        hitbox = new Rectangle(xPos - 1, yPos - 1, 2, 2);
+	  }
   }
   
   public void collisionDetect()
