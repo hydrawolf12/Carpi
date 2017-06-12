@@ -5,4 +5,9 @@ public class Pistol extends Gun
   {
 	  b.getBullets().add(new Bullet(b.getPlayer().getxPos(), b.getPlayer().getyPos(), direction, false, false, b.getPlayer().getDamage(), b));
   }
+  
+  public int returnType()
+  {
+          return 0;
+  }
 }
