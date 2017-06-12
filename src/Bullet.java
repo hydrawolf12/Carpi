@@ -46,7 +46,7 @@ public class Bullet
 		  yPos = yPos - 2;
 		  xPos = xPos - 2;
 	  }
-      isBuckshot = b;
+      isBuckshot = bu;
       isPierce = p;
       damage = dam;
       hitbox = new Rectangle(xPos - 1, yPos - 1, 2, 2);
