@@ -21,7 +21,7 @@ public class Player extends Entity
 		fireRate = 1;
 		isInvin = false;
 		canShoot = true;
-		currentWep = new Pistol(damage, fireRate);//this isn't a thing
+		currentWep = new Pistol();//this isn't a thing
 	}
 	public boolean getShoot()
 	{
@@ -172,15 +172,15 @@ public class Player extends Entity
 			three = board.getInputs(10);
 			if (one)
 			{
-				currentWep = new Pistol(damage, fireRate);
+				currentWep = new Pistol();
 			}
 			else if(two)
 			{
-				currentWep = new Shotgun(damage, fireRate);
+				currentWep = new Shotgun();
 			}
 			else if(three)
 			{
-				currentWep = new Sniper(damage, fireRate);
+				currentWep = new Sniper();
 			}	
 		}
 	}
