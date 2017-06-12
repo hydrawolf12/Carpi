@@ -7,4 +7,9 @@ public class Shotgun extends Gun
 	  b.getBullets().add(new Bullet(b.getPlayer().getxPos(), b.getPlayer().getyPos(), direction + 1, false, true, b.getPlayer().getDamage() * 2, b));
 	  b.getBullets().add(new Bullet(b.getPlayer().getxPos(), b.getPlayer().getyPos(), direction - 1, false, true, b.getPlayer().getDamage() * 2, b));
   }
+  
+  public int returnType()
+  {
+          return 1;
+  }
 }
