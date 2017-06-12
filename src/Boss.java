@@ -5,11 +5,13 @@ public class Boss extends Zombie
 	private int bossKillCount = 0;
 	// private boolean isBossDefeated;
 	private Timer spawn;
+	private Board board;
 	public Boss(int health, int speed, int x, int y, Board playBoard) //initiates boss based on speed position and health
 	{
 		super(health, speed, x, y, playBoard);
 		// isBossDefeated = false;'
 		spawn = playBoard.returnZombieSpawner();
+		board = playBoard;
 	}
 	
 	
