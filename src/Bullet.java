@@ -15,7 +15,7 @@ public class Bullet
   private Rectangle hitbox;
   private Board b;
 
-  public Bullet(int x, int y, int d, boolean p, boolean b, int dam, board bd)
+  public Bullet(int x, int y, int d, boolean p, boolean b, int dam, Board bd)
   {
 	  b = bd;
           if (d == 90)
