@@ -149,7 +149,7 @@ public class Player extends Entity
 		{
 			this.setDirection(0);
 		}
-		currentWep.shoot(this.getDirection(), this);
+		currentWep.shoot(this.getDirection(), board);
 		canShoot = false;
 		Timer shootTimer = new Timer(3000, action);
 		shootTimer.setRepeats(false);
