@@ -49,6 +49,7 @@ public class Bullet
       isBuckshot = b;
       isPierce = p;
       damage = dam;
+      hitbox = new Rectangle(xPos - 1, yPos - 1, 2, 2);
       direction = d;
       if(isBuckshot == true)
       {
@@ -101,6 +102,12 @@ public class Bullet
 		  yPos--;
 		  xPos--;
 	  }
+	  
+	  if(xpos >= b.getxEnd() || ypos >= b.getyEnd() || xpos <= 0 || ypos <= 0)
+          {
+		this.remove();
+	  }
+	  
 	  hitbox = new Rectangle(xPos - 1, yPos - 1, 2, 2);
   }
   
@@ -121,27 +128,15 @@ public class Bullet
 			     this.remove();
 			     break;
 			 }
-			 
-			 if(xpos >= b.getxEnd() || ypos >= b.getyEnd() || xpos <= 0 || ypos <= 0)
-			 {
-				 this.remove();
-			 }
 		  }
 	  }
    }
   
    public void remove()
    {
-      ArrayList<Bullet> currentBullets = b.returnList2(); 
-	  for (int i = 0; i < currentBullets.size(); i++)
-	  {
-		  if (this.equals(currentBullets.get(i)))
-		  {
-			  currentBullets.remove(i);
-			  i--;
-			  break;
-		  }
-	  }
+      ArrayList<Bullet> currentBullets = t.returnList2(); 
+      int index = currentBullets.indexOf(this);
+      currentBullets.remove(index);
    }
 	
    public Bullet getBullet()
