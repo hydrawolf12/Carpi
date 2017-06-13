@@ -103,7 +103,7 @@ public class Bullet
 		  xPos--;
 	  }
 	  
-	  if(xpos >= b.getxEnd() || ypos >= b.getyEnd() || xpos <= 0 || ypos <= 0)
+	  if(xPos >= b.getxEnd() || yPos >= b.getyEnd() || xPos <= 0 || yPos <= 0)
           {
 		this.remove();
 	  }
@@ -115,14 +115,18 @@ public class Bullet
   
   public void collisionDetect()
   {   
-      ArrayList<Zombie> currentZombs = b.returnList();
+      ArrayList<Zombie> currentZombs = b.getZombies();
 	  for (int i = 0; i < currentZombs.size(); i++)
 	  {
 		  if(currentZombs.get(i).getHitbox().intersects(this.hitbox))
 		  {
-			 if(currentZombs.takeDamage(this.damage, i) == true)
+			 if(currentZombs.get(i).takeDamage(this.damage, i) == true)
 			 {
 			    i--;
+			    if(currentZombs.get(i) instanceof Boss)
+			    {
+			    	Spawner.incrementRate(1);
+			    }
 			 }
 			 
 			 if(isPierce == false)
@@ -136,7 +140,7 @@ public class Bullet
   
    public void remove()
    {
-      ArrayList<Bullet> currentBullets = t.returnList2(); 
+      ArrayList<Bullet> currentBullets = b.getBullets(); 
       int index = currentBullets.indexOf(this);
       currentBullets.remove(index);
    }
@@ -145,7 +149,6 @@ public class Bullet
    {
        return this;
    }
-
    public int getXPos()
    {
        return xPos;
