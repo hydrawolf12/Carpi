@@ -1,17 +1,15 @@
 import java.awt.Rectangle;
+import javax.swing.Timer;
 
 public class Boss extends Zombie
 {
 	private int bossKillCount = 0;
 	// private boolean isBossDefeated;
-	private Timer spawn;
 	private Board board;
 	public Boss(int health, int speed, int x, int y, Board playBoard) //initiates boss based on speed position and health
 	{
 		super(health, speed, x, y, playBoard);
 		// isBossDefeated = false;'
-		spawn = playBoard.returnZombieSpawner();
-		board = playBoard;
 	}
 	
 	
@@ -41,10 +39,6 @@ public class Boss extends Zombie
 			mccree.updateFireRate(2);
 		}
 	} */
-	public int returnWidth()
-	{
-		return 35;
-	}
 	public boolean takeDamage(int a, int pos)
 	{
 		this.setHealth(a);
@@ -55,7 +49,6 @@ public class Boss extends Zombie
 			Spawner.incrementSpeed(1);
 			Spawner.incrementRate(1);
 			bossKillCount++;
-			spawn.setDelay(Spawner.returnRate());
 			if (bossKillCount % 3 == 0)
 				mccree.setHealth(1); // int a subject to change
 			else if (bossKillCount % 3 == 2)
