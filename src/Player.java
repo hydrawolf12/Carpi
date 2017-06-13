@@ -13,11 +13,8 @@ public class Player extends Entity
 
 	public Player(Board playBoard)//public Player(int health, int speed, int x, int y, int w, int h, int topL, int topR, int width, int height) //constructs player hitbox + spawns in center of map
 	{
-		int x = playBoard.getxEnd() / 2;
-		int y = playBoard.getyEnd() / 2;
-		super(3, 2, x, y,  x - 25, y - 25, 50, 50);
+		super(3, 2, playBoard.getxEnd() / 2, playBoard.getyEnd() / 2,  playBoard.getxEnd() / 2 - 25, playBoard.getyEnd() / 2 - 25, 50, 50);
 		board = playBoard;
-		
 		damage = 1;
 		fireRate = 1;
 		isInvin = false;
