@@ -14,7 +14,10 @@ public class Zombie extends Entity
 		// currentZombs = zombieList;
 	}
 	
-	
+	public int returnWidth()
+	{
+		return 25;
+	}
 	public void move()// moves every tick
 	{
 		boolean canUP = this.getYPos() > 1;
