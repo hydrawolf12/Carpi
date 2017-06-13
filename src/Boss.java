@@ -41,6 +41,10 @@ public class Boss extends Zombie
 			mccree.updateFireRate(2);
 		}
 	} */
+	public int returnWidth()
+	{
+		return 35;
+	}
 	public boolean takeDamage(int a, int pos)
 	{
 		this.setHealth(a);
