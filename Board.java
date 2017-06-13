@@ -33,11 +33,7 @@ public class Board extends JPanel implements ActionListener
 	private ArrayList<Zombie> currentZombs;
 	private ArrayList<Bullet> currentBullets;
 	private boolean[] currentInputs; 
-	public BufferedImage c1pistol, c1shotgun, c1sniper, c2pistol, c2shotgun, c2sniper, 
-	c3pistol, c3shotgun, c3sniper, c4pistol, c4shotgun, c4sniper, c5pistol, c5shotgun, 
-	c5sniper, c6pistol, c6shotgun, c6sniper, c7pistol, c7shotgun, c7sniper, c8pistol, 
-	c8shotgun, c8sniper, z1, z2, z3, z4, z5, z6, z7, z8, bz1, bz2, bz3, bz4, bz5, bz6, 
-	bz7, bz8, b, background;
+	public BufferedImage cpistol, cshotgun, csniper, z, bz, b, background;
 	
 	public Board()
 	{
