@@ -85,48 +85,13 @@ public class Board extends JPanel implements ActionListener
 		    cpistol = ImageIO.read(new File("pixelArt//cpistol.png"));
 		    cshotgun = ImageIO.read(new File("pixelArt//cshotgun.png"));
 		    csniper = ImageIO.read(new File("pixelArt//csniper.png"));
-		    /*c2pistol = ImageIO.read(new File("c2pistol.jpg"));
-		    c2shotgun = ImageIO.read(new File("c2shotgun.jpg"));
-		    c2sniper = ImageIO.read(new File("c2sniper.jpg"));
-		    c3pistol = ImageIO.read(new File("c3pistol.jpg"));
-		    c3shotgun = ImageIO.read(new File("c3shotgun.jpg"));
-		    c3sniper = ImageIO.read(new File("c3sniper.jpg"));
-		    c4pistol = ImageIO.read(new File("c4pistol.jpg"));
-		    c4shotgun = ImageIO.read(new File("c4shotgun.jpg"));
-		    c4sniper = ImageIO.read(new File("c4sniper.jpg"));
-		    c5pistol = ImageIO.read(new File("c5pistol.jpg"));
-		    c5shotgun = ImageIO.read(new File("c5shotgun.jpg"));
-		    c5sniper = ImageIO.read(new File("c5sniper.jpg"));
-		    c6pistol = ImageIO.read(new File("c6pistol.jpg"));
-		    c6shotgun = ImageIO.read(new File("c6shotgun.jpg"));
-		    c6sniper = ImageIO.read(new File("c6sniper.jpg"));
-		    c7pistol = ImageIO.read(new File("c7pistol.jpg"));
-		    c7shotgun = ImageIO.read(new File("c7shotgun.jpg"));
-		    c7sniper = ImageIO.read(new File("c7sniper.jpg"));
-		    c8pistol = ImageIO.read(new File("c8pistol.jpg"));
-		    c8shotgun = ImageIO.read(new File("c8shotgun.jpg"));
-		    c8sniper = ImageIO.read(new File("c8sniper.jpg"));*/
 		    z = ImageIO.read(new File("pixelArt//z.png"));
-		    /*z2 = ImageIO.read(new File("z2.jpg"));
-		    z3 = ImageIO.read(new File("z3.jpg"));
-		    z4 = ImageIO.read(new File("z4.jpg"));
-		    z5 = ImageIO.read(new File("z5.jpg"));
-		    z6 = ImageIO.read(new File("z6.jpg"));
-		    z7 = ImageIO.read(new File("z7.jpg"));
-		    z8 = ImageIO.read(new File("z8.jpg"));*/
 		    bz = ImageIO.read(new File("pixelArt//bz.png"));
-		    /*bz2 = ImageIO.read(new File("bz2.jpg"));
-		    bz3 = ImageIO.read(new File("bz3.jpg"));
-		    bz4 = ImageIO.read(new File("bz4.jpg"));
-		    bz5 = ImageIO.read(new File("bz5.jpg"));
-		    bz6 = ImageIO.read(new File("bz6.jpg"));
-		    bz7 = ImageIO.read(new File("bz7.jpg"));
-		    bz8 = ImageIO.read(new File("bz8.jpg"));*/
-		    b = ImageIO.read(new File("pixelArt//b.jpg"));
-		    background = ImageIO.read(new File("pixelArt//background.jpg"));
+		    b = ImageIO.read(new File("b.png"));
+		    background = ImageIO.read(new File("pixelArt//background.png"));
 		} catch (IOException e) 
 		{
-		} 
+		}
 		score.start();
 		spawnZ.start();
 		timer.start(); 
@@ -173,38 +138,33 @@ public class Board extends JPanel implements ActionListener
 		g.drawString("Health: 420", 200, 950);
 	}*/
 	public void paintComponent(Graphics g)
-	{
-		super.paintComponent(g);
+	{super.paintComponent(g);
+		this.setBackground(Color.BLACK);
 		g.drawImage(background, 0, 0, null);
-		if(player.returnType() == 1)
-			g.drawImage(cpistol, player.getXPos(), player.getYPos(), null);
-		else if(player.returnType() == 2)
-			g.drawImage(cshotgun, player.getXPos(), player.getYPos(), null);
-		else if(player.returnType() == 3)
-			g.drawImage(csniper, player.getXPos(), player.getYPos(), null);
-		for(Zombie zomb : currentZombs)
+		AffineTransform at = AffineTransform.getTranslateInstance(player.getXPos() - 25, player.getYPos() - 25);
+		at.rotate(Math.toRadians(player.getDirection()), 25, 25);
+		Graphics2D g2d = (Graphics2D) g;
+		if(player.returnType() == 0)
+			g2d.drawImage(cpistol, at, null);
+		else if(player.returnType() == 1)
+			g2d.drawImage(cshotgun, at, null);
+		else
+			g2d.drawImage(csniper, at, null);
+			
+		for(int i = 0; i < currentZombs.size(); i++)
 		{
-			/*if(Zombie.getDirection() == 1)
-				g.drawImage(z1, zomb.getXPos(), zomb.getYPos(), null);
-			else if(Zombie.getDirection == 2)
-				g.drawImage(z2, zomb.getXPos(), zomb.getYPos(), null);
-			else if(Zombie.getDirection() == 3)
-				g.drawImage(z3, zomb.getXPos(), zomb.getYPos(), null);
-			else if(Zombie.getDirection() == 4)
-				g.drawImage(z4, zomb.getXPos(), zomb.getYPos(), null);
-			else if(Zombie.getDirection() == 5)
-				g.drawImage(z5, zomb.getXPos(), zomb.getYPos(), null);
-			else if(Zombie.getDirection() == 6)
-				g.drawImage(z6, zomb.getXPos(), zomb.getYPos(), null);
-			else if(Zombie.getDirection() == 7)
-				g.drawImage(z7, zomb.getXPos(), zomb.getYPos(), null);
-			else if(Zombie.getDirection() == 8)
-				g.drawImage(z8, zomb.getXPos(), zomb.getYPos(), null);*/
-			g.drawImage(z, zomb.getXPos(), zomb.getYPos(), null);	
+			int x = currentZombs.get(i).returnRadius();
+			AffineTransform at1 = AffineTransform.getTranslateInstance(currentZombs.get(i).getXPos() - x, currentZombs.get(i).getYPos() - x);
+			at1.rotate(Math.toRadians(currentZombs.getDirection()), x, x);
+			Graphics2D g2d = (Graphics2D) g;
+			if(x == 25)
+				g2d.drawImage(z, at1, null);
+			else
+				g2d.drawImage(bz, at1, null);
 		}
-		for(Bullet bullet : currentBullets)
+		for(int i = 0; i < currentBullets.size(); i++)
 		{
-			g.drawImage(b, bullet.getXPos(), bullet.getYPos(), null);
+			g.drawImage(b, currentBullets.get(i).getXPos(), currentBullets.get(i).getYPos(), null);
 		}
 	}
 	public void actionPerformed(ActionEvent e)
