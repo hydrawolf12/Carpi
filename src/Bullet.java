@@ -18,6 +18,8 @@ public class Bullet
   public Bullet(int x, int y, int d, boolean p, boolean bu, int dam, Board bd)
   {
 	  b = bd;
+	  yPos = y;
+	  xPos = x;
           if (d == 90)
 		  yPos = yPos - 2;
 	  else if (d == 45)
