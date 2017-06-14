@@ -25,30 +25,30 @@ public class Zombie extends Entity
 		boolean canLEFT = this.getXPos() > 1;
 		boolean canRIGHT =  this.getXPos() < board.getxEnd() - 1;
 		
-		if (this.getDirection() == 90 && canUP)
+		if (this.getDirection() == 0 && canUP)
 			  this.setYPos(-1);
 		else if (this.getDirection() == 45 && canUP && canRIGHT)
 		{
 			  this.setYPos(-1);
 			  this.setXPos(1);
 		}
-		else if (this.getDirection() == 0 && canRIGHT)
+		else if (this.getDirection() == 90 && canRIGHT)
 			  this.setXPos(1);
-		else if (this.getDirection() == 315 && canDOWN && canRIGHT)
+		else if (this.getDirection() == 135 && canDOWN && canRIGHT)
 		{
 			  this.setYPos(1);
 			  this.setXPos(1);
 		}
-		else if (this.getDirection() == 270 && canDOWN)
+		else if (this.getDirection() == 180 && canDOWN)
 			  this.setYPos(1);
 		else if (this.getDirection() == 225 && canDOWN && canLEFT)
 		{
 			  this.setYPos(1);
 			  this.setXPos(-1);
 		}
-		else if (this.getDirection() == 180 && canLEFT)
+		else if (this.getDirection() == 270 && canLEFT)
 			  this.setXPos(-1);
-		else if (this.getDirection() == 135 && canUP && canLEFT)
+		else if (this.getDirection() == 315 && canUP && canLEFT)
 		{
 			  this.setYPos(-1);
 			  this.setXPos(-1);
