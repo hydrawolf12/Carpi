@@ -20,30 +20,30 @@ public class Bullet
 	  b = bd;
 	  yPos = y;
 	  xPos = x;
-          if (d == 90)
+          if (d == 0)
 		  yPos = yPos - 2;
 	  else if (d == 45)
 	  {
 		  xPos = xPos + 2;
 		  yPos = yPos - 2;
 	  }
-	  else if (d == 0)
+	  else if (d == 90)
 		  xPos = xPos + 2;
-	  else if (d == 315)
+	  else if (d == 135)
 	  {
 		  yPos = yPos + 2;
 		  xPos = xPos + 2;
 	  }
-	  else if (d == 270)
+	  else if (d == 180)
 		  yPos = yPos + 2;
 	  else if (d == 225)
 	  {
 		  xPos = xPos - 2;
 		  yPos = yPos + 2;
 	  }
-	  else if (d == 180)
+	  else if (d == 270)
 		  xPos = xPos - 2;
-	  else if (d == 135)
+	  else if (d == 315)
 	  {
 		  yPos = yPos - 2;
 		  xPos = xPos - 2;
