@@ -34,6 +34,8 @@ public class Board extends JPanel implements ActionListener
 	private ArrayList<Bullet> currentBullets;
 	private boolean[] currentInputs; 
 	public BufferedImage cpistol, cshotgun, csniper, z, bz, b, background;
+	private Image dbImage;
+	private Graphics dbg;
 	
 	public Board()
 	{
@@ -133,8 +135,16 @@ public class Board extends JPanel implements ActionListener
 		g.setFont(new Font("Times New Roman", Font.PLAIN, 34));
 		g.drawString("Health: 420", 200, 950);
 	}*/
+	public vois paint(Graphics g)
+	{
+		dbImage = createImage(1000, 900);
+		dbg = dbImage.getGraphics();
+		paintComponent(dbg);
+		g.drawImage(dbImage, 0, 0, this);
+	}  
 	public void paintComponent(Graphics g)
-	{super.paintComponent(g);
+	{
+		super.paintComponent(g);
 		this.setBackground(Color.BLACK);
 		g.drawImage(background, 0, 0, null);
 		AffineTransform at = AffineTransform.getTranslateInstance(player.getXPos() - 25, player.getYPos() - 25);
