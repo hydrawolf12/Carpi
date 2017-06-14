@@ -52,7 +52,7 @@ public class Board extends JPanel implements Runnable {
 			csniper = ImageIO.read(new File("pixelArt//csniper.png"));
 			z = ImageIO.read(new File("pixelArt//z.png"));
 			bz = ImageIO.read(new File("pixelArt//bz.png"));
-			b = ImageIO.read(new File("b.png"));
+			b = ImageIO.read(new File("pixelArt//b.png"));
 			background = ImageIO.read(new File("pixelArt//background.png"));
 		} catch (IOException e) {
 		}
