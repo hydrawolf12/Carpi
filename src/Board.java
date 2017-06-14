@@ -56,6 +56,7 @@ public class Board extends JPanel implements Runnable {
 			background = ImageIO.read(new File("pixelArt//background.png"));
 		} catch (IOException e) {
 		}
+
 		setFocusable(true);
 		requestFocus();
 	}
@@ -109,6 +110,7 @@ public void  paintComponent(Graphics g)
     g.drawString("Health: 420", 200, 950);
 }*/
 	public void paintComponent(Graphics g) {
+		int j = 0, temp;
 		super.paintComponent(g);
 		this.setBackground(Color.BLACK);
 		g.drawImage(background, 0, 0, null);
@@ -133,8 +135,14 @@ public void  paintComponent(Graphics g)
 			else
 				g2d1.drawImage(bz, at1, null);
 		}
-		for (int i = 0; i < currentBullets.size(); i++) { //may change to while(NUll Pointer Exception)
- 			g.drawImage(b, currentBullets.get(i).getXPos(), currentBullets.get(i).getYPos(), null);
+		while(j < currentBullets.size())
+		{
+			temp = currentBullets.size();
+			g.drawImage(b, currentBullets.get(j).getXPos(), currentBullets.get(j).getYPos(), null);
+			if(temp == currentBullets.size())
+			{
+				j++;
+			}
 		}
 	}
 
@@ -167,10 +175,10 @@ public void  paintComponent(Graphics g)
 	public void updateGame(double delta) {
 		scoreT += delta;
 		zombieT += delta;
-		if (scoreT == 1) {
+		if (scoreT >= 1000) {
 			score++;
 		}
-		if (zombieT == Spawner.returnRate()) {
+		if (zombieT >= Spawner.returnRate() * 1000) {
 			if (killCount >= 100) {
 				currentZombs.add(spawner.spawnBoss());
 				killCount = 0;
@@ -200,12 +208,19 @@ public void  paintComponent(Graphics g)
 	}
 
 	public void detect() {
+	    int i = 0, temp;
 		for (Zombie z : currentZombs) {
 			z.collisionDetect();
 		}
-		for (Bullet bill : currentBullets) {
-			bill.collisionDetect();
-		}
+        while(i < currentBullets.size())
+        {
+            temp = currentBullets.size();
+            currentBullets.get(i).collisionDetect();
+            if(temp == currentBullets.size())
+            {
+                i++;
+            }
+        }
 	}
 
 	public Player getPlayer() {
