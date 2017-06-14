@@ -29,7 +29,9 @@ public class Board extends JPanel implements Runnable {
 	private ArrayList<Bullet> currentBullets;
 	private boolean[] currentInputs;
 	public BufferedImage cpistol, cshotgun, csniper, z, bz, b, background;
-
+	private Image dbImage;
+	private Graphics dbg;
+	
 	public Board() {
 		addKeyListener(new AAdapter());
 		score = 0;
@@ -109,7 +111,16 @@ public void  paintComponent(Graphics g)
     g.setFont(new Font("Times New Roman", Font.PLAIN, 34));
     g.drawString("Health: 420", 200, 950);
 }*/
-	public void paintComponent(Graphics g) {
+	public void paint(Graphics g)
+	{
+		dbImage = createImage(1000, 900);
+		dbg = dbImage.getGraphics();
+		paintComponent(dbg);
+		g.drawImage(dbImage, 0, 0, this);
+	}  
+	
+	public void paintComponent(Graphics g) 
+	{
 		int j = 0, temp;
 		super.paintComponent(g);
 		this.setBackground(Color.BLACK);
