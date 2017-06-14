@@ -60,44 +60,84 @@ public class Zombie extends Entity
 	{
 		Player player = board.getPlayer();
 		double angle = (double)Math.toDegrees(Math.atan2(player.getYPos() - this.getYPos(), player.getXPos() - this.getXPos()));
-
+		int xDiff = this.getXPos() - player.getXPos();
+		int yDiff = this.getYPos() - player.getYPos();
+		
 	    if(angle < 0)
 	    {
 	        angle += 360;
 	    }
 	    
-	    if (angle < 45)
-	    {
-	    	this.setDirection(0);
-	    }
-	    else if(angle < 90)
-	    {
-	    	this.setDirection(45);
-	    }
-	    else if(angle < 135)
-	    {
-	    	this.setDirection(90);
-	    }
-	    else if(angle < 180)
-	    {
-	    	this.setDirection(135);
-	    }
-	    else if(angle < 225)
+	    if (xDiff == 0 && yDiff < 0) // above
 	    {
 	    	this.setDirection(180);
 	    }
-	    else if(angle < 270)
+	    else if(xDiff == 0 && yDiff > 0) // below
 	    {
-	    	this.setDirection(225);
+	    	this.setDirection(0);
 	    }
-	    else if(angle < 315)
+	    else if(yDiff == 0 && xDiff < 0) // left
+	    {
+	    	this.setDirection(90);
+	    }
+	    else if(yDiff == 0 && xDiff > 0) // right
 	    {
 	    	this.setDirection(270);
 	    }
-	    else if(angle < 360)
+	    else
 	    {
-	    	this.setDirection(315);
-	    }
+	    	if (xDiff < 0 && yDiff < 0) // top left
+	    	{
+	    		angle += 90;
+	    	}
+	    	else if(xDiff < 0 &&  yDiff > 0) // bottom left
+	    	{
+	    		angle += 0;
+	    	}
+	    	else if(xDiff > 0 && yDiff < 0) // top right
+	    	{
+	    		angle += 180;
+	    	}
+	    	else if(xDiff > 0 && yDiff > 0) //bottom right
+	    	{
+	    		angle += 270;
+	    	}
+	    
+	    	angle = angle % 360;
+	    
+	    	if (angle < 45)
+	    	{
+	    		this.setDirection(0);
+	    	}
+	    	else if(angle < 90)
+	    	{
+	    		this.setDirection(45);
+	    	}
+	    	else if(angle < 135)
+	    	{
+	    		this.setDirection(90);
+	    	}
+	    	else if(angle < 180)
+	    	{
+	    		this.setDirection(135);
+	    	}
+	    	else if(angle < 225)
+	    	{
+	    		this.setDirection(180);
+	    	}
+	    	else if(angle < 270)
+	    	{
+	    		this.setDirection(225);
+	    	}
+	    	else if(angle < 315)
+	    	{
+	    		this.setDirection(270);
+	    	}
+	    	else if(angle < 360)
+	    	{
+	    		this.setDirection(315);
+	    	}
+	   }
 	}
 	public void collisionDetect()
 	{
