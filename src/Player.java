@@ -99,7 +99,7 @@ public class Player extends Entity
 		}
 	}
 	
-	public void shoot() //spawns bullet
+public void shoot() //spawns bullet
 	{
 		ActionListener action = new ActionListener()
 		{   
@@ -117,7 +117,7 @@ public class Player extends Entity
 		right = board.getInputs(7);
 		if (up && left)
 		{
-			this.setDirection(135);
+			this.setDirection(315);
 		}
 		else if(left && down)
 		{
@@ -125,7 +125,7 @@ public class Player extends Entity
 		}
 		else if(down && right)
 		{
-			this.setDirection(315);
+			this.setDirection(135);
 		}
 		else if(up && right)
 		{
@@ -133,19 +133,19 @@ public class Player extends Entity
 		}
 		else if(up)
 		{
-			this.setDirection(90);
+			this.setDirection(0);
 		}
 		else if(left)
 		{
-			this.setDirection(180);
+			this.setDirection(270);
 		}
 		else if(down)
 		{
-			this.setDirection(270);
+			this.setDirection(180);
 		}
 		else if(right)
 		{
-			this.setDirection(0);
+			this.setDirection(90);
 		}
 		currentWep.shoot(this.getDirection(), board);
 		canShoot = false;
