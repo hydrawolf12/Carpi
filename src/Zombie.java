@@ -139,5 +139,11 @@ public class Zombie extends Entity
 		currentZombs.remove(pos);
 		Board.setKillCount(1);
 	} */
+
+
+	public int returnRadius() {
+		// TODO Auto-generated method stub
+		return 1;
+	}
 	
 }
