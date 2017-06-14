@@ -30,7 +30,7 @@ public class Boss extends Zombie
 		spawn.setDelay(Spawner.returnRate());
 		if (bossKillCount % 3 == 0)
 			mccree.updateHP(1); // int a subject to change
-		else if (bossKillCount % 3 == 2)
+		else if (bossKillCount % 3 == 2)//
 		{
 			mccree.updateDamage(2);
 		}
