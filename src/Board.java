@@ -116,7 +116,6 @@ public void  paintComponent(Graphics g)
 		dbImage = createImage(1000, 900);
 		dbg = dbImage.getGraphics();
 		paintComponent(dbg);
-		g.dispose();
 		g.drawImage(dbImage, 0, 0, this);
 	}  
 	
