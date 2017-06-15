@@ -19,7 +19,7 @@ public class Player extends Entity
 		fireRate = 1;
 		isInvin = false;
 		canShoot = true;
-		currentWep = new Pistol();//this isn't a thing
+		currentWep = new Pistol();
 	}
 	public boolean getShoot()
 	{
