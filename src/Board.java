@@ -8,69 +8,70 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.awt.Image;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public class Board extends JPanel implements Runnable {
-	private int score;
-	private boolean inGame;
-	private static int killCount;
-	private int xEnd;
-	private int yEnd;
-	private long lastFpsTime;
-	private int fps;
-	private Thread string;
-	private Player player;
-	private double scoreT;
-	private double zombieT;
-	private Spawner spawner;
-	private ArrayList<Zombie> currentZombs;
-	private ArrayList<Bullet> currentBullets;
-	private boolean[] currentInputs;
-	public BufferedImage cpistol, cshotgun, csniper, z, bz, b, background;
-	private Image dbImage;
-	private Graphics dbg;
-	
-	public Board() {
-		addKeyListener(new AAdapter());
-		score = 0;
-		killCount = 0;
-		fps = 0;
-		xEnd = 1000;
-		yEnd = 900;
-		lastFpsTime = 0;
-		scoreT = 0;
-		zombieT = 0;
-		player = new Player(this);
-		spawner = new Spawner(this);
-		currentZombs = new ArrayList<Zombie>();
-		currentBullets = new ArrayList<Bullet>();
-		currentInputs = new boolean[11];
-		inGame = true;
-		try {
-			cpistol = ImageIO.read(new File("pixelArt//cpistol.png"));
-			cshotgun = ImageIO.read(new File("pixelArt//cshotgun.png"));
-			csniper = ImageIO.read(new File("pixelArt//csniper.png"));
-			z = ImageIO.read(new File("pixelArt//z.png"));
-			bz = ImageIO.read(new File("pixelArt//bz.png"));
-			b = ImageIO.read(new File("pixelArt//b.png"));
-			background = ImageIO.read(new File("pixelArt//background.png"));
-		} catch (IOException e) {
-		}
+    private int score;
+    private boolean inGame;
+    private static int killCount;
+    private int xEnd;
+    private int yEnd;
+    private long lastFpsTime;
+    private int fps;
+    private Thread string;
+    private Player player;
+    private double scoreT;
+    private double zombieT;
+    private Spawner spawner;
+    private ArrayList<Zombie> currentZombs;
+    private ArrayList<Bullet> currentBullets;
+    private boolean[] currentInputs;
+    public BufferedImage cpistol, cshotgun, csniper, z, bz, b, background;
+    private Image dbImage;
+    private Graphics dbg;
 
-		setFocusable(true);
-		requestFocus();
-	}
-	public void addNotify() {
-		super.addNotify();
-		if(string == null)
-		{
-			string = new Thread(this);
-			string.start();
-		}
-	}
-	/*int i = 0;
+    public Board() {
+        addKeyListener(new AAdapter());
+        score = 0;
+        killCount = 0;
+        fps = 0;
+        xEnd = 1000;
+        yEnd = 900;
+        lastFpsTime = 0;
+        scoreT = 0;
+        zombieT = 0;
+        player = new Player(this);
+        spawner = new Spawner(this);
+        currentZombs = new ArrayList<Zombie>();
+        currentBullets = new ArrayList<Bullet>();
+        currentInputs = new boolean[11];
+        inGame = true;
+        try {
+            cpistol = ImageIO.read(new File("pixelArt//cpistol.png"));
+            cshotgun = ImageIO.read(new File("pixelArt//cshotgun.png"));
+            csniper = ImageIO.read(new File("pixelArt//csniper.png"));
+            z = ImageIO.read(new File("pixelArt//z.png"));
+            bz = ImageIO.read(new File("pixelArt//bz.png"));
+            b = ImageIO.read(new File("pixelArt//b.png"));
+            background = ImageIO.read(new File("pixelArt//background.png"));
+        } catch (IOException e) {
+        }
+
+        setFocusable(true);
+        requestFocus();
+    }
+    public void addNotify() {
+        super.addNotify();
+        if(string == null)
+        {
+            string = new Thread(this);
+            string.start();
+        }
+    }
+    /*int i = 0;
 public void  paintComponent(Graphics g)
 {
     super.paintComponent(g);
@@ -111,118 +112,123 @@ public void  paintComponent(Graphics g)
     g.setFont(new Font("Times New Roman", Font.PLAIN, 34));
     g.drawString("Health: 420", 200, 950);
 }*/
-	public void paint(Graphics g)
-	{
-		dbImage = createImage(1000, 900);
-		dbg = dbImage.getGraphics();
-		paintComponent(dbg);
-		g.drawImage(dbImage, 0, 0, this);
-	}  
-	
-	public void paintComponent(Graphics g) 
-	{
-		int j = 0, temp;
-		super.paintComponent(g);
-		this.setBackground(Color.BLACK);
-		g.drawImage(background, 0, 0, null);
-		AffineTransform at = AffineTransform.getTranslateInstance(player.getXPos() - 25, player.getYPos() - 25);
-		at.rotate(Math.toRadians(player.getDirection()), 25, 25);
-		Graphics2D g2d = (Graphics2D) g;
-		if (player.returnType() == 0)
-			g2d.drawImage(cpistol, at, null);
-		else if (player.returnType() == 1)
-			g2d.drawImage(cshotgun, at, null);
-		else
-			g2d.drawImage(csniper, at, null);
+    public void paint(Graphics g)
+    {
+        dbImage = createImage(1000, 900);
+        dbg = dbImage.getGraphics();
+        paintComponent(dbg);
+        g.drawImage(dbImage, 0, 0, this);
+    }
 
-		for (int i = 0; i < currentZombs.size(); i++) {
-			int x = currentZombs.get(i).returnRadius();
-			AffineTransform at1 = AffineTransform.getTranslateInstance(currentZombs.get(i).getXPos() - x,
-					currentZombs.get(i).getYPos() - x);
-			at1.rotate(Math.toRadians(currentZombs.get(i).getDirection()), x, x);
-			Graphics2D g2d1 = (Graphics2D) g;
-			if (x == 25)
-				g2d1.drawImage(z, at1, null);
-			else
-				g2d1.drawImage(bz, at1, null);
-		}
-		while(j < currentBullets.size())
-		{
-			temp = currentBullets.size();
-			g.drawImage(b, currentBullets.get(j).getXPos(), currentBullets.get(j).getYPos(), null);
-			if(temp == currentBullets.size())
-			{
-				j++;
-			}
-		}
-	}
+    public void paintComponent(Graphics g)
+    {
+        int j = 0, temp;
+        super.paintComponent(g);
+        this.setBackground(Color.BLACK);
+        g.drawImage(background, 0, 0, null);
+        AffineTransform at = AffineTransform.getTranslateInstance(player.getXPos() - 25, player.getYPos() - 25);
+        at.rotate(Math.toRadians(player.getDirection()), 25, 25);
+        Graphics2D g2d = (Graphics2D) g;
+        if (player.returnType() == 0)
+            g2d.drawImage(cpistol, at, null);
+        else if (player.returnType() == 1)
+            g2d.drawImage(cshotgun, at, null);
+        else
+            g2d.drawImage(csniper, at, null);
 
-	public void run() {
-		long lastLoopTime = System.nanoTime();
-		final int TARGET_FPS = 60;
-		final long OPTIMAL_TIME = 1000000000 / TARGET_FPS;
+        for (int i = 0; i < currentZombs.size(); i++) {
+            int x = currentZombs.get(i).returnRadius();
+            AffineTransform at1 = AffineTransform.getTranslateInstance(currentZombs.get(i).getXPos() - x,
+                    currentZombs.get(i).getYPos() - x);
+            at1.rotate(Math.toRadians(currentZombs.get(i).getDirection()), x, x);
+            Graphics2D g2d1 = (Graphics2D) g;
+            if (x == 25)
+                g2d1.drawImage(z, at1, null);
+            else
+                g2d1.drawImage(bz, at1, null);
+        }
+        while(j < currentBullets.size())
+        {
+            temp = currentBullets.size();
+            g.drawImage(b, currentBullets.get(j).getXPos(), currentBullets.get(j).getYPos(), null);
+            if(temp == currentBullets.size())
+            {
+                j++;
+            }
+        }
+        g.dispose();
+    }
 
-		while (inGame) {
-			long now = System.nanoTime();
-			long updateLength = now - lastLoopTime;
-			lastLoopTime = now;
-			double delta = updateLength / ((double) OPTIMAL_TIME);
-			lastFpsTime += updateLength;
-			fps++;
-			if (lastFpsTime >= 1000000000) {
-				System.out.println("(FPS: " + fps + ")");
-				lastFpsTime = 0;
-				fps = 0;
-			}
-			updateGame(delta);
-			repaint();
-			try {
-				Thread.sleep((lastLoopTime - System.nanoTime() + OPTIMAL_TIME) / 1000000000);
-			} catch (Exception e) {
-			}
-		}
-	}
+     public void run() {
+        long lastLoopTime = System.nanoTime();
+        final int TARGET_FPS = 60;
+        final long OPTIMAL_TIME = 1000000000 / TARGET_FPS;
 
-	public void updateGame(double delta) {
-		scoreT += delta;
-		zombieT += delta;
-		if (scoreT >= 1000) {
-			score++;
-		}
-		if (zombieT >= Spawner.returnRate() * 1000) {
-			if (killCount >= 100) {
-				currentZombs.add(spawner.spawnBoss());
-				killCount = 0;
-			} else {
-				currentZombs.add(spawner.spawnZombie());
-			}
-		}
-		move();
-		player.shoot();
-		detect();
-	}
+        while (inGame) {
+            long now = System.nanoTime();
+            long updateLength = now - lastLoopTime;
+            lastLoopTime = now;
+            double delta = updateLength / ((double) OPTIMAL_TIME);
+            lastFpsTime += updateLength;
+            fps++;
+            if (lastFpsTime >= 1000000000) {
+                System.out.println("(FPS: " + fps + ")");
+                lastFpsTime = 0;
+                fps = 0;
+            }
+            updateGame(delta);
+            repaint();
+            try {
+                Thread.sleep((lastLoopTime - System.nanoTime() + OPTIMAL_TIME) / 1000000000);
+            } catch (Exception e) {
+            }
+        }
+    }
 
-	public void move() {
-		int i = 0, temp;
-		for (Zombie z : currentZombs) {
-			z.move();
-		}
-		while(i < currentBullets.size())
-		{
-			temp = currentBullets.size();
-			currentBullets.get(i).move();
-			if(temp == currentBullets.size())
-			{
-				i++;
-			}
-		}
-	}
+    public void updateGame(double delta) {
+        scoreT += delta;
+        zombieT += delta;
+        if (scoreT >= 60) {
+            score++;
+            scoreT = 0;
+        }
+        if (zombieT >= Spawner.returnRate()) {
+            if (killCount >= 100) {
+                currentZombs.add(spawner.spawnBoss());
+                killCount = 0;
+            } else {
+                currentZombs.add(spawner.spawnZombie());
+            }
+            zombieT = 0;
+        }
+        move();
+        player.shoot();
+        detect();
+    }
 
-	public void detect() {
-	    int i = 0, temp;
-		for (Zombie z : currentZombs) {
-			z.collisionDetect();
-		}
+    public void move() {
+        int i = 0, temp;
+        player.move();
+        player.setWeapon();
+        for (Zombie z : currentZombs) {
+            z.move();
+        }
+        while(i < currentBullets.size())
+        {
+            temp = currentBullets.size();
+            currentBullets.get(i).move();
+            if(temp == currentBullets.size())
+            {
+                i++;
+            }
+        }
+    }
+
+    public void detect() {
+        int i = 0, temp;
+        for (Zombie z : currentZombs) {
+            z.collisionDetect();
+        }
         while(i < currentBullets.size())
         {
             temp = currentBullets.size();
@@ -232,126 +238,126 @@ public void  paintComponent(Graphics g)
                 i++;
             }
         }
-	}
+    }
 
-	public Player getPlayer() {
-		return player;
-	}
+    public Player getPlayer() {
+        return player;
+    }
 
-	public ArrayList<Bullet> getBullets() {
-		return currentBullets;
-	}
+    public ArrayList<Bullet> getBullets() {
+        return currentBullets;
+    }
 
-	public ArrayList<Zombie> getZombies() {
-		return currentZombs;
-	}
+    public ArrayList<Zombie> getZombies() {
+        return currentZombs;
+    }
 
-	public int getxEnd() {
-		return xEnd;
-	}
+    public int getxEnd() {
+        return xEnd;
+    }
 
-	public int getyEnd() {
-		return yEnd;
-	}
+    public int getyEnd() {
+        return yEnd;
+    }
 
-	public static int returnKillCount() {
-		return killCount;
-	}
+    public static int returnKillCount() {
+        return killCount;
+    }
 
-	public static void setKillCount(int k) {
-		killCount += k;
-	}
+    public static void setKillCount(int k) {
+        killCount += k;
+    }
 
-	public void addZomb(Zombie z) {
-		currentZombs.add(z);
-	}
+    public void addZomb(Zombie z) {
+        currentZombs.add(z);
+    }
 
-	public void removeZomb(Zombie zomb) {
-		currentZombs.remove(zomb);
-	}
+    public void removeZomb(Zombie zomb) {
+        currentZombs.remove(zomb);
+    }
 
-	public boolean getInputs(int x) {
-		return currentInputs[x];
-	}
+    public boolean getInputs(int x) {
+        return currentInputs[x];
+    }
 
-	public void endGame() {
-		System.exit(0);
-	}
+    public void endGame() {
+        System.exit(0);
+    }
 
-	private class AAdapter extends KeyAdapter // deals with keyboard inputs
-	{
-		public void keyPressed(KeyEvent e) {
-			int key = e.getKeyCode();
-			if (key == KeyEvent.VK_W) {
-				currentInputs[0] = true;
-			}
-			if (key == KeyEvent.VK_A) {
-				currentInputs[1] = true;
-			}
-			if (key == KeyEvent.VK_S) {
-				currentInputs[2] = true;
-			}
-			if (key == KeyEvent.VK_D) {
-				currentInputs[3] = true;
-			}
-			if (key == KeyEvent.VK_UP) {
-				currentInputs[4] = true;
-			}
-			if (key == KeyEvent.VK_LEFT) {
-				currentInputs[5] = true;
-			}
-			if (key == KeyEvent.VK_DOWN) {
-				currentInputs[6] = true;
-			}
-			if (key == KeyEvent.VK_RIGHT) {
-				currentInputs[7] = true;
-			}
-			if (key == KeyEvent.VK_1) {
-				currentInputs[8] = true;
-			}
-			if (key == KeyEvent.VK_2) {
-				currentInputs[9] = true;
-			}
-			if (key == KeyEvent.VK_3) {
-				currentInputs[10] = true;
-			}
-		}
+    private class AAdapter extends KeyAdapter // deals with keyboard inputs
+    {
+        public void keyPressed(KeyEvent e) {
+            int key = e.getKeyCode();
+            if (key == KeyEvent.VK_W) {
+                currentInputs[0] = true;
+            }
+            if (key == KeyEvent.VK_A) {
+                currentInputs[1] = true;
+            }
+            if (key == KeyEvent.VK_S) {
+                currentInputs[2] = true;
+            }
+            if (key == KeyEvent.VK_D) {
+                currentInputs[3] = true;
+            }
+            if (key == KeyEvent.VK_UP) {
+                currentInputs[4] = true;
+            }
+            if (key == KeyEvent.VK_LEFT) {
+                currentInputs[5] = true;
+            }
+            if (key == KeyEvent.VK_DOWN) {
+                currentInputs[6] = true;
+            }
+            if (key == KeyEvent.VK_RIGHT) {
+                currentInputs[7] = true;
+            }
+            if (key == KeyEvent.VK_1) {
+                currentInputs[8] = true;
+            }
+            if (key == KeyEvent.VK_2) {
+                currentInputs[9] = true;
+            }
+            if (key == KeyEvent.VK_3) {
+                currentInputs[10] = true;
+            }
+        }
 
-		public void keyReleased(KeyEvent e) {
-			int key = e.getKeyCode();
-			if (key == KeyEvent.VK_W) {
-				currentInputs[0] = false;
-			}
-			if (key == KeyEvent.VK_A) {
-				currentInputs[1] = false;
-			}
-			if (key == KeyEvent.VK_S) {
-				currentInputs[2] = false;
-			}
-			if (key == KeyEvent.VK_D) {
-				currentInputs[3] = false;
-			}
-			if (key == KeyEvent.VK_UP) {
-				currentInputs[4] = false;
-			}
-			if (key == KeyEvent.VK_LEFT) {
-				currentInputs[5] = false;
-			}
-			if (key == KeyEvent.VK_DOWN) {
-				currentInputs[6] = false;
-			}
-			if (key == KeyEvent.VK_RIGHT) {
-				currentInputs[7] = false;
-			}
-			if (key == KeyEvent.VK_1) {
-				currentInputs[8] = false;
-			}
-			if (key == KeyEvent.VK_2) {
-				currentInputs[9] = false;
-			}
-			if (key == KeyEvent.VK_3) {
-				currentInputs[10] = false;
-			}
-		}
-	}
+        public void keyReleased(KeyEvent e) {
+            int key = e.getKeyCode();
+            if (key == KeyEvent.VK_W) {
+                currentInputs[0] = false;
+            }
+            if (key == KeyEvent.VK_A) {
+                currentInputs[1] = false;
+            }
+            if (key == KeyEvent.VK_S) {
+                currentInputs[2] = false;
+            }
+            if (key == KeyEvent.VK_D) {
+                currentInputs[3] = false;
+            }
+            if (key == KeyEvent.VK_UP) {
+                currentInputs[4] = false;
+            }
+            if (key == KeyEvent.VK_LEFT) {
+                currentInputs[5] = false;
+            }
+            if (key == KeyEvent.VK_DOWN) {
+                currentInputs[6] = false;
+            }
+            if (key == KeyEvent.VK_RIGHT) {
+                currentInputs[7] = false;
+            }
+            if (key == KeyEvent.VK_1) {
+                currentInputs[8] = false;
+            }
+            if (key == KeyEvent.VK_2) {
+                currentInputs[9] = false;
+            }
+            if (key == KeyEvent.VK_3) {
+                currentInputs[10] = false;
+            }
+        }
+    }
 }
