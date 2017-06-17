@@ -136,7 +136,7 @@ public class Zombie extends Entity
 	    	}
 	    	else if (angle > 337.5 && angle <= 22.5)
 		{
-			this.setDirection(0)
+			this.setDirection(0);
 		}
 	   }
 	}
