@@ -63,10 +63,10 @@ public class Zombie extends Entity
 		int xDiff = this.getXPos() - player.getXPos();
 		int yDiff = this.getYPos() - player.getYPos();
 		
-	    if(angle < 0)
+	    /*if(angle < 0)
 	    {
 	        angle += 360;
-	    }
+	    }*/
 	    
 	    if (xDiff == 0 && yDiff < 0) // above
 	    {
@@ -110,34 +110,34 @@ public class Zombie extends Entity
 	    	{
 	    		this.setDirection(45);
 	    	}
-	    	else if(angle > 67.5 && angle <= 112.5)
+	    else if(angle > 67.5 && angle <= 112.5)
 	    	{
 	    		this.setDirection(90);
 	    	}
-	    	else if(angle > 112.5 && angle <= 157.5)
+	    else if(angle > 112.5 && angle <= 157.5)
 	    	{
 	    		this.setDirection(135);
 	    	}
-	    	else if(angle > 157.5 && angle <= 202.5)
+	    else if(angle > 157.5 && angle <= 202.5)
 	    	{
 	    		this.setDirection(180);
 	    	}
-	    	else if(angle > 202.5 && angle <= 292.5)
+	    else if(angle > 202.5 && angle <= 247.5)
 	    	{
 	    		this.setDirection(225);
 	    	}
-	    	else if(angle > 292.5 && angle <= 337.5)
-	    	{
-	    		this.setDirection(270);
-	    	}
-	    	else if(angle > 337.5 && angle <= 382.5)
+	    else if(angle > 247.2 && angle <= 292.5)
+	    {
+	    	this.setDirection(270);
+	    }
+	    else if(angle > 292.5 && angle <= 337.5)
 	    	{
 	    		this.setDirection(315);
 	    	}
-	    	else if (angle > 337.5 && angle <= 22.5)
-		{
-			this.setDirection(0);
-		}
+	    else if (angle > 337.5 && angle <= 22.5)
+	    	{
+	    		this.setDirection(0);
+	    	}
 	   }
 	}
 	public void collisionDetect(double delta)
