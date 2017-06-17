@@ -10,6 +10,5 @@ public class CarpiGame extends JFrame
 		f.add(b);
 		f.setSize(1000, 1000);
 		f.setVisible(true);
-		
 	}
 }
