@@ -44,7 +44,7 @@ public class Bullet
 		}
 		else if (d == 270)
 			xPos = xPos - 2;
-		else if (d == 315)
+		else if (d == 315 || d == -45)
 		{
 			yPos = yPos - 2;
 			xPos = xPos - 2;
