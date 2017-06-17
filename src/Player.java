@@ -10,6 +10,8 @@ public class Player extends Entity
 	private boolean isInvin;
 	private int damage, fireRate;
 	private Board board;
+	private double shootT;
+	private double invinT;
 
 	public Player(Board playBoard)//public Player(int health, int speed, int x, int y, int w, int h, int topL, int topR, int width, int height) //constructs player hitbox + spawns in center of map
 	{
@@ -18,8 +20,9 @@ public class Player extends Entity
 		damage = 1;
 		fireRate = 1;
 		isInvin = false;
-		canShoot = true;
-		currentWep = new Pistol();
+		canShoot = false;
+		shootT = 0;
+		currentWep = new Pistol();//this isn't a thing
 	}
 	public boolean getShoot()
 	{
@@ -84,7 +87,7 @@ public class Player extends Entity
 		}
 		else if(s && canDOWN)
 		{
-			this.setYPos(-1);
+			this.setYPos(1);
 			//  direction = 270;
 		}
 		else if(d && canRIGHT)
@@ -93,65 +96,41 @@ public class Player extends Entity
 			// direction = 3;
 		}
 		this.setHitbox(new Rectangle(this.getXPos() - 25, this.getYPos() - 25, 50 , 50));
-		for (Zombie z: board.getZombies())
+		for (Zombie z: board.getCurrentZombs())
 		{
 			z.calcAng();
 		}
 	}
 	
-public void shoot() //spawns bullet
+	public void shoot(double delta) //spawns bullet
 	{
-		ActionListener action = new ActionListener()
-		{   
-		    @Override
-		    public void actionPerformed(ActionEvent event)
-		    {
-		    	canShoot = true;
-		    }
-		};
-		boolean up, left, down, right;
-		
-		up = board.getInputs(4);
-		left = board.getInputs(5);
-		down = board.getInputs(6);
-		right = board.getInputs(7);
-		if (up && left)
-		{
-			this.setDirection(315);
-		}
-		else if(left && down)
-		{
-			this.setDirection(225);
-		}
-		else if(down && right)
-		{
-			this.setDirection(135);
-		}
-		else if(up && right)
-		{
-			this.setDirection(45);
-		}
-		else if(up)
-		{
-			this.setDirection(0);
-		}
-		else if(left)
-		{
-			this.setDirection(270);
-		}
-		else if(down)
-		{
-			this.setDirection(180);
-		}
-		else if(right)
-		{
-			this.setDirection(90);
-		}
-		currentWep.shoot(this.getDirection(), board);
-		canShoot = false;
-		Timer shootTimer = new Timer(3000, action);
-		shootTimer.setRepeats(false);
-		shootTimer.start();
+        boolean up, left, down, right;
+        up = board.getInputs(4);
+        left = board.getInputs(5);
+        down = board.getInputs(6);
+        right = board.getInputs(7);
+        if (up && left) {
+            this.setDirection(315);
+        } else if (left && down) {
+            this.setDirection(225);
+        } else if (down && right) {
+            this.setDirection(135);
+        } else if (up && right) {
+            this.setDirection(45);
+        } else if (up) {
+            this.setDirection(0);
+        } else if (left) {
+            this.setDirection(270);
+        } else if (down) {
+            this.setDirection(180);
+        } else if (right) {
+            this.setDirection(90);
+        }
+	    if(canShoot) {
+            currentWep.shoot(this.getDirection(), board);
+            System.out.println("The number of bullets" + board.getCurrentBullets().size());
+            canShoot = false;
+        }
 	}
 	
 	public void checkHP() //checks hp ends game if < 0
@@ -160,8 +139,8 @@ public void shoot() //spawns bullet
 			board.endGame();
 	}
 	
-	public void setWeapon() //what variable type is the keyboard input?
-	{	
+	public void setWeapon(double delta) //what variable type is the keyboard input?
+	{
 		if (canShoot)
 		{
 			boolean one, two , three;
@@ -171,14 +150,17 @@ public void shoot() //spawns bullet
 			if (one)
 			{
 				currentWep = new Pistol();
+				fireRate = 1;
 			}
 			else if(two)
 			{
 				currentWep = new Shotgun();
+				fireRate = 2;
 			}
 			else if(three)
 			{
 				currentWep = new Sniper();
+				fireRate = 3;
 			}	
 		}
 	}
@@ -192,24 +174,24 @@ public void shoot() //spawns bullet
 		fireRate += a;
 	}
 	
-	public void toggleInvin()
+	public void toggleInvin(double delta)
 	{
-		ActionListener action = new ActionListener()
-		{   
-		    @Override
-		    public void actionPerformed(ActionEvent event)
-		    {
-		    	isInvin = false;
-		    }
-		};
-		isInvin = true;
-		Timer invTimer = new Timer(2000, action);
-		invTimer.setRepeats(false);
-		invTimer.start();
+	    invinT +=delta;
+	    if(invinT >= 2 && isInvin){
+	        isInvin = false;
+	        invinT = 0;
+        }
 	}
+	public void changeInvin() {
+	    isInvin = !isInvin;
+    }
 	public int returnType()
 	{
 		return currentWep.returnType();
 	}
+	public void setCanShoot(boolean canShoot) {
+		this.canShoot = canShoot;
+	}
+
 
 }
