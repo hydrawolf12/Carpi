@@ -155,6 +155,7 @@ public class Zombie extends Entity
 	}
 	public void attack()//attacks if hitboxes overlap w/ player
 	{
+		board.getPlayer().toggleInvin();
 		board.getPlayer().setHealth(-1);
 		board.getPlayer().checkHP();
 	}
