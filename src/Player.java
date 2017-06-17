@@ -109,6 +109,10 @@ public class Player extends Entity
         left = board.getInputs(5);
         down = board.getInputs(6);
         right = board.getInputs(7);
+	if (up == left && left == right && right == down && up == false)
+	{
+		return;
+	}
         if (up && left) {
             this.setDirection(315);
         } else if (left && down) {
