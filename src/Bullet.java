@@ -22,32 +22,32 @@ public class Bullet
 		yPos = y;
 		xPos = x;
 		if (d == 0)
-			yPos = yPos - 2;
+			yPos = yPos - 4;
 		else if (d == 45)
 		{
-			xPos = xPos + 2;
-			yPos = yPos - 2;
+			xPos = xPos + 4;
+			yPos = yPos - 4;
 		}
 		else if (d == 90)
-			xPos = xPos + 2;
+			xPos = xPos + 4;
 		else if (d == 135)
 		{
-			yPos = yPos + 2;
-			xPos = xPos + 2;
+			yPos = yPos + 4;
+			xPos = xPos + 4;
 		}
 		else if (d == 180)
-			yPos = yPos + 2;
+			yPos = yPos + 4;
 		else if (d == 225)
 		{
-			xPos = xPos - 2;
-			yPos = yPos + 2;
+			xPos = xPos - 4;
+			yPos = yPos + 4;
 		}
 		else if (d == 270)
-			xPos = xPos - 2;
+			xPos = xPos - 4;
 		else if (d == 315 || d == -45)
 		{
-			yPos = yPos - 2;
-			xPos = xPos - 2;
+			yPos = yPos - 4;
+			xPos = xPos - 4;
 		}
 		isBuckshot = bu;
 		isPierce = p;
@@ -75,32 +75,32 @@ public class Bullet
 	{
 		counter+= delta;
 		if (direction == 90)
-			xPos++;
+			xPos += 3;
 		else if (direction == 45)
 		{
-			yPos--;
-			xPos++;
+			yPos -= 3;
+			xPos += 3;
 		}
 		else if (direction == 0)
-			yPos--;
+			yPos -= 3;
 		else if (direction == 315)
 		{
-			yPos--;
-			xPos--;
+			yPos -= 3;
+			xPos -= 3;
 		}
 		else if (direction == 270)
-			xPos--;
+			xPos -= 3;
 		else if (direction == 225)
 		{
-			yPos++;
-			xPos--;
+			yPos += 3;
+			xPos -= 3;
 		}
 		else if (direction == 180)
-			yPos++;
+			yPos += 3;
 		else if (direction == 135)
 		{
-			yPos++;
-			xPos++;
+			yPos += 3;
+			xPos += 3;
 		}
 		if(isBuckshot && counter >= 3) {
 			this.remove();
