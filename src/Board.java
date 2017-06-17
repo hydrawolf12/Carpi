@@ -22,17 +22,17 @@ public class Board extends JPanel implements Runnable {
     private long lastFpsTime;
     private int fps;
     private Thread string;
+    private double zombieT;
     private Player player;
     private double scoreT;
-    private double zombieT;
     private Spawner spawner;
+    private double shootT;
     private ArrayList<Zombie> currentZombs;
     private ArrayList<Bullet> currentBullets;
     private boolean[] currentInputs;
     public BufferedImage cpistol, cshotgun, csniper, z, bz, b, background;
     private Image dbImage;
     private Graphics dbg;
-
     public Board() {
         addKeyListener(new AAdapter());
         score = 0;
@@ -42,7 +42,7 @@ public class Board extends JPanel implements Runnable {
         yEnd = 900;
         lastFpsTime = 0;
         scoreT = 0;
-        zombieT = 0;
+        shootT = 0;
         player = new Player(this);
         spawner = new Spawner(this);
         currentZombs = new ArrayList<Zombie>();
@@ -159,64 +159,67 @@ public void  paintComponent(Graphics g)
         g.dispose();
     }
 
-     public void run() {
+    public void run() {
         long lastLoopTime = System.nanoTime();
         final int TARGET_FPS = 60;
-        final long OPTIMAL_TIME = 1000000000 / TARGET_FPS;
-
+        final long NANOSECONDS_FRAME = 1000000000 / TARGET_FPS;
         while (inGame) {
             long now = System.nanoTime();
             long updateLength = now - lastLoopTime;
             lastLoopTime = now;
-            double delta = updateLength / ((double) OPTIMAL_TIME);
+            double delta = updateLength / 1000000000D;
             lastFpsTime += updateLength;
             fps++;
-            if (lastFpsTime >= 1000000000) {
-                System.out.println("(FPS: " + fps + ")");
+            if (lastFpsTime >= 1000000000)
+            {
+                System.out.println("(FPS: "+fps+")");
                 lastFpsTime = 0;
                 fps = 0;
             }
             updateGame(delta);
             repaint();
-            try {
-                Thread.sleep((lastLoopTime - System.nanoTime() + OPTIMAL_TIME) / 1000000000);
-            } catch (Exception e) {
+
+            long elapsed = System.nanoTime() - now;
+            long sleepTime = (NANOSECONDS_FRAME - elapsed) / 1000000L;
+            if(sleepTime > 0) {
+                try {
+                    Thread.sleep(sleepTime);
+                } catch (Exception e) {
+                }
             }
         }
     }
 
     public void updateGame(double delta) {
         scoreT += delta;
-        zombieT += delta;
-        if (scoreT >= 60) {
+        shootT += delta;
+        if (scoreT >= 1) {
             score++;
+            System.out.println(score);
             scoreT = 0;
         }
-        if (zombieT >= Spawner.returnRate()) {
-            if (killCount >= 100) {
-                currentZombs.add(spawner.spawnBoss());
-                killCount = 0;
-            } else {
-                currentZombs.add(spawner.spawnZombie());
-            }
-            zombieT = 0;
+        if(shootT >= player.getFireRate()){
+            player.setCanShoot(true);
+            shootT = 0;
         }
-        move();
-        player.shoot();
-        detect();
+        spawner.spawn(delta);
+        player.toggleInvin(delta);
+        move(delta);
+        player.shoot(delta);
+        detect(delta);
+        player.setWeapon(delta);
     }
 
-    public void move() {
+    public void move(double delta) {
         int i = 0, temp;
         player.move();
-        player.setWeapon();
         for (Zombie z : currentZombs) {
             z.move();
         }
         while(i < currentBullets.size())
         {
             temp = currentBullets.size();
-            currentBullets.get(i).move();
+            currentBullets.get(i).move(delta);
             if(temp == currentBullets.size())
             {
                 i++;
@@ -224,10 +227,10 @@ public void  paintComponent(Graphics g)
         }
     }
 
-    public void detect() {
+    public void detect(double delta) {
         int i = 0, temp;
         for (Zombie z : currentZombs) {
-            z.collisionDetect();
+            z.collisionDetect(delta);
         }
         while(i < currentBullets.size())
         {
@@ -239,17 +242,16 @@ public void  paintComponent(Graphics g)
             }
         }
     }
-
-    public Player getPlayer() {
-        return player;
+    public ArrayList<Zombie> getCurrentZombs() {
+        return currentZombs;
     }
 
-    public ArrayList<Bullet> getBullets() {
+    public ArrayList<Bullet> getCurrentBullets() {
         return currentBullets;
     }
 
-    public ArrayList<Zombie> getZombies() {
-        return currentZombs;
+    public Player getPlayer() {
+        return player;
     }
 
     public int getxEnd() {
@@ -265,15 +267,7 @@ public void  paintComponent(Graphics g)
     }
 
     public static void setKillCount(int k) {
-        killCount += k;
-    }
-
-    public void addZomb(Zombie z) {
-        currentZombs.add(z);
-    }
-
-    public void removeZomb(Zombie zomb) {
-        currentZombs.remove(zomb);
+        killCount = k;
     }
 
     public boolean getInputs(int x) {
