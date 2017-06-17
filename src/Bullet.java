@@ -14,10 +14,12 @@ public class Bullet
   private int direction;
   private Rectangle hitbox;
   private Board b;
+  private int counter;
 
   public Bullet(int x, int y, int d, boolean p, boolean bu, int dam, Board bd)
   {
 	  b = bd;
+	  counter = 0;
 	  yPos = y;
 	  xPos = x;
           if (d == 0)
@@ -53,26 +55,8 @@ public class Bullet
       damage = dam;
       hitbox = new Rectangle(xPos - 1, yPos - 1, 2, 2);
       direction = d;
-      if(isBuckshot == true)
-      {
-    	  startTimer();
-      }
    }
-   
-  public void startTimer()
-  {
-      ActionListener action = new ActionListener()
-		{   
-		    @Override
-		    public void actionPerformed(ActionEvent event)
-		    {
-		    	remove();
-		    }
-		};
-      Timer t = new Timer(3000, action);
-      t.setRepeats(false);
-      t.start();
-  }
+
    
   public void move()
   {
@@ -112,6 +96,14 @@ public class Bullet
 	  else
 	  {
 	        hitbox = new Rectangle(xPos - 1, yPos - 1, 2, 2);
+	  }
+	  if(isBuckshot == true)
+	  {
+	        counter++;
+	  }
+	  if(counter > 150)
+	  {
+	        this.remove();
 	  }
   }
   
