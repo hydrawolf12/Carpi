@@ -80,9 +80,9 @@ public class Bullet
 			yPos -= 2;
 			xPos += 2;
 		}
-		else if (direction == 0)
+		else if (direction == 0 || direction == 360)
 			yPos -= 4;
-		else if (direction == 315)
+		else if (direction == 315 || direction == -45)
 		{
 			yPos -= 2;
 			xPos -= 2;
