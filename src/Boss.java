@@ -4,41 +4,14 @@ import javax.swing.Timer;
 public class Boss extends Zombie
 {
 	private static int bossKillCount = 0;
-	// private boolean isBossDefeated;
-	// private Board board;
-	public Boss(int health, int speed, int x, int y, int width, int height, Board playBoard) //initiates boss based on speed position and health
+	
+	 //initiates boss based on speed, position, hitbox size and health
+	public Boss(int health, int speed, int x, int y, int width, int height, Board playBoard)
 	{
 		super(health, speed, x, y, width, height, playBoard);
-		// isBossDefeated = false;'
 	}
 	
-	
-	/*public static boolean returnIsBossDefeated()
-	{
-		return isBossDefeated;
-	}
-	*/
-	/*public void remove(int pos) // removes boss from field, upgrades player, returns spawn rate to normal
-	{
-		Player mccree = board.getPlayer();
-		// currentZombs.remove(pos);
-		//isBossDefeated = true;
-		Spawner.incrementHealth(2);
-		Spawner.incrementSpeed(1);
-		Spawner.incrementRate(1);
-		bossKillCount++;
-		spawn.setDelay(Spawner.returnRate());
-		if (bossKillCount % 3 == 0)
-			mccree.updateHP(1); // int a subject to change
-		else if (bossKillCount % 3 == 2)//
-		{
-			mccree.updateDamage(2);
-		}
-		else if (bossKillCount % 3 == 1)
-		{
-			mccree.updateFireRate(2);
-		}
-	} */
+	//decrements Boss health by int a and returns true if the Bossis killed. Increments zombies' health, speed, and spawn rate and player's health, damage, and firerate in alternating order every 3 boss kills.
 	public boolean takeDamage(int a)
 	{
 		this.setHealth(-a);
@@ -65,8 +38,10 @@ public class Boss extends Zombie
 		} 
 		return false;
 	}
-	public int returnRadius() {
-		// TODO Auto-generated method stub
+	
+	//returns the radius of the Boss zombie object
+	public int returnRadius() 
+	{
 		return 35;
 	}
 }
