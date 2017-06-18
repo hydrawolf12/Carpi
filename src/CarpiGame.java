@@ -1,7 +1,7 @@
-import java.awt.EventQueue;
+//import java.awt.EventQueue;
 import javax.swing.JFrame;
 public class CarpiGame extends JFrame 
-{	
+{
 	public static void main(String[] args)
 	{
 		JFrame f = new JFrame("Cowboy Carpi");
