@@ -4,12 +4,15 @@ public class Zombie extends Entity
 
 	// private Player player;
 	private Board board;
+	private int widtha, heighta;
 	// private static ArrayList<Zombie> currentZombs = Board.returnCurrentZombs();
 	//private static int killCount = Board.returnKillCount();
 
 	public Zombie(int health, int speed, int x, int y, int width, int height, Board playBoard) //public Zombie(int hp, int sp, int x, int y, Player mccree)// creates zombie speed and position
 	{
 		super(health, speed, x, y, x - width/2, y - height/2, width, height);
+		widtha = width;
+		heighta = height;
 		board = playBoard;
 		// currentZombs = zombieList;
 	}
@@ -56,7 +59,7 @@ public class Zombie extends Entity
 			this.setYPos(-1);
 			this.setXPos(-1);
 		}
-		this.setHitbox(new Rectangle(this.getXPos() - 25, this.getYPos() - 25, 50, 50));
+		this.setHitbox(new Rectangle(this.getXPos() - widtha / 2, this.getYPos() - heighta / 2, widtha, heighta));
 		this.calcAng();
 	}
 	public void calcAng()// called when player moves
