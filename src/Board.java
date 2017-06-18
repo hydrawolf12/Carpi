@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 public class Board extends JPanel implements Runnable {
     private int score;
     private boolean inGame;
-    private static int killCount;
+    private int killCount;
     private int xEnd;
     private int yEnd;
     private long lastFpsTime;
@@ -275,6 +275,7 @@ public void  paintComponent(Graphics g)
     }
 
     public void endGame() {
+        System.out.println("Game over");
         System.exit(0);
     }
 
