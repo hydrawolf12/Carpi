@@ -8,7 +8,9 @@ public class Player extends Entity
 	private Gun currentWep;
 	private boolean canShoot;
 	private boolean isInvin;
-	private int damage, fireRate;
+	private int damage; 
+	private double fireRate;
+	private double baseRate;
 	private Board board;
 	private double shootT;
 	private double invinT;
@@ -18,6 +20,7 @@ public class Player extends Entity
 		super(3, 2, playBoard.getxEnd() / 2, playBoard.getyEnd() / 2,  playBoard.getxEnd() / 2 - 25, playBoard.getyEnd() / 2 - 25, 50, 50);
 		board = playBoard;
 		damage = 1;
+		baseRate = 1;
 		fireRate = 1;
 		isInvin = false;
 		canShoot = false;
@@ -36,7 +39,7 @@ public class Player extends Entity
 	{
 		return damage;
 	}
-	public int getFireRate()
+	public double getFireRate()
 	{
 		return fireRate;
 	}
@@ -49,8 +52,8 @@ public class Player extends Entity
 		d = board.getInputs(3);
 		boolean canUP = this.getYPos() > 1;
 		boolean canDOWN = this.getYPos() < board.getyEnd() - 1;
-		boolean canLEFT = this.getXPos() > 1;
-		boolean canRIGHT =  this.getXPos() < board.getxEnd() - 1;
+		boolean canLEFT = this.getXPos() > 26;
+		boolean canRIGHT =  this.getXPos() < board.getxEnd() - 26;
 		if (w && a && canUP && canLEFT)
 		{
 			this.setYPos(-3);
@@ -95,7 +98,7 @@ public class Player extends Entity
 			this.setXPos(6);
 			// direction = 3;
 		}
-		this.setHitbox(new Rectangle(this.getXPos() - 25, this.getYPos() - 25, 50 , 50));
+		this.setHitbox(new Rectangle(this.getXPos() - 25, this.getYPos() - 25, 50, 50));
 		for (Zombie z: board.getCurrentZombs())
 		{
 			z.calcAng();
@@ -154,28 +157,28 @@ public class Player extends Entity
 			if (one)
 			{
 				currentWep = new Pistol();
-				fireRate = 1;
+				fireRate = baseRate;
 			}
 			else if(two)
 			{
 				currentWep = new Shotgun();
-				fireRate = 2;
+				fireRate = baseRate * 2;
 			}
 			else if(three)
 			{
 				currentWep = new Sniper();
-				fireRate = 3;
+				fireRate = baseRate * 3;
 			}	
 		}
 	}
 	
 	public void updateDamage(int a) // updates damage and firerate by a
 	{
-		damage+= a;
+		damage += a;
 	}
-	public void updateFireRate(int a)
+	public void updateFireRate(double a)
 	{
-		fireRate += a;
+		baseRate *= a;
 	}
 	
 	public void toggleInvin(double delta)
