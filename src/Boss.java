@@ -11,8 +11,8 @@ public class Boss extends Zombie
 		super(health, speed, x, y, width, height, playBoard);
 		// isBossDefeated = false;'
 	}
-	
-	
+
+
 	/*public static boolean returnIsBossDefeated()
 	{
 		return isBossDefeated;
@@ -62,7 +62,7 @@ public class Boss extends Zombie
 				Spawner.incrementRate(1);
 			}
 			return true;
-		} 
+		}
 		return false;
 	}
 	public int returnRadius() {
