@@ -21,7 +21,7 @@ public class Bullet
 		b = bd;
 		yPos = y;
 		xPos = x;
-		if (d == 0)
+		if (d == 0 || d == 360)
 			yPos = yPos - 4;
 		else if (d == 45)
 		{
@@ -52,7 +52,7 @@ public class Bullet
 		isBuckshot = bu;
 		isPierce = p;
 		damage = dam;
-		hitbox = new Rectangle(xPos - 1, yPos - 1, 2, 2);
+		hitbox = new Rectangle(xPos - 1, yPos - 1, 3, 3);
 		direction = d;
 	}
 
@@ -73,34 +73,33 @@ public class Bullet
 
 	public void move(double delta)
 	{
-		counter+= delta;
-		if (direction == 90)
-			xPos += 3;
+	    if (direction == 90)
+			xPos += 4;
 		else if (direction == 45)
 		{
-			yPos -= 3;
-			xPos += 3;
+			yPos -= 2;
+			xPos += 2;
 		}
 		else if (direction == 0)
-			yPos -= 3;
+			yPos -= 4;
 		else if (direction == 315)
 		{
-			yPos -= 3;
-			xPos -= 3;
+			yPos -= 2;
+			xPos -= 2;
 		}
 		else if (direction == 270)
-			xPos -= 3;
+			xPos -= 4;
 		else if (direction == 225)
 		{
-			yPos += 3;
-			xPos -= 3;
+			yPos += 2;
+			xPos -= 2;
 		}
 		else if (direction == 180)
-			yPos += 3;
+			yPos += 4;
 		else if (direction == 135)
 		{
-			yPos += 3;
-			xPos += 3;
+			yPos += 2;
+			xPos += 2;
 		}
 		if(isBuckshot && counter >= 3) {
 			this.remove();
@@ -112,7 +111,15 @@ public class Bullet
 		}
 		else
 		{
-			hitbox = new Rectangle(xPos - 1, yPos - 1, 2, 2);
+			hitbox = new Rectangle(xPos - 1, yPos - 1, 3, 3);
+		}
+		if(isBuckshot == true)
+		{
+		    counter += delta;
+		}
+		if(counter > 15000)
+		{
+		    this.remove();
 		}
 	}
 
@@ -123,7 +130,9 @@ public class Bullet
 		{
 			if(currentZombs.get(i).getHitbox().intersects(this.hitbox))
 			{
-				if(currentZombs.get(i).takeDamage(this.damage, i) == true) {
+				if(currentZombs.get(i).takeDamage(this.damage, i) == true) 
+				{
+				    b.getCurrentZombs().remove(i);
 					if(currentZombs.get(i) instanceof Boss)
 					{
 						Spawner.incrementRate(1);
