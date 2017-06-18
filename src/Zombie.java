@@ -63,10 +63,10 @@ public class Zombie extends Entity
 		int xDiff = this.getXPos() - player.getXPos();
 		int yDiff = this.getYPos() - player.getYPos();
 		
-	    /*if(angle < 0)
+	    if(angle < 0)
 	    {
 	        angle += 360;
-	    }*/
+	    }
 	    
 	    if (xDiff == 0 && yDiff < 0) // above
 	    {
