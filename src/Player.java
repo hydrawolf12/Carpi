@@ -15,10 +15,12 @@ public class Player extends Entity
 	private double shootT;
 	private double invinT;
 
-	//spawns player object in center of board and initializes health, speed, damage, fire rate, invincibility, ability to shoot, shoot timer, and constructs a pistol object
+	//spawns player object in center of board and initializes health, speed, damage, fire rate, invincibility, ability to shoot,
+	//shoot timer, and constructs a pistol object
 	public Player(Board playBoard)
 	{
-		super(3, 3, playBoard.getxEnd() / 2, playBoard.getyEnd() / 2,  playBoard.getxEnd() / 2 - 23, playBoard.getyEnd() / 2 - 23, 46, 46);
+		super(3, 3, playBoard.getxEnd() / 2, playBoard.getyEnd() / 2, 
+		playBoard.getxEnd() / 2 - 23, playBoard.getyEnd() / 2 - 23, 46, 46);
 		board = playBoard;
 		damage = 1;
 		baseRate = 1;
