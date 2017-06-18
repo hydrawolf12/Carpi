@@ -132,11 +132,11 @@ public class Bullet
 			{
 				if(currentZombs.get(i).takeDamage(this.damage, i) == true) 
 				{
-				    b.getCurrentZombs().remove(i);
 					if(currentZombs.get(i) instanceof Boss)
 					{
 						Spawner.incrementRate(1);
 					}
+					b.getCurrentZombs().remove(i);
 					i--;
 				}
 
