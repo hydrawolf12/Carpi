@@ -1,20 +1,16 @@
 import java.awt.Rectangle;
 public class Zombie extends Entity
 {
-
-	// private Player player;
 	private Board board;
 	private int widtha, heighta;
-	// private static ArrayList<Zombie> currentZombs = Board.returnCurrentZombs();
-	//private static int killCount = Board.returnKillCount();
 
-	public Zombie(int health, int speed, int x, int y, int width, int height, Board playBoard) //public Zombie(int hp, int sp, int x, int y, Player mccree)// creates zombie speed and position
+	//initializes zombie object based on health, speed, position, and hitbox size
+	public Zombie(int health, int speed, int x, int y, int width, int height, Board playBoard)
 	{
 		super(health, speed, x, y, x - width/2, y - height/2, width, height);
 		widtha = width;
 		heighta = height;
 		board = playBoard;
-		// currentZombs = zombieList;
 	}
 	public Board returnBoard()
 	{
@@ -24,6 +20,9 @@ public class Zombie extends Entity
 	{
 		return 25;
 	}
+	
+	//moves zombie object based on the angle calculated in calcAng() if it is not at the border of the map
+	//redraws hitbox at new positions and calls calcAng() again
 	public void move()// moves every tick
 	{
 		boolean canUP = this.getYPos() > 25;
@@ -63,52 +62,44 @@ public class Zombie extends Entity
 		this.setHitbox(new Rectangle(this.getXPos() - widtha / 2, this.getYPos() - heighta / 2, widtha, heighta));
 		this.calcAng();
 	}
-	public void calcAng()// called when player moves
+	
+	//called whenever a Zombie or Player object moves
+	//uses the difference in x and y pos of zombie/player to calculate the degree angle between the two objects
+	//and sets direction depending on angle range
+	public void calcAng()
 	{
 		Player player = board.getPlayer();
 		double angle = (double)Math.toDegrees(Math.atan2(player.getYPos() - this.getYPos(), player.getXPos() - this.getXPos()));
 		int xDiff = this.getXPos() - player.getXPos();
 		int yDiff = this.getYPos() - player.getYPos();
 		
-	    if(angle < 0)
-	    {
-	        angle += 360;
-	    }
+	 	if(angle < 0)
+	    	{
+	       		angle += 360;
+	    	}
 	    
-	    if (xDiff == 0 && yDiff < 0) // above
-	    {
-	    	this.setDirection(180);
-	    }
-	    else if(xDiff == 0 && yDiff > 0) // below
-	    {
-	    	this.setDirection(0);
-	    }
-	    else if(yDiff == 0 && xDiff < 0) // left
-	    {
-	    	this.setDirection(90);
-	    }
-	    else if(yDiff == 0 && xDiff > 0) // right
-	    {
-	    	this.setDirection(270);
-	    }
-	    else
-	    {
-	    	/*if (xDiff < 0 && yDiff < 0) // top left
+	   	if (xDiff == 0 && yDiff < 0) // above
 	    	{
-	    		angle += 90;
+	    		this.setDirection(180);
 	    	}
-	    	if(xDiff > 0 && yDiff < 0) // top right
+	    	else if(xDiff == 0 && yDiff > 0) // below
 	    	{
-	    		angle += 90;
+	    		this.setDirection(0);
 	    	}
-	    	if(xDiff > 0 && yDiff > 0) //bottom right
+	    	else if(yDiff == 0 && xDiff < 0) // left
 	    	{
-	    		angle += 90;
-	    	}*/
+	    		this.setDirection(90);
+	    	}
+	    	else if(yDiff == 0 && xDiff > 0) // right
+	    	{
+	    		this.setDirection(270);
+	    	}
+	    	else
+	   	{
+	    	
 	    	angle += 90;
 	    	angle = angle % 360;
-	    
-	        
+	   	
 	    	if (angle > 22.5 && angle <= 67.5)
 	    	{
 	    		this.setDirection(45);
@@ -143,6 +134,9 @@ public class Zombie extends Entity
 	    	}
 	   }
 	}
+	
+	//checks if any zombies in the ArrayList are colliding with a player hitbox
+	//toggles player's invincibility and calls zombie attack() method
 	public void collisionDetect(double delta)
 	{
 		for (Zombie z: board.getCurrentZombs())
@@ -157,12 +151,17 @@ public class Zombie extends Entity
 			}
 		}
 	}
-	public void attack()//attacks if hitboxes overlap w/ player
+	
+	//decrements player health by 1 and checks if player has died
+	public void attack()
 	{
 		board.getPlayer().setHealth(-1);
 		board.getPlayer().checkHP();
 		System.out.println("The player health is: " + board.getPlayer().getHealth());
 	}
+	
+	//decrements zombie health by 1
+	//returns true if the zombie has died so it can be removed from the ArrayList
 	public boolean takeDamage(int a)
 	{
 		this.setHealth(-1);
@@ -172,22 +171,11 @@ public class Zombie extends Entity
 		}
 		return false;
 	}
-	//public boolean checkHP()
-	//{
-	//	if (health <= 0)
-	//		return true;
-	//	else
-	//		return false;
-	//}
-	/*public void remove(int pos)// removes zombie from ArrayList when collides w/ bullet
+	
+
+	
+	public int returnRadius()
 	{
-		currentZombs.remove(pos);
-		Board.setKillCount(1);
-	} */
-
-
-	public int returnRadius() {
-		// TODO Auto-generated method stub
 		return 25;
 	}
 
