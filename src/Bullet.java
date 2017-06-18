@@ -101,10 +101,6 @@ public class Bullet
 			yPos += 2;
 			xPos += 2;
 		}
-		if(isBuckshot && counter >= 3) {
-			this.remove();
-			counter = 0;
-		}
 		if(xPos >= b.getxEnd() || yPos >= b.getyEnd() || xPos <= 0 || yPos <= 0)
 		{
 			this.remove();
@@ -115,11 +111,7 @@ public class Bullet
 		}
 		if(isBuckshot == true)
 		{
-		    counter += delta;
-		}
-		if(counter > 15000)
-		{
-		    this.remove();
+		    counter++;
 		}
 	}
 
@@ -132,12 +124,14 @@ public class Bullet
 			{
 				if(currentZombs.get(i).takeDamage(this.damage, i) == true) 
 				{
+				    b.getCurrentZombs().remove(i);
+				    b.setKillCount(b.returnKillCount() + 1);
 					if(currentZombs.get(i) instanceof Boss)
 					{
 						Spawner.incrementRate(1);
 					}
-					b.getCurrentZombs().remove(i);
 					i--;
+					b.getCurrentZombs().remove(i);
 				}
 
 				if(isPierce == false)
