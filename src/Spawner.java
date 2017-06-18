@@ -9,7 +9,7 @@ public class Spawner
 	
 	public Spawner(Board a)
 	{
-		currentSpeed = 1;
+		currentSpeed = 2;
 		currentHealth = 1;
 		rate = 2;
 		// mccree = player;
