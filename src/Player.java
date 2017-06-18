@@ -190,7 +190,7 @@ public class Player extends Entity
 	public void toggleInvin(double delta)
 	{
 	    invinT +=delta;
-	    if(invinT >= 2 && isInvin){
+	    if(invinT >= 1 && isInvin){
 	        isInvin = false;
 	        invinT = 0;
         }
