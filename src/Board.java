@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyAdapter;
@@ -9,14 +10,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.awt.Image;
-
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public class Board extends JPanel implements Runnable {
     private int score;
     private boolean inGame;
-    private int killCount;
+    private static int killCount;
     private int xEnd;
     private int yEnd;
     private long lastFpsTime;
@@ -279,7 +279,6 @@ public void  paintComponent(Graphics g)
     }
 
     public void endGame() {
-        System.out.println("Game over");
         System.exit(0);
     }
 
