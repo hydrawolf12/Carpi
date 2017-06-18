@@ -11,7 +11,8 @@ public class Boss extends Zombie
 		super(health, speed, x, y, width, height, playBoard);
 	}
 	
-	//decrements Boss health by int a and returns true if the Bossis killed. Increments zombies' health, speed, and spawn rate and player's health, damage, and firerate in alternating order every 3 boss kills.
+	//decrements Boss health by int a and returns true if the Bossis killed. Increments zombies' health, speed,
+	//and spawn rate and player's health, damage, and firerate in alternating order every 3 boss kills.
 	public boolean takeDamage(int a)
 	{
 		this.setHealth(-a);
