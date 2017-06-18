@@ -54,8 +54,8 @@ public class Bullet
 		damage = dam;
 		hitbox = new Rectangle(xPos - 1, yPos - 1, 3, 3);
 		direction = d;
-		if(isBuckshot == true)
-		   startTimer();
+		//if(isBuckshot == true)
+		  // startTimer();
 	}
 
 	public void startTimer()
@@ -73,48 +73,50 @@ public class Bullet
 		t.start();
 	}
 
-	public void move(double delta)
-	{
-	    if (direction == 90)
-			xPos += 4;
-		else if (direction == 45)
-		{
-			yPos -= 2;
-			xPos += 2;
-		}
-		else if (direction == 0 || direction == 360)
-			yPos -= 4;
-		else if (direction == 315 || direction == -45)
-		{
-			yPos -= 2;
-			xPos -= 2;
-		}
-		else if (direction == 270)
-			xPos -= 4;
-		else if (direction == 225)
-		{
-			yPos += 2;
-			xPos -= 2;
-		}
-		else if (direction == 180)
-			yPos += 4;
-		else if (direction == 135)
-		{
-			yPos += 2;
-			xPos += 2;
-		}
-		if(xPos >= b.getxEnd() || yPos >= b.getyEnd() || xPos <= 0 || yPos <= 0)
-		{
-			this.remove();
-		}
-		else
-		{
-			hitbox = new Rectangle(xPos - 1, yPos - 1, 3, 3);
-		}
-		if(isBuckshot == true)
-		{
-		    counter++;
-		}
+public void move(double delta)
+    {
+        counter += delta;
+        if (direction == 90)
+            xPos += 4;
+        else if (direction == 45)
+        {
+            yPos -= 2;
+            xPos += 2;
+        }
+        else if (direction == 0 || direction == 360)
+            yPos -= 4;
+        else if (direction == 315 || direction == -45)
+        {
+            yPos -= 2;
+            xPos -= 2;
+        }
+        else if (direction == 270)
+            xPos -= 4;
+        else if (direction == 225)
+        {
+            yPos += 2;
+            xPos -= 2;
+        }
+        else if (direction == 180)
+            yPos += 4;
+        else if (direction == 135)
+        {
+            yPos += 2;
+            xPos += 2;
+        }
+        if(xPos >= b.getxEnd() || yPos >= b.getyEnd() || xPos <= 0 || yPos <= 0)
+        {
+            this.remove();
+        }
+        else
+        {
+            hitbox = new Rectangle(xPos - 1, yPos - 1, 3, 3);
+        }
+        if(isBuckshot && counter >= 1.2)
+        {
+            this.remove();
+        }
+    }
 	}
 
 	public void collisionDetect()
