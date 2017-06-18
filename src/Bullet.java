@@ -54,55 +54,38 @@ public class Bullet
 		damage = dam;
 		hitbox = new Rectangle(xPos - 1, yPos - 1, 3, 3);
 		direction = d;
-		//if(isBuckshot == true)
-		  // startTimer();
 	}
 
-	public void startTimer()
-	{
-		ActionListener action = new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent event)
-			{
-				remove();
-			}
-		};
-		Timer t = new Timer(1200, action);
-		t.setRepeats(false);
-		t.start();
-	}
-
-public void move(double delta)
+    public void move(double delta)
     {
         counter += delta;
         if (direction == 90)
-            xPos += 4;
+            xPos += 6;
         else if (direction == 45)
         {
-            yPos -= 2;
-            xPos += 2;
+            yPos -= 3;
+            xPos += 3;
         }
         else if (direction == 0 || direction == 360)
-            yPos -= 4;
+            yPos -= 6;
         else if (direction == 315 || direction == -45)
         {
-            yPos -= 2;
-            xPos -= 2;
+            yPos -= 3;
+            xPos -= 3;
         }
         else if (direction == 270)
-            xPos -= 4;
+            xPos -= 6;
         else if (direction == 225)
         {
-            yPos += 2;
-            xPos -= 2;
+            yPos += 3;
+            xPos -= 3;
         }
         else if (direction == 180)
-            yPos += 4;
+            yPos += 6;
         else if (direction == 135)
         {
-            yPos += 2;
-            xPos += 2;
+            yPos += 3;
+            xPos += 3;
         }
         if(xPos >= b.getxEnd() || yPos >= b.getyEnd() || xPos <= 0 || yPos <= 0)
         {
@@ -112,7 +95,7 @@ public void move(double delta)
         {
             hitbox = new Rectangle(xPos - 1, yPos - 1, 3, 3);
         }
-        if(isBuckshot && counter >= 1.2)
+        if(isBuckshot && counter >= 0.7)
         {
             this.remove();
         }
