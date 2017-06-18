@@ -262,11 +262,11 @@ public void  paintComponent(Graphics g)
         return yEnd;
     }
 
-    public static int returnKillCount() {
+    public int returnKillCount() {
         return killCount;
     }
 
-    public static void setKillCount(int k) {
+    public void setKillCount(int k) {
         killCount = k;
     }
 
