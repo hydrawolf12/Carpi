@@ -36,7 +36,7 @@ public class Spawner
 	}
 	public Boss spawnBoss()
 	{
-		Boss baby = new Boss(currentHealth * 5, currentSpeed * 3, board.getxEnd() / 2, 30, board);
+		Boss baby = new Boss(currentHealth * 5, currentSpeed * 3, board.getxEnd() / 2, 30, 70, 70, board);
 		baby.calcAng();
 		//board.addZomb(baby);
 		return baby;
@@ -89,7 +89,7 @@ public class Spawner
 			x = 1;
 			y = frameHeight / 8;
 		}
-		Zombie zimbabwe = new Zombie(currentHealth, currentSpeed, x, y, board);
+		Zombie zimbabwe = new Zombie(currentHealth, currentSpeed, x, y, 50, 50, board);
 		zimbabwe.calcAng();
 		return zimbabwe;
 		
@@ -99,7 +99,7 @@ public class Spawner
 		if (zombieT >= rate) {
 			System.out.println("spawn has been called");
 			System.out.println("The killCount is " + board.returnKillCount());
-			if (board.returnKillCount() >= 100) {
+			if (board.returnKillCount() >= 1) {
 				board.getCurrentZombs().add(spawnBoss());
 				board.setKillCount(0);
 				System.out.println("A zombie boss has spawned");
