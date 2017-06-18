@@ -54,9 +54,11 @@ public class Bullet
 		damage = dam;
 		hitbox = new Rectangle(xPos - 1, yPos - 1, 3, 3);
 		direction = d;
+		if(isBuckshot == true)
+		   startTimer();
 	}
 
-	/*public void startTimer()
+	public void startTimer()
 	{
 		ActionListener action = new ActionListener()
 		{
@@ -66,10 +68,10 @@ public class Bullet
 				remove();
 			}
 		};
-		Timer t = new Timer(3000, action);
+		Timer t = new Timer(1200, action);
 		t.setRepeats(false);
 		t.start();
-	}*/
+	}
 
 	public void move(double delta)
 	{
