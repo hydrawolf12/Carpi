@@ -5,7 +5,7 @@ public class Boss extends Zombie
 {
 	private static int bossKillCount = 0;
 	
-	 //initiates boss based on speed, position, hitbox size and health
+	 //initiazes boss based on speed, position, hitbox size and health
 	public Boss(int health, int speed, int x, int y, int width, int height, Board playBoard)
 	{
 		super(health, speed, x, y, width, height, playBoard);
