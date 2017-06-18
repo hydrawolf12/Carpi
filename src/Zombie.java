@@ -7,13 +7,16 @@ public class Zombie extends Entity
 	// private static ArrayList<Zombie> currentZombs = Board.returnCurrentZombs();
 	//private static int killCount = Board.returnKillCount();
 
-	public Zombie(int health, int speed, int x, int y, Board playBoard) //public Zombie(int hp, int sp, int x, int y, Player mccree)// creates zombie speed and position
+	public Zombie(int health, int speed, int x, int y, int width, int height, Board playBoard) //public Zombie(int hp, int sp, int x, int y, Player mccree)// creates zombie speed and position
 	{
-		super(health, speed, x, y, x - 25, y - 25, 50, 50);
+		super(health, speed, x, y, x - width/2, y - height/2, width, height);
 		board = playBoard;
 		// currentZombs = zombieList;
 	}
-
+	public Board returnBoard()
+	{
+		return board;
+	}
 	public int returnWidth()
 	{
 		return 25;
@@ -155,7 +158,7 @@ public class Zombie extends Entity
 		board.getPlayer().setHealth(-1);
 		board.getPlayer().checkHP();
 	}
-	public boolean takeDamage(int a, int pos)
+	public boolean takeDamage(int a)
 	{
 		this.setHealth(-1);
 		if (this.getHealth() <= 0)
@@ -180,7 +183,7 @@ public class Zombie extends Entity
 
 	public int returnRadius() {
 		// TODO Auto-generated method stub
-		return 1;
+		return 25;
 	}
 
 }
