@@ -53,46 +53,46 @@ public class Player extends Entity
 		boolean canRIGHT =  this.getXPos() < board.getxEnd() - 1;
 		if (w && a && canUP && canLEFT)
 		{
-			this.setYPos(-1);
-			this.setXPos(-1);
+			this.setYPos(-3);
+			this.setXPos(-3);
 			// direction = 135;
 		}
 		else if(a && s && canLEFT && canDOWN)
 		{
-			this.setYPos(1);
-			this.setXPos(-1);
+			this.setYPos(3);
+			this.setXPos(-3);
 			// direction = 225;
 		}
 		else if(s && d && canDOWN && canRIGHT)
 		{
-			this.setYPos(1);
-			this.setXPos(1);
+			this.setYPos(3);
+			this.setXPos(3);
 			// direction = 315;
 		}
 		else if(w && d && canUP && canRIGHT)
 		{
-			this.setYPos(-1);
-			this.setXPos(1);
+			this.setYPos(-3);
+			this.setXPos(3);
 			// direction = 2;
 		}
 		else if(w && canUP)
 		{
-			this.setYPos(-1);
+			this.setYPos(-6);
 			// direction = 1;
 		}
 		else if(a && canLEFT)
 		{
-			this.setXPos(-1);
+			this.setXPos(-6);
 			// direction = 180;
 		}
 		else if(s && canDOWN)
 		{
-			this.setYPos(1);
+			this.setYPos(6);
 			//  direction = 270;
 		}
 		else if(d && canRIGHT)
 		{
-			this.setXPos(1);
+			this.setXPos(6);
 			// direction = 3;
 		}
 		this.setHitbox(new Rectangle(this.getXPos() - 25, this.getYPos() - 25, 50 , 50));
