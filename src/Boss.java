@@ -45,19 +45,21 @@ public class Boss extends Zombie
 		if (this.getHealth() <= 0)
 		{
 			Player mccree = this.returnBoard().getPlayer();
-			Spawner.incrementHealth(2);
-			Spawner.incrementSpeed(1);
-			Spawner.incrementRate(1);
 			bossKillCount++;
 			if (bossKillCount % 3 == 0)
+			{
+				Spawner.incrementHealth(2);
 				mccree.setHealth(1); // int a subject to change
+			}
 			else if (bossKillCount % 3 == 2)
 			{
 				mccree.updateDamage(2);
+				Spawner.incrementSpeed(1);
 			}
 			else if (bossKillCount % 3 == 1)
 			{
-				mccree.updateFireRate(2);
+				mccree.updateFireRate(0.9);
+				Spawner.incrementRate(1);
 			}
 			return true;
 		} 
@@ -65,6 +67,6 @@ public class Boss extends Zombie
 	}
 	public int returnRadius() {
 		// TODO Auto-generated method stub
-		return 1;
+		return 35;
 	}
 }
