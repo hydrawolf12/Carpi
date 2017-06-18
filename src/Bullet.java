@@ -56,36 +56,51 @@ public class Bullet
         direction = d;
     }
 
+    public void startTimer()
+    {
+        ActionListener action = new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent event)
+            {
+                remove();
+            }
+        };
+        Timer t = new Timer(1200, action);
+        t.setRepeats(false);
+        t.start();
+    }
+
     public void move(double delta)
     {
         counter += delta;
         if (direction == 90)
-            xPos += 6;
+            xPos += 10;
         else if (direction == 45)
         {
-            yPos -= 3;
-            xPos += 3;
+            yPos -= 5;
+            xPos += 5;
         }
         else if (direction == 0 || direction == 360)
-            yPos -= 6;
+            yPos -= 10;
         else if (direction == 315 || direction == -45)
         {
-            yPos -= 3;
-            xPos -= 3;
+            yPos -= 5;
+            xPos -= 5;
         }
         else if (direction == 270)
-            xPos -= 6;
+            xPos -= 10;
         else if (direction == 225)
         {
-            yPos += 3;
-            xPos -= 3;
+            yPos += 5;
+            xPos -= 5;
         }
         else if (direction == 180)
-            yPos += 6;
+            yPos += 10;
         else if (direction == 135)
         {
-            yPos += 3;
-            xPos += 3;
+            yPos += 5;
+            xPos += 5;
         }
         if(xPos >= b.getxEnd() || yPos >= b.getyEnd() || xPos <= 0 || yPos <= 0)
         {
@@ -95,7 +110,7 @@ public class Bullet
         {
             hitbox = new Rectangle(xPos - 1, yPos - 1, 3, 3);
         }
-        if(isBuckshot && counter >= 0.7)
+        if(isBuckshot && counter >= 0.35)
         {
             this.remove();
         }
@@ -103,12 +118,12 @@ public class Bullet
 
     public void collisionDetect()
     {
-        ArrayList<Zombie> currentZombs = b.getCurrentZombs();
-        for (int i = 0; i < currentZombs.size(); i++)
+        //ArrayList<Zombie> currentZombs = b.getCurrentZombs();
+        for (int i = 0; i < b.getCurrentZombs().size(); i++)
         {
-            if(currentZombs.get(i).getHitbox().intersects(this.hitbox))
+            if(b.getCurrentZombs().get(i).getHitbox().intersects(this.hitbox))
             {
-                if(currentZombs.get(i).takeDamage(this.damage) == true)
+                if(b.getCurrentZombs().get(i).takeDamage(this.damage) == true)
                 {
                     b.setKillCount(b.returnKillCount() + 1);
                     b.getCurrentZombs().remove(i);
