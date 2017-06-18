@@ -5,7 +5,7 @@ public class Zombie extends Entity
 	// private Player player;
 	private Board board;
 	// private static ArrayList<Zombie> currentZombs = Board.returnCurrentZombs();
-	private static int killCount = Board.returnKillCount();
+	//private static int killCount = Board.returnKillCount();
 
 	public Zombie(int health, int speed, int x, int y, Board playBoard) //public Zombie(int hp, int sp, int x, int y, Player mccree)// creates zombie speed and position
 	{
@@ -26,28 +26,28 @@ public class Zombie extends Entity
 		boolean canRIGHT =  this.getXPos() < board.getxEnd() - 1;
 
 		if (this.getDirection() == 0 && canUP)
-			this.setYPos(-1);
+			this.setYPos(-2);
 		else if (this.getDirection() == 45 && canUP && canRIGHT)
 		{
 			this.setYPos(-1);
 			this.setXPos(1);
 		}
 		else if (this.getDirection() == 90 && canRIGHT)
-			this.setXPos(1);
+			this.setXPos(2);
 		else if (this.getDirection() == 135 && canDOWN && canRIGHT)
 		{
 			this.setYPos(1);
 			this.setXPos(1);
 		}
 		else if (this.getDirection() == 180 && canDOWN)
-			this.setYPos(1);
+			this.setYPos(2);
 		else if (this.getDirection() == 225 && canDOWN && canLEFT)
 		{
 			this.setYPos(1);
 			this.setXPos(-1);
 		}
 		else if (this.getDirection() == 270 && canLEFT)
-			this.setXPos(-1);
+			this.setXPos(-2);
 		else if (this.getDirection() == 315 && canUP && canLEFT)
 		{
 			this.setYPos(-1);
