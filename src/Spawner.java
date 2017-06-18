@@ -6,7 +6,7 @@ public class Spawner
 	private Board board;
 	private double zombieT;
 	// private static Player mccree;
-	
+
 	public Spawner(Board a)
 	{
 		currentSpeed = 1;
@@ -19,17 +19,17 @@ public class Spawner
 	{
 		currentSpeed += a;
 	}
-	
+
 	public static void incrementHealth(int a)
 	{
 		currentHealth += a;
 	}
-	
+
 	public static void incrementRate(int a)
 	{
 		rate += a;
 	}
-	
+
 	public static double returnRate() //IN MILLISECONDS, NOT SECONDS.  SO MULTIPLE WHATEVER IT CURRENT IT IS BY 1000.
 	{
 		return rate;
@@ -40,7 +40,7 @@ public class Spawner
 		baby.calcAng();
 		//board.addZomb(baby);
 		return baby;
-		
+
 	}
 	public Zombie spawnZombie()
 	{
@@ -92,7 +92,7 @@ public class Spawner
 		Zombie zimbabwe = new Zombie(currentHealth, currentSpeed, x, y, 50, 50, board);
 		zimbabwe.calcAng();
 		return zimbabwe;
-		
+
 	}
 	public void spawn(double delta) {
 		zombieT += delta;
