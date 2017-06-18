@@ -86,55 +86,51 @@ public class Zombie extends Entity
 	    }
 	    else
 	    {
-	    	if (xDiff < 0 && yDiff < 0) // top left
+	    	/*if (xDiff < 0 && yDiff < 0) // top left
 	    	{
 	    		angle += 90;
 	    	}
-	    	else if(xDiff < 0 &&  yDiff > 0) // bottom left
+	    	if(xDiff > 0 && yDiff < 0) // top right
 	    	{
-	    		angle += 0;
+	    		angle += 90;
 	    	}
-	    	else if(xDiff > 0 && yDiff < 0) // top right
+	    	if(xDiff > 0 && yDiff > 0) //bottom right
 	    	{
-	    		angle += 180;
-	    	}
-	    	else if(xDiff > 0 && yDiff > 0) //bottom right
-	    	{
-	    		angle += 270;
-	    	}
-	    
+	    		angle += 90;
+	    	}*/
+	    	angle += 90;
 	    	angle = angle % 360;
 	    
 	        
-		if (angle > 22.5 && angle <= 67.5)
+	    	if (angle > 22.5 && angle <= 67.5)
 	    	{
 	    		this.setDirection(45);
 	    	}
-	    else if(angle > 67.5 && angle <= 112.5)
+	    	else if(angle > 67.5 && angle <= 112.5)
 	    	{
 	    		this.setDirection(90);
 	    	}
-	    else if(angle > 112.5 && angle <= 157.5)
+	    	else if(angle > 112.5 && angle <= 157.5)
 	    	{
 	    		this.setDirection(135);
 	    	}
-	    else if(angle > 157.5 && angle <= 202.5)
+	    	else if(angle > 157.5 && angle <= 202.5)
 	    	{
 	    		this.setDirection(180);
 	    	}
-	    else if(angle > 202.5 && angle <= 247.5)
+	    	else if(angle > 202.5 && angle <= 247.5)
 	    	{
 	    		this.setDirection(225);
 	    	}
-	    else if(angle > 247.2 && angle <= 292.5)
-	    {
-	    	this.setDirection(270);
-	    }
-	    else if(angle > 292.5 && angle <= 337.5)
+	    	else if(angle > 247.2 && angle <= 292.5)
+	    	{
+	    		this.setDirection(270);
+	    	}
+	    	else if(angle > 292.5 && angle <= 337.5)
 	    	{
 	    		this.setDirection(315);
 	    	}
-	    else if (angle > 337.5 && angle <= 22.5)
+	    	else if (angle > 337.5 && angle <= 22.5)
 	    	{
 	    		this.setDirection(0);
 	    	}
