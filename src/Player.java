@@ -15,7 +15,8 @@ public class Player extends Entity
 	private double shootT;
 	private double invinT;
 
-	public Player(Board playBoard)//public Player(int health, int speed, int x, int y, int w, int h, int topL, int topR, int width, int height) //constructs player hitbox + spawns in center of map
+	//spawns player object in center of board and initializes health, speed, damage, fire rate, invincibility, ability to shoot, shoot timer, and constructs a pistol object
+	public Player(Board playBoard)
 	{
 		super(3, 3, playBoard.getxEnd() / 2, playBoard.getyEnd() / 2,  playBoard.getxEnd() / 2 - 23, playBoard.getyEnd() / 2 - 23, 46, 46);
 		board = playBoard;
@@ -43,6 +44,9 @@ public class Player extends Entity
 	{
 		return fireRate;
 	}
+	
+	//moves player based on boolean array of inputs representing WASD movement keys if the player is not at the map's border
+	//calls all zombie calcAng() methods and redraws player hitbox at new position
 	public void move() //moves player
 	{
 		boolean w,a,s,d;
@@ -105,54 +109,76 @@ public class Player extends Entity
 		}
 	}
 	
-	public void shoot(double delta) //spawns bullet
-    {
-        shootT += delta;
-        boolean up, left, down, right;
-        up = board.getInputs(4);
-        left = board.getInputs(5);
-        down = board.getInputs(6);
-        right = board.getInputs(7);
-        if(shootT >= fireRate)
-        {
-            canShoot = true;
-        }
-        if (up == left && left == right && right == down && up == false)
-        {
-            return;
-        }
-        if (up && left) {
-            this.setDirection(315);
-        } else if (left && down) {
-            this.setDirection(225);
-        } else if (down && right) {
-            this.setDirection(135);
-        } else if (up && right) {
-            this.setDirection(45);
-        } else if (up) {
-            this.setDirection(0);
-        } else if (left) {
-            this.setDirection(270);
-        } else if (down) {
-            this.setDirection(180);
-        } else if (right) {
-            this.setDirection(90);
-        }
-        if(canShoot) {
-            canShoot = false;
-            currentWep.shoot(this.getDirection(), board);
-            System.out.println("The number of bullets" + board.getCurrentBullets().size());
-            shootT = 0;
-        }
-    }
+	//spawns bullet in one of eight directions depending on boolean array representing ARROW KEYS if canShoot is true
+	//increments the shoot timer by a double value and checks if the time since the last shot is greater than the fireRate
+	//sets canShoot to false and resets timer
+	public void shoot(double delta)
+    	{
+       		shootT += delta;
+       		boolean up, left, down, right;
+        	up = board.getInputs(4);
+        	left = board.getInputs(5);
+        	down = board.getInputs(6);
+        	right = board.getInputs(7);
+        	if(shootT >= fireRate)
+        	{
+            		canShoot = true;
+        	}
+       		 if (up == left && left == right && right == down && up == false)
+        	{
+            		return;
+        	}
+        	if (up && left)
+		{
+            		this.setDirection(315);
+        	} 
+		else if (left && down)
+		{
+            		this.setDirection(225);
+		} 
+		else if (down && right) 
+		{
+            		this.setDirection(135);
+        	} 
+		else if (up && right) 
+		{
+            		this.setDirection(45);
+        	} 
+		else if (up) 
+		{
+            		this.setDirection(0);
+        	} 
+		else if (left) 
+		{
+            		this.setDirection(270);
+        	} 
+		else if (down) 
+		{
+            		this.setDirection(180);
+        	} 
+		else if (right) 
+		{
+            		this.setDirection(90);
+        	}
+       		if(canShoot)
+		{
+        		canShoot = false;
+        		currentWep.shoot(this.getDirection(), board);
+        		System.out.println("The number of bullets" + board.getCurrentBullets().size());
+        		shootT = 0;
+        	}
+   	}
 	
-	public void checkHP() //checks hp ends game if < 0
+	//checks hp ends game if <= 0
+	public void checkHP() 
 	{	
-		if (this.getHealth() == 0)
+		if (this.getHealth() <= 0)
 			board.endGame();
 	}
 	
-	public void setWeapon(double delta) //what variable type is the keyboard input?
+	//constructs and assigns new weapon based on boolean array of inputs representing numbers 1 - 3
+	//pistol for 1, shotgun for 2, sniper for 3 and changes fireRate depending on weapon
+	public void setWeapon(double delta)
 	{
 		if (canShoot)
 		{
@@ -187,25 +213,29 @@ public class Player extends Entity
 		baseRate *= a;
 	}
 	
+	//disables invincibility if it has been longer than 1 second and resets timer
 	public void toggleInvin(double delta)
 	{
-	    invinT +=delta;
-	    if(invinT >= 1 && isInvin){
-	        isInvin = false;
-	        invinT = 0;
-        }
+		invinT +=delta;
+	    	if(invinT >= 1 && isInvin)
+	    	{
+	       	 	isInvin = false;
+	       		invinT = 0;
+        	}
 	}
-	public void changeInvin() {
-	    isInvin = !isInvin;
-	    invinT = 0;
-    }
+	
+	//switches invincibility value and resets timer
+	public void changeInvin()
+	{
+		isInvin = !isInvin;
+		invinT = 0;
+    	}
 	public int returnType()
 	{
 		return currentWep.returnType();
 	}
-	public void setCanShoot(boolean canShoot) {
+	public void setCanShoot(boolean canShoot)
+	{
 		this.canShoot = canShoot;
 	}
-
-
 }
