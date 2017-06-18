@@ -196,15 +196,10 @@ public void  paintComponent(Graphics g)
 
     public void updateGame(double delta) {
         scoreT += delta;
-        shootT += delta;
         if (scoreT >= 1) {
             score++;
             System.out.println(score);
             scoreT = 0;
-        }
-        if(shootT >= player.getFireRate()){
-            player.setCanShoot(true);
-            shootT = 0;
         }
         spawner.spawn(delta);
         player.toggleInvin(delta);
