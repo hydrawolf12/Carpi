@@ -17,7 +17,7 @@ public class Player extends Entity
 
 	public Player(Board playBoard)//public Player(int health, int speed, int x, int y, int w, int h, int topL, int topR, int width, int height) //constructs player hitbox + spawns in center of map
 	{
-		super(6, 2, playBoard.getxEnd() / 2, playBoard.getyEnd() / 2,  playBoard.getxEnd() / 2 - 23, playBoard.getyEnd() / 2 - 23, 46, 46);
+		super(3, 3, playBoard.getxEnd() / 2, playBoard.getyEnd() / 2,  playBoard.getxEnd() / 2 - 23, playBoard.getyEnd() / 2 - 23, 46, 46);
 		board = playBoard;
 		damage = 1;
 		baseRate = 1;
@@ -106,16 +106,21 @@ public class Player extends Entity
 	}
 	
 	public void shoot(double delta) //spawns bullet
-	{
+    {
+        shootT += delta;
         boolean up, left, down, right;
         up = board.getInputs(4);
         left = board.getInputs(5);
         down = board.getInputs(6);
         right = board.getInputs(7);
-	if (up == left && left == right && right == down && up == false)
-	{
-		return;
-	}
+        if(shootT >= fireRate)
+        {
+            canShoot = true;
+        }
+        if (up == left && left == right && right == down && up == false)
+        {
+            return;
+        }
         if (up && left) {
             this.setDirection(315);
         } else if (left && down) {
@@ -133,13 +138,13 @@ public class Player extends Entity
         } else if (right) {
             this.setDirection(90);
         }
-	    if(canShoot) {
+        if(canShoot) {
+            canShoot = false;
             currentWep.shoot(this.getDirection(), board);
             System.out.println("The number of bullets" + board.getCurrentBullets().size());
-            canShoot = false;
             shootT = 0;
         }
-	}
+    }
 	
 	public void checkHP() //checks hp ends game if < 0
 	{	
