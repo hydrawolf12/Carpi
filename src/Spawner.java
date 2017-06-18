@@ -99,7 +99,7 @@ public class Spawner
 		if (zombieT >= rate) {
 			System.out.println("spawn has been called");
 			System.out.println("The killCount is " + board.returnKillCount());
-			if (board.returnKillCount() >= 1) {
+			if (board.returnKillCount() >= 50) {
 				board.getCurrentZombs().add(spawnBoss());
 				board.setKillCount(0);
 				System.out.println("A zombie boss has spawned");
