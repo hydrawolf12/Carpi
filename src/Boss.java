@@ -5,10 +5,10 @@ public class Boss extends Zombie
 {
 	private int bossKillCount = 0;
 	// private boolean isBossDefeated;
-	private Board board;
-	public Boss(int health, int speed, int x, int y, Board playBoard) //initiates boss based on speed position and health
+	// private Board board;
+	public Boss(int health, int speed, int x, int y, int width, int height, Board playBoard) //initiates boss based on speed position and health
 	{
-		super(health, speed, x, y, playBoard);
+		super(health, speed, x, y, width, height, playBoard);
 		// isBossDefeated = false;'
 	}
 	
@@ -39,12 +39,12 @@ public class Boss extends Zombie
 			mccree.updateFireRate(2);
 		}
 	} */
-	public boolean takeDamage(int a, int pos)
+	public boolean takeDamage(int a)
 	{
-		this.setHealth(a);
+		this.setHealth(-a);
 		if (this.getHealth() <= 0)
 		{
-			Player mccree = board.getPlayer();
+			Player mccree = this.returnBoard().getPlayer();
 			Spawner.incrementHealth(2);
 			Spawner.incrementSpeed(1);
 			Spawner.incrementRate(1);
@@ -63,5 +63,8 @@ public class Boss extends Zombie
 		} 
 		return false;
 	}
-	
+	public int returnRadius() {
+		// TODO Auto-generated method stub
+		return 1;
+	}
 }
