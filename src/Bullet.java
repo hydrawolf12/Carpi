@@ -117,7 +117,6 @@ public void move(double delta)
             this.remove();
         }
     }
-	
 
 	public void collisionDetect()
 	{
