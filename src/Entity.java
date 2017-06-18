@@ -5,6 +5,7 @@ public abstract class Entity
 	private int health, speed, xPos, yPos, direction;
 	private Rectangle hitbox;
 	
+	//initializes Entity object based on health, speed, x pos, y pos, hitbox origin corner, and hitbox height / width
 	public Entity(int hp, int sp, int x, int y, int topX, int topY, int hbW, int hbH)
 	{
 		health = hp;
@@ -15,7 +16,6 @@ public abstract class Entity
 		
 		hitbox = new Rectangle(topX, topY, hbW, hbH);
 	}
-	
 	public Rectangle getHitbox()
 	{
 		return hitbox;
@@ -61,5 +61,6 @@ public abstract class Entity
 		direction = x;
 	}
 	
+	//abstract method move for all Entity objects to implement
 	public abstract void move();
 }
