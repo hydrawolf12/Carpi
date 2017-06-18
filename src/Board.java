@@ -118,48 +118,68 @@ public void  paintComponent(Graphics g)
         dbg = dbImage.getGraphics();
         paintComponent(dbg);
         g.drawImage(dbImage, 0, 0, this);
-        g.setColor(Color.BLACK);
-        g.fillRect(0, 900, 1000, 100);
-        g.setColor(Color.WHITE);
-        g.setFont(new Font("Times New Roman", Font.PLAIN, 34));
-        g.drawString("Health: " + player.getHealth(), 200, 950);
-        g.drawString("Score: " + score, 700, 950);
+        if(inGame)
+        {
+	        g.setColor(Color.BLACK);
+	        g.fillRect(0, 900, 1000, 100);
+	        g.setColor(Color.WHITE);
+	        g.setFont(new Font("Times New Roman", Font.PLAIN, 34));
+	        g.drawString("Health: " + player.getHealth(), 200, 950);
+	        g.drawString("Score: " + score, 700, 950);
+        }
+        else
+        {
+        	g.setColor(Color.BLACK);
+        	g.fillRect(0, 900, 1000, 100);
+        }
     } 
 
     public void paintComponent(Graphics g)
     {
         int j = 0, temp;
-        super.paintComponent(g);
-        g.drawImage(background, 0, 0, null);
-        AffineTransform at = AffineTransform.getTranslateInstance(player.getXPos() - 25, player.getYPos() - 25);
-        at.rotate(Math.toRadians(player.getDirection()), 25, 25);
-        Graphics2D g2d = (Graphics2D) g;
-        if (player.returnType() == 0)
-            g2d.drawImage(cpistol, at, null);
-        else if (player.returnType() == 1)
-            g2d.drawImage(cshotgun, at, null);
-        else
-            g2d.drawImage(csniper, at, null);
+        if(inGame)
+        {	
+        	super.paintComponent(g);
+        	g.drawImage(background, 0, 0, null);
+        	AffineTransform at = AffineTransform.getTranslateInstance(player.getXPos() - 25, player.getYPos() - 25);
+        	at.rotate(Math.toRadians(player.getDirection()), 25, 25);
+        	Graphics2D g2d = (Graphics2D) g;
+        	if (player.returnType() == 0)
+        		g2d.drawImage(cpistol, at, null);
+        	else if (player.returnType() == 1)
+        		g2d.drawImage(cshotgun, at, null);
+        	else	
+        		g2d.drawImage(csniper, at, null);
 
-        for (int i = 0; i < currentZombs.size(); i++) {
-            int x = currentZombs.get(i).returnRadius();
-            AffineTransform at1 = AffineTransform.getTranslateInstance(currentZombs.get(i).getXPos() - x,
-                    currentZombs.get(i).getYPos() - x);
-            at1.rotate(Math.toRadians(currentZombs.get(i).getDirection()), x, x);
-            Graphics2D g2d1 = (Graphics2D) g;
-            if (x == 25)
-                g2d1.drawImage(z, at1, null);
-            else
-                g2d1.drawImage(bz, at1, null);
+        	for (int i = 0; i < currentZombs.size(); i++) {
+        		int x = currentZombs.get(i).returnRadius();
+        		AffineTransform at1 = AffineTransform.getTranslateInstance(currentZombs.get(i).getXPos() - x,
+        				currentZombs.get(i).getYPos() - x);
+        		at1.rotate(Math.toRadians(currentZombs.get(i).getDirection()), x, x);
+        		Graphics2D g2d1 = (Graphics2D) g;
+        		if (x == 25)
+        			g2d1.drawImage(z, at1, null);
+        		else
+        			g2d1.drawImage(bz, at1, null);
+        	}
+        	while(j < currentBullets.size())
+        	{
+        		temp = currentBullets.size();
+        		g.drawImage(b, currentBullets.get(j).getXPos(), currentBullets.get(j).getYPos(), null);
+        		if(temp == currentBullets.size())
+        		{
+        			j++;
+        		}
+        	}
         }
-        while(j < currentBullets.size())
+        else
         {
-            temp = currentBullets.size();
-            g.drawImage(b, currentBullets.get(j).getXPos(), currentBullets.get(j).getYPos(), null);
-            if(temp == currentBullets.size())
-            {
-                j++;
-            }
+        	g.setColor(Color.BLACK);
+        	g.fillRect(0, 0, 1000, 1000);
+        	g.setColor(Color.WHITE);
+        	g.setFont(new Font("Times New Roman", Font.PLAIN, 80));
+        	g.drawString("Final Score: " + score, 200, 400);
+        	g.drawString("Nigg3rs Slain", 200, 600);
         }
     }
 
@@ -181,8 +201,6 @@ public void  paintComponent(Graphics g)
                 fps = 0;
             }
             updateGame(delta);
-            repaint();
-
             long elapsed = System.nanoTime() - now;
             long sleepTime = (NANOSECONDS_FRAME - elapsed) / 1000000L;
             if(sleepTime > 0) {
@@ -191,15 +209,21 @@ public void  paintComponent(Graphics g)
                 } catch (Exception e) {
                 }
             }
+            repaint();
         }
     }
 
     public void updateGame(double delta) {
         scoreT += delta;
+        shootT += delta;
         if (scoreT >= 1) {
             score++;
             System.out.println(score);
             scoreT = 0;
+        }
+        if(shootT >= player.getFireRate()){
+            player.setCanShoot(true);
+            shootT = 0;
         }
         spawner.spawn(delta);
         player.toggleInvin(delta);
@@ -273,8 +297,9 @@ public void  paintComponent(Graphics g)
         return currentInputs[x];
     }
 
-    public void endGame() {
-        System.exit(0);
+    public void endGame()
+    {
+    	inGame = false;
     }
 
     private class AAdapter extends KeyAdapter // deals with keyboard inputs
