@@ -15,7 +15,7 @@ public class Bullet
     private Rectangle hitbox;
     private double counter = 0.0;
     private Board b;
-
+    //Creates a bullet based on the type of gun used and the direction of the player
     public Bullet(int x, int y, int d, boolean p, boolean bu, int dam, Board bd)
     {
         b = bd;
@@ -55,22 +55,7 @@ public class Bullet
         hitbox = new Rectangle(xPos - 1, yPos - 1, 3, 3);
         direction = d;
     }
-
-    public void startTimer()
-    {
-        ActionListener action = new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent event)
-            {
-                remove();
-            }
-        };
-        Timer t = new Timer(1200, action);
-        t.setRepeats(false);
-        t.start();
-    }
-
+    //Moves the bullet and removes it if it is out of bounds, or if it is a shotgun bullet removes it after 0.35 seconds
     public void move(double delta)
     {
         counter += delta;
@@ -115,10 +100,9 @@ public class Bullet
             this.remove();
         }
     }
-
+    //Determines if a bullet and a zombie's hitboxes collide and removes the zombie if it has no more health
     public void collisionDetect()
     {
-        //ArrayList<Zombie> currentZombs = b.getCurrentZombs();
         for (int i = 0; i < b.getCurrentZombs().size(); i++)
         {
             if(b.getCurrentZombs().get(i).getHitbox().intersects(this.hitbox))
@@ -130,7 +114,7 @@ public class Bullet
                     i--;
                 }
 
-                if(isPierce == false)
+                if(isPierce == false) //Non Sniper Bullets are removed after a collison
                 {
                     this.remove();
                     break;
@@ -138,7 +122,7 @@ public class Bullet
             }
         }
     }
-
+    //Removes a bullet from the game
     public void remove()
     {
         ArrayList<Bullet> currentBullets = b.getCurrentBullets();
