@@ -26,12 +26,12 @@ public class Zombie extends Entity
 	}
 	public void move()// moves every tick
 	{
-		boolean canUP = this.getYPos() > 1;
-		boolean canDOWN = this.getYPos() < board.getyEnd() - 1;
-		boolean canLEFT = this.getXPos() > 1;
-		boolean canRIGHT =  this.getXPos() < board.getxEnd() - 1;
+		boolean canUP = this.getYPos() > 25;
+		boolean canDOWN = this.getYPos() < board.getyEnd() - 25;
+		boolean canLEFT = this.getXPos() > 25;
+		boolean canRIGHT =  this.getXPos() < board.getxEnd() - 25;
 		int distance = this.getSpeed();
-
+		
 		if (this.getDirection() == 0 && canUP)
 			this.setYPos(distance * -1);
 		else if (this.getDirection() == 45 && canUP && canRIGHT)
@@ -69,30 +69,30 @@ public class Zombie extends Entity
 		double angle = (double)Math.toDegrees(Math.atan2(player.getYPos() - this.getYPos(), player.getXPos() - this.getXPos()));
 		int xDiff = this.getXPos() - player.getXPos();
 		int yDiff = this.getYPos() - player.getYPos();
-
-		if(angle < 0)
-		{
-			angle += 360;
-		}
-
-		if (xDiff == 0 && yDiff < 0) // above
-		{
-			this.setDirection(180);
-		}
-		else if(xDiff == 0 && yDiff > 0) // below
-		{
-			this.setDirection(0);
-		}
-		else if(yDiff == 0 && xDiff < 0) // left
-		{
-			this.setDirection(90);
-		}
-		else if(yDiff == 0 && xDiff > 0) // right
-		{
-			this.setDirection(270);
-		}
-		else
-		{
+		
+	    if(angle < 0)
+	    {
+	        angle += 360;
+	    }
+	    
+	    if (xDiff == 0 && yDiff < 0) // above
+	    {
+	    	this.setDirection(180);
+	    }
+	    else if(xDiff == 0 && yDiff > 0) // below
+	    {
+	    	this.setDirection(0);
+	    }
+	    else if(yDiff == 0 && xDiff < 0) // left
+	    {
+	    	this.setDirection(90);
+	    }
+	    else if(yDiff == 0 && xDiff > 0) // right
+	    {
+	    	this.setDirection(270);
+	    }
+	    else
+	    {
 	    	/*if (xDiff < 0 && yDiff < 0) // top left
 	    	{
 	    		angle += 90;
@@ -105,43 +105,43 @@ public class Zombie extends Entity
 	    	{
 	    		angle += 90;
 	    	}*/
-			angle += 90;
-			angle = angle % 360;
-
-
-			if (angle > 22.5 && angle <= 67.5)
-			{
-				this.setDirection(45);
-			}
-			else if(angle > 67.5 && angle <= 112.5)
-			{
-				this.setDirection(90);
-			}
-			else if(angle > 112.5 && angle <= 157.5)
-			{
-				this.setDirection(135);
-			}
-			else if(angle > 157.5 && angle <= 202.5)
-			{
-				this.setDirection(180);
-			}
-			else if(angle > 202.5 && angle <= 247.5)
-			{
-				this.setDirection(225);
-			}
-			else if(angle > 247.2 && angle <= 292.5)
-			{
-				this.setDirection(270);
-			}
-			else if(angle > 292.5 && angle <= 337.5)
-			{
-				this.setDirection(315);
-			}
-			else if (angle > 337.5 && angle <= 22.5)
-			{
-				this.setDirection(0);
-			}
-		}
+	    	angle += 90;
+	    	angle = angle % 360;
+	    
+	        
+	    	if (angle > 22.5 && angle <= 67.5)
+	    	{
+	    		this.setDirection(45);
+	    	}
+	    	else if(angle > 67.5 && angle <= 112.5)
+	    	{
+	    		this.setDirection(90);
+	    	}
+	    	else if(angle > 112.5 && angle <= 157.5)
+	    	{
+	    		this.setDirection(135);
+	    	}
+	    	else if(angle > 157.5 && angle <= 202.5)
+	    	{
+	    		this.setDirection(180);
+	    	}
+	    	else if(angle > 202.5 && angle <= 247.5)
+	    	{
+	    		this.setDirection(225);
+	    	}
+	    	else if(angle > 247.2 && angle <= 292.5)
+	    	{
+	    		this.setDirection(270);
+	    	}
+	    	else if(angle > 292.5 && angle <= 337.5)
+	    	{
+	    		this.setDirection(315);
+	    	}
+	    	else if (angle > 337.5 && angle <= 22.5)
+	    	{
+	    		this.setDirection(0);
+	    	}
+	   }
 	}
 	public void collisionDetect(double delta)
 	{
