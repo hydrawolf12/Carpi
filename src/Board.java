@@ -118,13 +118,18 @@ public void  paintComponent(Graphics g)
         dbg = dbImage.getGraphics();
         paintComponent(dbg);
         g.drawImage(dbImage, 0, 0, this);
-    }
+        g.setColor(Color.BLACK);
+        g.fillRect(0, 900, 1000, 100);
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("Times New Roman", Font.PLAIN, 34));
+        g.drawString("Health: " + player.getHealth(), 200, 950);
+        g.drawString("Score: " + score, 700, 950);
+    } 
 
     public void paintComponent(Graphics g)
     {
         int j = 0, temp;
         super.paintComponent(g);
-        this.setBackground(Color.BLACK);
         g.drawImage(background, 0, 0, null);
         AffineTransform at = AffineTransform.getTranslateInstance(player.getXPos() - 25, player.getYPos() - 25);
         at.rotate(Math.toRadians(player.getDirection()), 25, 25);
@@ -156,7 +161,6 @@ public void  paintComponent(Graphics g)
                 j++;
             }
         }
-        g.dispose();
     }
 
     public void run() {
