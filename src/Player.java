@@ -137,6 +137,7 @@ public class Player extends Entity
             currentWep.shoot(this.getDirection(), board);
             System.out.println("The number of bullets" + board.getCurrentBullets().size());
             canShoot = false;
+            shootT = 0;
         }
 	}
 	
