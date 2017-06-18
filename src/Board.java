@@ -13,7 +13,7 @@ import java.awt.Image;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-public class Board extends JPanel implements Runnable {
+public class Board extends JPanel implements Runnable { 
     private int score;
     private boolean inGame;
     private static int killCount;
@@ -33,7 +33,7 @@ public class Board extends JPanel implements Runnable {
     public BufferedImage cpistol, cshotgun, csniper, z, bz, b, background;
     private Image dbImage;
     private Graphics dbg;
-    public Board() {
+    public Board() //creates a board and initializes variables {
         addKeyListener(new AAdapter());
         score = 0;
         killCount = 0;
@@ -112,7 +112,7 @@ public void  paintComponent(Graphics g)
     g.setFont(new Font("Times New Roman", Font.PLAIN, 34));
     g.drawString("Health: 420", 200, 950);
 }*/
-    public void paint(Graphics g)
+    public void paint(Graphics g) // paints the graphcis
     {
         dbImage = createImage(1000, 900);
         dbg = dbImage.getGraphics();
@@ -134,7 +134,7 @@ public void  paintComponent(Graphics g)
         }
     } 
 
-    public void paintComponent(Graphics g)
+    public void paintComponent(Graphics g) //used by repaint() to repaing the graphics
     {
         int j = 0, temp;
         if(inGame)
@@ -183,7 +183,7 @@ public void  paintComponent(Graphics g)
         }
     }
 
-    public void run() {
+    public void run() // game loop{
         long lastLoopTime = System.nanoTime();
         final int TARGET_FPS = 60;
         final long NANOSECONDS_FRAME = 1000000000 / TARGET_FPS;
@@ -191,16 +191,17 @@ public void  paintComponent(Graphics g)
             long now = System.nanoTime();
             long updateLength = now - lastLoopTime;
             lastLoopTime = now;
-            double delta = updateLength / 1000000000D;
+            double delta = updateLength / 1000000000D; //the time, in seconds, between each frame
             lastFpsTime += updateLength;
             fps++;
-            if (lastFpsTime >= 1000000000)
+            if (lastFpsTime >= 1000000000) //allows us to see the fps
             {
                 System.out.println("(FPS: "+fps+")");
                 lastFpsTime = 0;
                 fps = 0;
             }
-            updateGame(delta);
+            updateGame(delta); //updates  the game
+	    repaint(); //updates graphics
             long elapsed = System.nanoTime() - now;
             long sleepTime = (NANOSECONDS_FRAME - elapsed) / 1000000L;
             if(sleepTime > 0) {
@@ -209,7 +210,6 @@ public void  paintComponent(Graphics g)
                 } catch (Exception e) {
                 }
             }
-            repaint();
         }
     }
 
@@ -233,7 +233,7 @@ public void  paintComponent(Graphics g)
         player.setWeapon(delta);
     }
 
-    public void move(double delta) {
+    public void move(double delta) //handles movement of player, zombies, and bullets {
         int i = 0, temp;
         player.move();
         for (Zombie z : currentZombs) {
@@ -250,7 +250,7 @@ public void  paintComponent(Graphics g)
         }
     }
 
-    public void detect(double delta) {
+    public void detect(double delta) //handles collison detection{
         int i = 0, temp;
         for (Zombie z : currentZombs) {
             z.collisionDetect(delta);
