@@ -182,7 +182,7 @@ public void  paintComponent(Graphics g)
         	g.setColor(Color.WHITE);
         	g.setFont(new Font("Times New Roman", Font.PLAIN, 80));
         	g.drawString("Final Score: " + score, 200, 400);
-        	g.drawString("GAME OVER", 300, 600);
+        	g.drawString("GAME OVER", 275, 600);
         }
     }
 
