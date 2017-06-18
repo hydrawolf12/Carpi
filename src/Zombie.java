@@ -30,34 +30,35 @@ public class Zombie extends Entity
 		boolean canDOWN = this.getYPos() < board.getyEnd() - 1;
 		boolean canLEFT = this.getXPos() > 1;
 		boolean canRIGHT =  this.getXPos() < board.getxEnd() - 1;
-
+		int distance = this.getSpeed();
+		
 		if (this.getDirection() == 0 && canUP)
-			this.setYPos(-2);
+			this.setYPos(distance * -1);
 		else if (this.getDirection() == 45 && canUP && canRIGHT)
 		{
-			this.setYPos(-1);
-			this.setXPos(1);
+			this.setYPos(distance * -1);
+			this.setXPos(distance);
 		}
 		else if (this.getDirection() == 90 && canRIGHT)
-			this.setXPos(2);
+			this.setXPos(distance * 2);
 		else if (this.getDirection() == 135 && canDOWN && canRIGHT)
 		{
-			this.setYPos(1);
-			this.setXPos(1);
+			this.setYPos(distance);
+			this.setXPos(distance);
 		}
 		else if (this.getDirection() == 180 && canDOWN)
-			this.setYPos(2);
+			this.setYPos(distance * 2);
 		else if (this.getDirection() == 225 && canDOWN && canLEFT)
 		{
-			this.setYPos(1);
-			this.setXPos(-1);
+			this.setYPos(distance);
+			this.setXPos(distance * -1);
 		}
 		else if (this.getDirection() == 270 && canLEFT)
-			this.setXPos(-2);
+			this.setXPos(distance * -2);
 		else if (this.getDirection() == 315 && canUP && canLEFT)
 		{
-			this.setYPos(-1);
-			this.setXPos(-1);
+			this.setYPos(distance * -1);
+			this.setXPos(distance * -1);
 		}
 		this.setHitbox(new Rectangle(this.getXPos() - widtha / 2, this.getYPos() - heighta / 2, widtha, heighta));
 		this.calcAng();
@@ -160,6 +161,7 @@ public class Zombie extends Entity
 	{
 		board.getPlayer().setHealth(-1);
 		board.getPlayer().checkHP();
+		System.out.println("The player health is: " + board.getPlayer().getHealth());
 	}
 	public boolean takeDamage(int a)
 	{
