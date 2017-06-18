@@ -179,7 +179,7 @@ public void  paintComponent(Graphics g)
         	g.setColor(Color.WHITE);
         	g.setFont(new Font("Times New Roman", Font.PLAIN, 80));
         	g.drawString("Final Score: " + score, 200, 400);
-        	g.drawString("Nigg3rs Slain", 200, 600);
+        	g.drawString("Nigg3rs Slain", 300, 600);
         }
     }
 
