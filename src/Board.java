@@ -33,7 +33,8 @@ public class Board extends JPanel implements Runnable {
     public BufferedImage cpistol, cshotgun, csniper, z, bz, b, background;
     private Image dbImage;
     private Graphics dbg;
-    public Board() //creates a board and initializes variables {
+    public Board() //creates a board and initializes variables 
+    {
         addKeyListener(new AAdapter());
         score = 0;
         killCount = 0;
@@ -49,7 +50,8 @@ public class Board extends JPanel implements Runnable {
         currentBullets = new ArrayList<Bullet>();
         currentInputs = new boolean[11];
         inGame = true;
-        try {
+        try 
+	{
             cpistol = ImageIO.read(new File("pixelArt//cpistol.png"));
             cshotgun = ImageIO.read(new File("pixelArt//cshotgun.png"));
             csniper = ImageIO.read(new File("pixelArt//csniper.png"));
@@ -57,13 +59,14 @@ public class Board extends JPanel implements Runnable {
             bz = ImageIO.read(new File("pixelArt//bz.png"));
             b = ImageIO.read(new File("pixelArt//b.png"));
             background = ImageIO.read(new File("pixelArt//background.png"));
-        } catch (IOException e) {
+        } catch (IOException e) 
+	{
         }
-
         setFocusable(true);
         requestFocus();
     }
-    public void addNotify() {
+    public void addNotify() 
+    {
         super.addNotify();
         if(string == null)
         {
@@ -112,7 +115,7 @@ public void  paintComponent(Graphics g)
     g.setFont(new Font("Times New Roman", Font.PLAIN, 34));
     g.drawString("Health: 420", 200, 950);
 }*/
-    public void paint(Graphics g) // paints the graphcis
+    public void paint(Graphics g) // paints the graphics
     {
         dbImage = createImage(1000, 900);
         dbg = dbImage.getGraphics();
@@ -134,7 +137,7 @@ public void  paintComponent(Graphics g)
         }
     } 
 
-    public void paintComponent(Graphics g) //used by repaint() to repaing the graphics
+    public void paintComponent(Graphics g) //used by repaint() to repaitng the graphics
     {
         int j = 0, temp;
         if(inGame)
@@ -183,11 +186,13 @@ public void  paintComponent(Graphics g)
         }
     }
 
-    public void run() // game loop{
+    public void run() // calculates the time between each frame and runs the game loop 
+    {
         long lastLoopTime = System.nanoTime();
         final int TARGET_FPS = 60;
         final long NANOSECONDS_FRAME = 1000000000 / TARGET_FPS;
-        while (inGame) {
+        while (inGame) 
+	{
             long now = System.nanoTime();
             long updateLength = now - lastLoopTime;
             lastLoopTime = now;
@@ -204,24 +209,30 @@ public void  paintComponent(Graphics g)
 	    repaint(); //updates graphics
             long elapsed = System.nanoTime() - now;
             long sleepTime = (NANOSECONDS_FRAME - elapsed) / 1000000L;
-            if(sleepTime > 0) {
-                try {
+            if(sleepTime > 0) 
+	    {
+                try 
+		{
                     Thread.sleep(sleepTime);
-                } catch (Exception e) {
+                } catch (Exception e) 
+		{
                 }
             }
         }
     }
 
-    public void updateGame(double delta) {
+    public void updateGame(double delta) //updates 
+    {
         scoreT += delta;
         shootT += delta;
-        if (scoreT >= 1) {
+        if (scoreT >= 1) 
+	{
             score++;
             System.out.println(score);
             scoreT = 0;
         }
-        if(shootT >= player.getFireRate()){
+        if(shootT >= player.getFireRate())
+	{
             player.setCanShoot(true);
             shootT = 0;
         }
@@ -233,10 +244,12 @@ public void  paintComponent(Graphics g)
         player.setWeapon(delta);
     }
 
-    public void move(double delta) //handles movement of player, zombies, and bullets {
+    public void move(double delta) //handles movement of player, zombies, and bullets 
+    {
         int i = 0, temp;
         player.move();
-        for (Zombie z : currentZombs) {
+        for (Zombie z : currentZombs) 
+	{
             z.move();
         }
         while(i < currentBullets.size())
@@ -250,9 +263,11 @@ public void  paintComponent(Graphics g)
         }
     }
 
-    public void detect(double delta) //handles collison detection{
+    public void detect(double delta) //handles collison detection
+    {   
         int i = 0, temp;
-        for (Zombie z : currentZombs) {
+        for (Zombie z : currentZombs) 
+	{
             z.collisionDetect(delta);
         }
         while(i < currentBullets.size())
@@ -265,35 +280,43 @@ public void  paintComponent(Graphics g)
             }
         }
     }
-    public ArrayList<Zombie> getCurrentZombs() {
+    public ArrayList<Zombie> getCurrentZombs() 
+    {
         return currentZombs;
     }
 
-    public ArrayList<Bullet> getCurrentBullets() {
+    public ArrayList<Bullet> getCurrentBullets() 
+    {
         return currentBullets;
     }
 
-    public Player getPlayer() {
+    public Player getPlayer() 
+    {
         return player;
     }
 
-    public int getxEnd() {
+    public int getxEnd() 
+    {
         return xEnd;
     }
 
-    public int getyEnd() {
+    public int getyEnd() 
+    {
         return yEnd;
     }
 
-    public int returnKillCount() {
+    public int returnKillCount() 
+    {
         return killCount;
     }
 
-    public void setKillCount(int k) {
+    public void setKillCount(int k) 
+    {
         killCount = k;
     }
 
-    public boolean getInputs(int x) {
+    public boolean getInputs(int x) 
+    {
         return currentInputs[x];
     }
 
@@ -302,7 +325,7 @@ public void  paintComponent(Graphics g)
     	inGame = false;
     }
 
-    private class AAdapter extends KeyAdapter // deals with keyboard inputs
+    private class AAdapter extends KeyAdapter //changes values in an arraylist to true based on buttons pressed on the keyboard.
     {
         public void keyPressed(KeyEvent e) {
             int key = e.getKeyCode();
