@@ -8,7 +8,7 @@ public class Player extends Entity
 	private Gun currentWep;
 	private boolean canShoot;
 	private boolean isInvin;
-	private int damage; 
+	private int damage;
 	private double fireRate;
 	private double baseRate;
 	private Board board;
@@ -104,48 +104,48 @@ public class Player extends Entity
 			z.calcAng();
 		}
 	}
-	
+
 	public void shoot(double delta) //spawns bullet
 	{
-        boolean up, left, down, right;
-        up = board.getInputs(4);
-        left = board.getInputs(5);
-        down = board.getInputs(6);
-        right = board.getInputs(7);
-	if (up == left && left == right && right == down && up == false)
-	{
-		return;
+		boolean up, left, down, right;
+		up = board.getInputs(4);
+		left = board.getInputs(5);
+		down = board.getInputs(6);
+		right = board.getInputs(7);
+		if (up == left && left == right && right == down && up == false)
+		{
+			return;
+		}
+		if (up && left) {
+			this.setDirection(315);
+		} else if (left && down) {
+			this.setDirection(225);
+		} else if (down && right) {
+			this.setDirection(135);
+		} else if (up && right) {
+			this.setDirection(45);
+		} else if (up) {
+			this.setDirection(0);
+		} else if (left) {
+			this.setDirection(270);
+		} else if (down) {
+			this.setDirection(180);
+		} else if (right) {
+			this.setDirection(90);
+		}
+		if(canShoot) {
+			currentWep.shoot(this.getDirection(), board);
+			System.out.println("The number of bullets" + board.getCurrentBullets().size());
+			canShoot = false;
+		}
 	}
-        if (up && left) {
-            this.setDirection(315);
-        } else if (left && down) {
-            this.setDirection(225);
-        } else if (down && right) {
-            this.setDirection(135);
-        } else if (up && right) {
-            this.setDirection(45);
-        } else if (up) {
-            this.setDirection(0);
-        } else if (left) {
-            this.setDirection(270);
-        } else if (down) {
-            this.setDirection(180);
-        } else if (right) {
-            this.setDirection(90);
-        }
-	    if(canShoot) {
-            currentWep.shoot(this.getDirection(), board);
-            System.out.println("The number of bullets" + board.getCurrentBullets().size());
-            canShoot = false;
-        }
-	}
-	
+
 	public void checkHP() //checks hp ends game if < 0
-	{	
+	{
 		if (this.getHealth() == 0)
 			board.endGame();
 	}
-	
+
 	public void setWeapon(double delta) //what variable type is the keyboard input?
 	{
 		if (canShoot)
@@ -168,10 +168,10 @@ public class Player extends Entity
 			{
 				currentWep = new Sniper();
 				fireRate = baseRate * 3;
-			}	
+			}
 		}
 	}
-	
+
 	public void updateDamage(int a) // updates damage and firerate by a
 	{
 		damage += a;
@@ -180,18 +180,18 @@ public class Player extends Entity
 	{
 		baseRate *= a;
 	}
-	
+
 	public void toggleInvin(double delta)
 	{
-	    invinT +=delta;
-	    if(invinT >= 2 && isInvin){
-	        isInvin = false;
-	        invinT = 0;
-        }
+		invinT +=delta;
+		if(invinT >= 2 && isInvin){
+			isInvin = false;
+			invinT = 0;
+		}
 	}
 	public void changeInvin() {
-	    isInvin = !isInvin;
-    }
+		isInvin = !isInvin;
+	}
 	public int returnType()
 	{
 		return currentWep.returnType();
