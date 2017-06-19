@@ -101,20 +101,19 @@ public class Bullet
         }
     }
     //Determines if a bullet and a zombie's hitboxes collide and removes the zombie if it has no more health
-    public void collisionDetect()
+     public void collisionDetect()
     {
         for (int i = 0; i < b.getCurrentZombs().size(); i++)
         {
             if(b.getCurrentZombs().get(i).getHitbox().intersects(this.hitbox))
             {
-                if(b.getCurrentZombs().get(i).takeDamage(this.damage) == true)
+                if(!hit.contains(b.getCurrentZombs().get(i)) && b.getCurrentZombs().get(i).takeDamage(this.damage, this))
                 {
                     b.setKillCount(b.returnKillCount() + 1);
                     b.getCurrentZombs().remove(i);
                     i--;
                 }
-
-                if(isPierce == false) //Non Sniper Bullets are removed after a collison
+                if(isPierce == false)
                 {
                     this.remove();
                     break;
