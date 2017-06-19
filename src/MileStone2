@@ -1,0 +1,66 @@
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.awt.Image;
+import javax.imageio.ImageIO;
+import javax.swing.JPanel;
+
+public class MileStone2 extends JPanel 
+{
+    public BufferedImage cpistol, cshotgun, csniper, z, bz, b, background;
+    public MileStone2() {
+        try {
+            cpistol = ImageIO.read(new File("pixelArt//cpistol.png"));
+            cshotgun = ImageIO.read(new File("pixelArt//cshotgun.png"));
+            csniper = ImageIO.read(new File("pixelArt//csniper.png"));
+            z = ImageIO.read(new File("pixelArt//z.png"));
+            bz = ImageIO.read(new File("pixelArt//bz.png"));
+            b = ImageIO.read(new File("pixelArt//b.png"));
+            background = ImageIO.read(new File("pixelArt//background.png"));
+        } catch (IOException e) {
+        }
+    }
+
+	int i = 0;
+	public void  paintComponent(Graphics g)
+	{
+	    super.paintComponent(g);
+	    g.drawImage(background, 0, 0, null);
+	    AffineTransform at1 = AffineTransform.getTranslateInstance(475, 425);
+	    at1.rotate(Math.toRadians(i++/10), 25, 25);
+	    at1.scale(2, 2);
+	    Graphics2D g2d = (Graphics2D) g;
+	    g2d.drawImage(cpistol, at1, null);
+	    AffineTransform at2 = AffineTransform.getTranslateInstance(350, 425);
+	    at2.rotate(Math.toRadians(i++/10), 25, 25);
+	    at2.scale(2, 2);
+	    g2d.drawImage(cshotgun, at2, null);
+	    AffineTransform at3 = AffineTransform.getTranslateInstance(600, 425);
+	    at3.rotate(Math.toRadians(i++/10), 25, 25);
+	    at3.scale(2, 2);
+	    g2d.drawImage(csniper, at3, null);
+	    AffineTransform at4 = AffineTransform.getTranslateInstance(600, 550);
+	    at4.rotate(Math.toRadians(i++/10), 25, 25);
+	    at4.scale(2, 2);
+	    g2d.drawImage(z, at4, null);
+	    AffineTransform at5 = AffineTransform.getTranslateInstance(350, 550);
+	    at5.rotate(Math.toRadians(i++/10), 25, 25);
+	    at5.scale(2, 2);
+	    g2d.drawImage(bz, at5, null);
+	    repaint();
+	    g.setColor(Color.BLACK);
+	    g.fillRect(0, 900, 1000, 100);
+	    g.setColor(Color.WHITE);
+	    g.setFont(new Font("Times New Roman", Font.PLAIN, 34));
+	    g.drawString("Health: 420", 200, 950);
+	    g.drawString("Score: 69", 700, 950);
+	}
+}
