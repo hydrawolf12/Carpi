@@ -178,7 +178,10 @@ public class Zombie extends Entity
 		isHit = b;
  	}
 	
-
+	public boolean getHit()
+	{
+		return isHit;
+ 	}
 	
 	public int returnRadius()
 	{
