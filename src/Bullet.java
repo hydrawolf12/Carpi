@@ -129,6 +129,10 @@ public class Bullet
         currentBullets.remove(index);
     }
 
+    public ArrayList<Zombie> getHit()
+    {
+    	return hit;
+    }
     public Bullet getBullet()
     {
         return this;
