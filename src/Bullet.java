@@ -15,8 +15,7 @@ public class Bullet
     private Rectangle hitbox;
     private double counter = 0.0;
     private Board b;
-    private ArrayList<Zombie> hit = new ArrayList<>();
-
+    //Creates a bullet based on the type of gun used and the direction of the player
     public Bullet(int x, int y, int d, boolean p, boolean bu, int dam, Board bd)
     {
         b = bd;
@@ -56,7 +55,7 @@ public class Bullet
         hitbox = new Rectangle(xPos - 1, yPos - 1, 3, 3);
         direction = d;
     }
-
+    //Moves the bullet and removes it if it is out of bounds, or if it is a shotgun bullet removes it after 0.35 seconds
     public void move(double delta)
     {
         counter += delta;
@@ -101,20 +100,21 @@ public class Bullet
             this.remove();
         }
     }
-
+    //Determines if a bullet and a zombie's hitboxes collide and removes the zombie if it has no more health
     public void collisionDetect()
     {
         for (int i = 0; i < b.getCurrentZombs().size(); i++)
         {
             if(b.getCurrentZombs().get(i).getHitbox().intersects(this.hitbox))
             {
-                if(!hit.contains(b.getCurrentZombs().get(i)) && b.getCurrentZombs().get(i).takeDamage(this.damage, this))
+                if(b.getCurrentZombs().get(i).takeDamage(this.damage) == true)
                 {
                     b.setKillCount(b.returnKillCount() + 1);
                     b.getCurrentZombs().remove(i);
                     i--;
                 }
-                if(isPierce == false)
+
+                if(isPierce == false) //Non Sniper Bullets are removed after a collison
                 {
                     this.remove();
                     break;
@@ -122,7 +122,7 @@ public class Bullet
             }
         }
     }
-
+    //Removes a bullet from the game
     public void remove()
     {
         ArrayList<Bullet> currentBullets = b.getCurrentBullets();
@@ -130,10 +130,6 @@ public class Bullet
         currentBullets.remove(index);
     }
 
-    public ArrayList<Zombie> getHit()
-    {
-    	return hit;
-    }
     public Bullet getBullet()
     {
         return this;
