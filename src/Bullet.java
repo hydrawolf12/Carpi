@@ -107,7 +107,7 @@ public class Bullet
         {
             if(b.getCurrentZombs().get(i).getHitbox().intersects(this.hitbox))
             {
-                if(b.getCurrentZombs().get(i).takeDamage(this.damage) == true)
+                if((b.getCurrentZombs.get(i).getHit() == false && b.getCurrentZombs().get(i).takeDamage(this.damage) == true)
                 {
                     b.setKillCount(b.returnKillCount() + 1);
                     b.getCurrentZombs().remove(i);
