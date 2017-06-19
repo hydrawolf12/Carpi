@@ -13,33 +13,33 @@ public class Boss extends Zombie
 	
 	//decrements Boss health by int a and returns true if the Bossis killed. Increments zombies' health, speed,
 	//and spawn rate and player's health, damage, and firerate in alternating order every 3 boss kills.
-	public boolean takeDamage(int a)
-	{
-		this.setHealth(-a);
-		if (this.getHealth() <= 0)
-		{
-			Player mccree = this.returnBoard().getPlayer();
-			bossKillCount++;
-			if (bossKillCount % 3 == 0)
-			{
-				Spawner.incrementHealth(1);
-				mccree.setHealth(1); // int a subject to change
-			}
-			else if (bossKillCount % 3 == 2)
-			{
-				mccree.updateDamage(1);
-				Spawner.incrementSpeed(1);
-			}
-			else if (bossKillCount % 3 == 1)
-			{
-				Spawner.incrementHealth(1);
-				mccree.updateFireRate(0.75);
-				Spawner.incrementRate(0.75);
-			}
-			return true;
-		} 
-		return false;
-	}
+	public boolean takeDamage(int a, Bullet bill)
+    	{
+       	  bill.getHit().add(this);
+      	  this.setHealth(-a);
+       	  if (this.getHealth() <= 0)
+          {
+            Player mccree = this.returnBoard().getPlayer();
+            bossKillCount++;
+            if (bossKillCount % 3 == 0)
+            {
+                Spawner.incrementHealth(2);
+                mccree.setHealth(1); // int a subject to change
+            }
+            else if (bossKillCount % 3 == 2)
+            {
+                mccree.updateDamage(2);
+                Spawner.incrementSpeed(1);
+            }
+            else if (bossKillCount % 3 == 1)
+            {
+                mccree.updateFireRate(0.9);
+                Spawner.incrementRate(1);
+            }
+            return true;
+        }
+        return false;
+    }
 	
 	//returns the radius of the Boss zombie object
 	public int returnRadius() 
