@@ -15,6 +15,8 @@ public class Bullet
     private Rectangle hitbox;
     private double counter = 0.0;
     private Board b;
+    private ArrayList<Zombie> hit = new ArrayList<>();
+    
     //Creates a bullet based on the type of gun used and the direction of the player
     public Bullet(int x, int y, int d, boolean p, boolean bu, int dam, Board bd)
     {
