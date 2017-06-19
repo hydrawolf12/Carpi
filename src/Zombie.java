@@ -162,15 +162,16 @@ public class Zombie extends Entity
 	
 	//decrements zombie health by 1
 	//returns true if the zombie has died so it can be removed from the ArrayList
-	public boolean takeDamage(int a)
-	{
-		this.setHealth(-1);
-		if (this.getHealth() <= 0)
-		{
-			return true;
-		}
-		return false;
-	}
+	public boolean takeDamage(int a, Bullet bill)
+   	 {
+     	   this.setHealth(-1);
+     	   bill.getHit().add(this);
+    	    if (this.getHealth() <= 0)
+    	    {
+     	       return true;
+     	   }
+     	   return false;
+   	 }
 	
 	
 	public int returnRadius()
