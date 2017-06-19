@@ -1,0 +1,22 @@
+import java.awt.Color;
+import java.awt.Graphics;
+
+import javax.swing.JPanel;
+
+public class MileStone1 extends JPanel
+{
+	public void  paintComponent(Graphics g)
+	{
+	    super.paintComponent(g);
+	    this.setBackground(Color.BLACK);
+	    g.setColor(new Color(216, 174, 119));
+	    g.fillRect(0, 0, 1000, 900);
+	    g.setColor(Color.RED);
+	    g.fillRect(475, 425, 50, 50);
+	    g.fillRect(575, 440, 10, 10);
+	    g.setColor(Color.WHITE);
+	    g.drawString("Health: 420", 200, 950);
+	    g.drawString("Score: 69", 700, 950);
+	    
+	}
+}
