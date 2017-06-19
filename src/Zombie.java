@@ -3,7 +3,6 @@ public class Zombie extends Entity
 {
 	private Board board;
 	private int widtha, heighta;
-	private boolean isHit = false;
 
 	//initializes zombie object based on health, speed, position, and hitbox size
 	public Zombie(int health, int speed, int x, int y, int width, int height, Board playBoard)
@@ -173,15 +172,6 @@ public class Zombie extends Entity
 		return false;
 	}
 	
-	public void setHit(boolean b)
-	{
-		isHit = b;
- 	}
-	
-	public boolean getHit()
-	{
-		return isHit;
- 	}
 	
 	public int returnRadius()
 	{
