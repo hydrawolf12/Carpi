@@ -23,18 +23,19 @@ public class Boss extends Zombie
             bossKillCount++;
             if (bossKillCount % 3 == 0)
             {
-                Spawner.incrementHealth(2);
+                Spawner.incrementHealth(1);
                 mccree.setHealth(1); // int a subject to change
             }
             else if (bossKillCount % 3 == 2)
             {
-                mccree.updateDamage(2);
+                mccree.updateDamage(1);
                 Spawner.incrementSpeed(1);
             }
             else if (bossKillCount % 3 == 1)
             {
-                mccree.updateFireRate(0.9);
-                Spawner.incrementRate(1);
+	    	Spawner.incrementHealth(1);
+                mccree.updateFireRate(0.75);
+                Spawner.incrementRate(0.75);
             }
             return true;
         }
