@@ -57,21 +57,6 @@ public class Bullet
         direction = d;
     }
 
-    public void startTimer()
-    {
-        ActionListener action = new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent event)
-            {
-                remove();
-            }
-        };
-        Timer t = new Timer(1200, action);
-        t.setRepeats(false);
-        t.start();
-    }
-
     public void move(double delta)
     {
         counter += delta;
